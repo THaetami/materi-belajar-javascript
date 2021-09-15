@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="UTF-8"><title>Number Object</title></head>
+    <style>
+    </style>
+    <body>
+        <h4>Belajar Materi Number Object</h4>
+        
+    </body>
+    <script>
+/// ============================== NUMBER OBJECT =============================================== ///
+
+/***
+   javaScript menyimpan property dan method Object bawaan di 4 tempat:
+
+   1. Object Property
+   2. Object method
+   3. Object instance property
+   4. Object instance method
+
+   Yang juga perlu diketahui, tidak semua Object memiliki ke-4 cara penulisan ini. Contohnya,
+   object Number tidak memiliki object instance property. Sedangkan object Math hanya memiliki
+   object property dan object method saja, tapi tidak memiliki object instance property dan object
+   instance method.
+
+   Object property dan Object method adalah sebutan untuk "sesuatu" yang melekat langsung ke object
+   Misalnya untuk mencari tau angka meksimum yang bisa disimpan JavaScript, bisa diakses dari property
+   Number.MAX_VALUE. Sedangkan untuk mengecek apakah sebuah variable beriisi angka bulat atau bukan,
+   bisa mengguankan method Number.Isinteger().
+
+   Perhatikan bahwa cara pemanggilan untuk object property dan object method adalah langsung dari objectnya,
+   yakni Number. Dalam konsep OOP, object property dan object method ini dikenal sebagai static property
+   dan static method, yaitu property dan method yang melekat ke Class. bukan ke object hasil instance class
+   tersebut.
+
+   Sedangkan Object instance property dan object instance method adalah sebutan untuk sesuatu yang melekat
+   ke instance object. Sebagi contoh, untuk memformat sebuah angka, kita bisa menggunakan method toPrecision()
+   yang cara penggunaannya adalah sebagai berikut:
+
+   var foo = new Number(5.123456);
+
+   console.log( foo.toPrecision(3) ); //5.12
+
+   Perhatikan bahwa method toPreciosion() melekat ke variable foo, yang merupakan hasil inctance dari 
+   Object Number, bukan diakses langsung dari Number. Disini method toPrecision() termasuk ke dalam 
+   kelompok Object instance method.
+
+   Untuk Object inastance property, contohnya sepeerti property length dari sebuah string:
+
+   var foo = new String("Selamat Belajar JavaScript");
+
+   console.log( foo.length );
+
+   Disini, property length melekat ke hasil instance dari Object String. Bukan ke object Stringnya langsung.
+
+   Sebagai tambahan, seperti yang telah kita pelajari pada bab sebelumnya, seluruh property dan method
+   bawaan JavaScript juga bisa diakses dari tipe data primitif object tersebut. Dan ini merupakan cara yang 
+   paling disarankan:
+
+
+***/
+
+/// ### NUMBER OBJECT PROPERTY ======================================================
+/***
+   Number adalah object bawaan JavaScript yang berisi berbagai property dan method yang
+   berkaitan dengan.. yup, angka. Mulai dari menformat angka, membulatkan angka, mengkonversi
+   angka menjadi string, dll.
+   Kita akan mulai dari object property terlebih dahulu. Di dalam JavaScript terdapat 8 object
+   property untuk Number:
+
+     1. Number.EPSILON , berisi interval terkecil dari dua angka di dalam JavaScript.
+     2. Number.MAX_SAFE_INTEGER , berisi nilai maksimum dari angka bulat (integer) di dalam JavaScript
+     3. Number.MAX_VALUE , berisi angka tertinggi yang bisa ditampung di dalam JavaScript
+     4. Number.MIN_SAFE_INTEGER , berisi nilai minimum dari sebuah angka bulat (integer) di dalam JavaScript
+     5. Number.MIN_VALUE , berisi angka positif terkecil yang bisa ditampung JavaScript, yakni nilai pecahan yang sangat mendekati nol, tapi bukan nol.
+     6. Number.NaN , berisi nilai khusus yang menyatakan not a number. Ini adalah cara untuk membuat nilai NaN.
+     7. Number.NEGATIVE_INFINITY , berisi nilai khusus yang menyatakan -infinity. Ini adalah cara untuk membuat nilai -infinity.
+     8. Number.POSITIVE_INFINITY , berisi nilai khusus yang menyatakan infinity. Ini adalah cara untuk membuat nilai infinity.
+
+  Dari kedelapan Number Object property ini, sebagian besar berisi konstanta dasar
+  JavaScript.
+
+***/
+
+
+/// ### NUMBER OBJECT METHOD =======================================================
+/***
+   Object Number memiliki 6 method:
+
+   • Number.isNaN()
+   • Number.isFinite()
+   • Number.isInteger()
+   • Number.isSafeInteger()
+   • Number.parseFloat()
+  
+***/
+
+// == Method Number.isNan() ----------------------------------------------------------
+// digunakan untuk mengecek apakah hasil operasi/suatu variable berisi NaN atau bukan.
+/* 
+   Method ini cukup penting karena di dalam JavaScript operasi perbandingan NaN = NaN,
+   maupun NaN === NaN akan menghasilkan false. Satu-satunya cara untuk memastikan 
+   apakah isi sebuah variable itu NaN atau bukan adalah menggunakan method isNaN().
+*/
+var foo;
+foo = 5;
+console.log( Number.isNaN(foo) ); //false
+
+goo = 5/'a';
+console.log( Number.isNaN(goo) ); //true
+
+
+// == Method Number.isFinite() ----------------------------------------------------------
+/* digunakan untuk mengecek apakah hasil operasi/suatu variable berisi angka yg bisa dihitung.
+   Fungsi ini mengembalikan boolean true jika nilai tersebut bisa dihitung (berupa angka biasa)
+   dan mengembalikan nilai false jika berupa infinity, NaN, atau bukan data Number.
+*/
+var koo;
+koo = 5;
+console.log( Number.isFinite(koo) ); //false
+
+joo = 5/'a';
+console.log( Number.isFinite(joo) ); //true
+
+
+// == Method Number.isInteger() dan Number.isSafeInteger() ----------------------------
+/* 
+  Kedua method ini digunakan untuk memeriksa apakah suatu nilai/variable berisi angka 
+  integer. Jika berupa integer, hasilnya adalah true, jika tidak integer hasilnya false
+
+  Bedanya, pada method Number.isSafeInteger(), nilai integer dibatasi sesuai standar IEEE-754
+  double precision, yakni nilai maksimum 253 - 1. Jika lebih dari itu, method Number.isSafeInteger()
+  akan mengembalikan nilai false.
+*/
+var doo;
+doo = 5;
+console.log( Number.isInteger(doo) );
+console.log( Number.isSafeInteger(doo) );
+
+boo = 3.21456 ;
+console.log( Number.isInteger(boo) );
+console.log( Number.isSafeInteger(boo) );
+
+
+// == Method Number.parseFloat() -------------------------------------------------------------
+/* 
+  Method Number.parseFloat() digunakan untuk mengkonversi nilai atau variabel ke bentuk angka float.
+  Biasanya dipakai untuk mengkonversi string menjadi Number. Jika string tersebut tidak bisa 
+  dikonversi menjadi number, method ini akan mengembalikan nilai NaN.
+*/
+var roo = "1234";
+console.log( typeof roo );
+
+roo = Number.parseFloat(roo);
+console.log( typeof roo );
+
+console.log( Number.parseFloat("12.045 potong ayam") ); // 12.045
+console.log( Number.parseFloat("Ada 12.045 potong ayam") ); // NaN
+
+
+// == Method Number.parseInt() -------------------------------------------------------------
+/* 
+  Method Number.parseInt() sangat mirip seperti Number.parseFloat(), bedanya method ini
+  akan mengkonversi nilai atau variabel menjadi angka integer (angka bulat). Jika di dalam string
+  asal terdapat nilai pecahan, bagian pecahan akan dibuang. Jika tidak bisa dikonversi menjadi
+  number, method ini mengembalikan nilai NaN.
+
+  Method Number.parseInt() memiliki 1 lagi argumen kedua yang bersifat opsional. Argumen
+  kedua ini bisa diisi dengan radix, yakni basis bilangan. Nilai default dari radix adalah 10,
+  dimana method Number.parseInt() akan menggunakan bilangan basis 10 (bilangan desimal)
+  jika argumen kedua dari method ini tidak ditulis.
+*/
+var roo = "1234";
+console.log( typeof roo );
+
+roo = Number.parseInt(roo);
+console.log( typeof roo );
+
+console.log( Number.parseInt("12.045 potong ayam") ); // 12
+console.log( Number.parseInt("Ada 12.045 potong ayam") ); // NaN
+
+
+
+
+/// ### NUMBER INSTANCE METHOD =======================================================
+/***
+   Number Instance Method memiliki 6 method:
+
+   • Number.prototype.toExponential()
+   • Number.prototype.toFixed()
+   • Number.prototype.toPrecision()
+   • Number.prototype.toString()
+   • Number.prototype.toLocaleString()
+   • Number.prototype.valueOf()
+  
+***/
+
+// == Method Number.prototype.toExponential() --------------------------------------------
+/* 
+  digunakan untuk mefformat tampilan angka menjadi scientific notation.
+  Scientific Notation adalah bentuk tampilan angka dengan 1 digit sebelum tanda desimal,
+  kemudian diikuti dengan tanda pangkat.
+
+  Method toExponential menyediakan 1 argumen opsional yang jika diinput akan menentukan
+  ‘panjang’ digit untuk pecahan. Argumen ini bisa diisi dengan angka 0 – 20. Apabila tidak
+  menggunakan argumen, method toExponential akan memakai panjang paling maksimal sesuai
+  jumlah digit dalam variabel asal.
+
+  instance method Number bisa dipanggil langsung dari sebuah angka (tidak perlu disimpan ke 
+  dalam sebuah variabel terlebih dahulu). Ini juga berlaku untuk instance method lainnya. 
+  Penggunaan tanda kurung direkomendasikan agar mudah membedakan karakter titik untuk angka 
+  desimal dengan dot notation untuk mengakses method.
+*/
+var woo = 5000.123456789;;
+console.log( woo.toExponential() );
+console.log( woo.toExponential(1) );
+console.log( woo.toExponential(5) );
+console.log( woo.toExponential(20) );
+
+console.log( (4.32345).toExponential(2) ); 
+console.log( (1.23e+6).toExponential(2) );
+
+
+// == Method Number.prototype.toFixed() --------------------------------------------------
+/* 
+  digunakan untuk membuat tampilan angka dengan jumlah digit desimal yang
+  tetap. Method ini membutuhkan satu argumen opsional berupa jumlah digit setelah tanda
+  desimal. 
+  
+  Jika dipanggil tanpa argumen, akan dianggap 0 sehingga hasilnya tanpa angka pecahan.
+  Angka hasil pemanggilan method toFixed dibulatkan ke bilangan terdekat (0,5 akan menjadi 1).
+  Jika angka yang ingin ditampilkan melebihi digit asal, sisa digit diisi angka 0.
+*/
+var soo = 5000.123456789;;
+console.log( soo.toFixed() );
+console.log( soo.toFixed(1) );
+console.log( soo.toFixed(5) );
+console.log( soo.toFixed(20) );
+
+console.log( (4.32345).toFixed(2) ); 
+console.log( (1.23e+6).toFixed(2) );
+
+
+// == Method Number.prototype.toPrecision() --------------------------------------------------
+/* 
+  mirip seperti toFixed(), bedanya angka yang ditulis di dalam argumen merupakan total dari seluruh digit.
+
+  Sebagai contoh, foo.toPrecision(3) artinya tampilkan variabel foo dengan 3 digit angka. Jika
+  jumlah digit di variabel foo kurang dari 3, tambahkan angka 0 di bagian desimal. Jika jumlah
+  digitnya lebih, akan dibulatkan dan jika perlu diformat ke bentuk scientific notation.
+
+
+*/
+var too = 5000.123456789;;
+
+console.log( too.toPrecision() );
+console.log( too.toPrecision(1) );
+console.log( too.toPrecision(5) );
+console.log( too.toPrecision(20) );
+
+console.log( (4.32345).toPrecision(2) ); 
+console.log( (1.23e+6).toPrecision(7) );
+
+
+// == Method Number.prototype.toLocaleString() --------------------------------------------------
+/* 
+  digunakan untuk mengkonversi tipe data number menjadi tipe data string, namun menggunakan format 
+  angka lokal yang ada di sistem (locale).
+
+  Method toLocaleString() juga bisa diisi dengan argumen opsional yakni kode bahasa yang
+  menentukan settingan local:
+*/
+var eoo = 1234500.346;
+
+console.log( eoo.toString() );
+console.log( eoo.toLocaleString() );
+console.log( eoo.toLocaleString('id-ID'));
+console.log( eoo.toLocaleString('en-GB'));
+console.log( eoo.toLocaleString('fr-FR'));
+console.log( eoo.toLocaleString('ar-SA'));
+
+/***
+    Method toLocaleString() juga memiliki argumen kedua berupa object dengan banyak konfigurasi.
+    Saya tidak akan membahas semua konfigurasi ini, tapi ada beberapa yang cukup menarik,
+    yakni pengaturan style dan currency. Berikut contoh penggunaannya:
+
+***/
+var kmn = 5649000.340;
+
+console.log( kmn.toLocaleString('en-US', { style: 'decimal' } ));
+console.log( kmn.toLocaleString('en-US', { style: 'percent' } ));
+console.log( kmn.toLocaleString('en-US', { style: 'currency', currency: 'USD' } ));
+console.log( kmn.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' } )); //indonesia
+console.log( kmn.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' } ));
+console.log( kmn.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' } ));
+
+
+// == Method Number.prototype.valueOf() --------------------------------------------------
+/* 
+  umumnya digunakan secara internal oleh JavaScript, dan kita jarang mengaksesnya
+  secara langsung. Method ini digunakan untuk mengkonversi Object Number menjadi
+  tipe data primitif number.
+
+*/
+var zon = new Number(230);
+console.log( typeof zon );
+
+var bar = zon.valueOf();
+console.log( typeof bar );
+console.log( bar );
+
+
+
+
+
+</script>   
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

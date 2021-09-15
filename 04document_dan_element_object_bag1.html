@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="UTF-8"><title>Materi Document Object Mode (DOM)</title></head>
+    <style>
+        table {
+            border: 1px solid plum;
+            border-collapse:collapse;
+            border-spacing:0;
+        }
+        td {
+            border: 1px solid plum; padding: 8px;
+        }
+        tr:nth-child(odd){
+            background-color: rebeccapurple;
+        }
+        tr:nth-child(even){
+            background-color: purple;
+        }
+        h4 {
+            border: 2px solid black;
+            width: 280px;
+            padding: 10px;
+            text-align: center;
+            color: red;
+            background-color: pink; }
+        }
+    </style>
+    <body>
+        <h4>Belajar Mencari Element Node dengan menulusuri DOM TREE</h4>
+        <p>sedang belajar<em> JavaScript</em><b> dari duniailkom</b></p>
+    </body>
+    <script>
+//MENCARI ELEMENT NODE DENGAN CARA MENELUSURI DOM TREE
+            bodyNode = document.childNodes[1].childNodes[2];
+            h1Node = bodyNode.childNodes[1];
+            scriptNode = bodyNode.childNodes[5]
+            pNode = bodyNode.childNodes[3];
+            emNode = pNode.childNodes[1];
+            bNode = pNode.childNodes[2];
+
+            // DAFTAR NODE OBJECT PROPERTY
+            console.log( pNode.baseURI ); //menampilkan posisi dokumen dimana pNode berada
+            console.log(pNode.childNodes); //menampilkan nilai child nodes
+            console.log(pNode.firstChild); //menampilkan anak pertama dari elemant node P
+            console.log(pNode.lastChild); //menampilkan anak terakhir dari elemant node P
+            console.log(pNode.nextSibling); //menampilkan saudara kandung berikutnya dari pNode
+            console.log(pNode.nodeName); //menampilkan nama Node 
+            console.log(pNode.nodeType); //menampilkan tipe Node berupa angka, 1 = element node, 2 = atribut node, 3 = text node, 8 = comment, 9 = document node (root node dari seluruh document)
+            console.log(pNode.nodeValue); //akan menampilkan nilai null jika yg diakses adalah text node
+            console.log(pNode.ownerDocument); //menampilkan informasi mengenai root document dari pNode
+            console.log(pNode.parentNode); //menampilkan nilai parent
+            console.log(pNode.parentElement); //menampilkan nilai parent tetapi akan menghasilkan nilai null jika parent node bukan sebuah element node.
+            console.log(pNode.previousSibling); //menampilkan saudara kandung sebelum pNode
+            console.log(pNode.textContent); //menampilkan nilai teks yang ada di dalam sebuah node
+            
+            //----------------------------------------------------------------------------
+            var headNode = document.childNodes[1].childNodes[0];
+            var titleNode = headNode.childNodes[1];
+            titleNode.textContent = "htmlku2"; //mengganti melalui node Object Property
+
+
+    //===========================================================================
+//DAFTAR NODE OBJECT METHOD :
+    // Method Document.createElement(), membuat element node baru
+    // Document.createTextNode(), membuat text node
+    // Method Node.appendChild(), berguna untuk menginput node baru ke posisi terakhir (sebagai last child)
+    // Method Node.insertBefore(), berguna untuk menginput node baru ke posisi tertentu.
+    // Method Node.replaceChild(), digunakan untuk mengganti sebuah node dengan node lain. Method ini membutuhkan 2 argumen: node baru yang akan ditambahkan dan node yang akan dihapus
+    // Method Node.removeChild(), digunakan untuk menghapus sebuah element dari DOM tree.
+/*  // Method Node.cloneNode(), digunakan untuk men-copy sebuah node.Method ini membutuhkan 1
+       argumen berupa nilai boolean. Jika diinput true, seluruh child dari node tersebut akan 
+       ikut dicopy. Jika diinput false, hanya node itu saya yang dicopy (child node tidak ikut).*/
+    // Method Node.contains(), digunakan untuk memeriksa apakah sebuah node memiliki child node tertentu.
+    // Method Node.hasChildNodes(), digunakan untuk memeriksa apakah sebuah node memiliki anak (child) atau tidak.
+
+
+
+        //Method Document.createElement() dan Document.createTextNode()
+            var newPNode = document.createElement("p"); //membuat element node baru
+            var newTextNode = document.createTextNode("Sebuah paragraf baru"); //membuat text node
+        //Method Node.appendChild(), berguna untuk menginput node baru ke posisi terakhir (sebagai last child)
+            newPNode.appendChild(newTextNode); //
+        //Method Node.insertBefore(), berguna untuk menginput node baru ke posisi tertentu.
+            bodyNode.insertBefore(newPNode, pNode);
+            // console.log (bodyNode.nodeName);
+
+            // var cekNode = bodyNode.contains(newPNode); //mengecek apakah newPNode anak dari bodyNode
+            // console.log(cekNode);
+    //----------------------------------------------------------------------------------
+        //Method Document.createElement() dan Document.createTextNode()
+            var spanNode = document.createElement("span");
+            var spanTextNode = document.createTextNode("  JavaScript Uncover");
+        //Method Node.appendChild()   
+            spanNode.appendChild(spanTextNode);
+            pNode.appendChild(spanNode); //menambah tag sesudah
+    //-----------------------------------------------------------------------------------
+        //Method Document.createElement() dan Document.createTextNode()
+            var newUpP = document.createElement("span");
+            var upP = document.createTextNode(" dengan giat ");
+        //Method Node.appendChild()
+            newUpP.appendChild(upP);
+        //Method Node.insertBefore()
+            pNode.insertBefore(newUpP, bNode); //menambah tag (sebelum)
+    //-----------------------------------------------------------------------------------
+        //Method Document.createElement() dan Document.createTextNode()
+            var newDel = document.createElement("del"); // del, mencoret teks
+            var delText = document.createTextNode(" PHP ");
+        //Method Node.appendChild()
+            newDel.appendChild(delText);
+        //Method Node.insertBefore()
+            pNode.insertBefore(newDel, emNode); //menambah tag (sebelum)
+    //----------------------------------------------------------------------------------
+        //Method Document.createElement() dan Document.createTextNode()
+            var gntU = document.createElement("u");
+            var gntUText = document.createTextNode(" sekali");
+        //Method Node.appendChild()
+            gntU.appendChild(gntUText);
+    /** //Method Node.replaceChild(), digunakan untuk mengganti sebuah node dengan node lain.
+        Method ini membutuhkan 2 argumen: node baru yang akan ditambahkan dan node yang akan dihapus.*/
+            pNode.replaceChild(gntU, bNode); // mengganti tag dengan replace
+    //----------------------------------------------------------------------------------
+        //Method Node.removeChild(), digunakan untuk menghapus sebuah element dari DOM tree.
+            var tempelNode = pNode.removeChild(spanNode);
+        //Method Node.insertBefore()
+            pNode.insertBefore(tempelNode, emNode);
+    //----------------------------------------------------------------------------------
+        //Method Node.cloneNode(), digunakan untuk men-copy sebuah node.
+            var copynewDel = newDel.cloneNode(true); //cloneNode, mengcopy
+        //Method Node.appendChild()
+            newPNode.appendChild(copynewDel);
+
+    //==================================================================================
+    //latihan :
+            var olNode = document.createElement("ol");
+            var liNode1 = document.createElement("li");
+            var liNode2 = document.createElement("li");
+            var liNode3 = document.createElement("li");
+
+            liNode1.appendChild(document.createTextNode("latihan"));
+            liNode2.appendChild(document.createTextNode("latihan"));
+            liNode3.appendChild(document.createTextNode("latihan"));
+
+            olNode.appendChild(liNode1);
+            olNode.appendChild(liNode2);
+            olNode.appendChild(liNode3);
+            bodyNode.insertBefore(olNode, tableNode);
+
+
+
+    //==================================================================================
+    //latihan :
+            // Buat tag <table>
+            var tableNode = document.createElement("table");
+
+            // siapkan beberapa variabel untuk looping
+            var i, trNode, tdNode1, tdNode2, textNo, randomNumber, textRandom;
+
+            for (i = 1; i <= 10; i++) {
+            
+                // buat 1 tag <tr> dan 2 tag <td>
+                var trNode = document.createElement("tr");
+                var tdNode1 = document.createElement("td");
+                var tdNode2 = document.createElement("td");
+
+                // buat text node untuk nomor urut
+                textNo = document.createTextNode(i);
+
+                // buat text node untuk angka acak
+                randomNumber = Math.floor(Math.random() * (50)) + 31;
+                textRandom = document.createTextNode(randomNumber);
+
+                // rangkai text node dengan element node <td>
+                tdNode1.appendChild(textNo);
+                tdNode2.appendChild(textRandom);
+
+                // input 2 tag <td> ke dalam tag <tr>
+                trNode.appendChild(tdNode1);
+                trNode.appendChild(tdNode2);
+
+                // input tag <tr> kedalam table
+                tableNode.appendChild(trNode);
+            }
+
+            // masukkan tag <table> kedalam DOM tree, sebelum tag <olNode>
+            bodyNode.appendChild(tableNode);
+
+
+        </script>   
+        
+</html>

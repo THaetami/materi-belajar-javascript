@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CASE STUDY: VALIDATION AND CSS</title></head>
+    <style>
+       div.container { font-size: 12px; width: 90%; margin: 0 auto; box-shadow: 1px 0px 10px, -1px 0px 10px; padding: 20px; }
+       h2 { text-align: center; }
+       .error { border: 2px solid red; color: red; background-color: pink; text-align: center; padding: 2px; }
+       .valid { border: 2px solid green; color: green; background-color: greenyellow; text-align: center; padding: 2px; }
+       label { width: 17%; float: left; margin-right: 2%; }
+       label[for="setuju"], label[for="cekPass"] { float: none; }
+       /* p { margin:1%; } */
+       input, select, textarea { margin-bottom: 0.4%; }
+    
+    
+    </style>
+    <body>
+    <div class="container">
+        <h2>Form Pendaftaran</h2>
+        <form id="pendaftaran" name="pendaftaran" method="get" action="daftarpeserta.php">
+            <p><label for="username">Username:</label> <input type="text" name="username" id="username"> <output id="pesanUsername"></output></p>
+            <p><label for="email">Email:</label> <input type="text" name="email" id="email"> <output id="pesanEmail"></output></p>
+            <p><label for="password">Password:</label> <input type="password" name="password" id="password"> <output id="pesanPass"></output></p>
+            <p><label for="passKonfirm">Ulangi Password:</label> <input type="password" name="passKonfirm" id="passKonfirm"> <output id="pesanKonfirm"></output></p>
+            <p><input type="checkbox" name="cekPass" id="cekPass"><label for="cekPass">Tampilkan Password</label></p>
+            <p><input type="checkbox" name="setuju" id="setuju"><label for="setuju">Saya menyetujui syarat dan ketentuan</label> <output id="pesanSetuju"></output></p>
+            <p><input type="submit" name="submit" id="submit" value="Kirim Data"></p>
+        </form>
+    </div>
+    </body>
+
+    <script>
+        var pendaftaranNode = document.getElementById("pendaftaran");
+        var usernameNode = document.getElementById("username");
+        var pesanUsernameNode = document.getElementById("pesanUsername");
+        var emailNode = document.getElementById("email");
+        var pesanEmailNode = document.getElementById("pesanEmail");
+        var passNode = document.getElementById("password");
+        var pesanPassNode = document.getElementById("pesanPass");
+        var passKonfirmNode = document.getElementById("passKonfirm");
+        var pesanKonfirmNode = document.getElementById("pesanKonfirm");
+        var cekPassNode = document.getElementById("cekPass");
+        var setujuNode = document.getElementById("setuju");
+        var pesanSetujuNode = document.getElementById("pesanSetuju");
+        
+
+        console.log(usernameNode.lastChild);
+
+        function deleteError(e){
+            e.target.style.border = "";
+            e.target.parentElement.lastChild.innerHTML = "";
+            e.target.parentElement.lastChild.className = "";
+        }
+
+        function cekPass(e){
+            if (cekPassNode.checked){
+                passNode.type = "text";
+                passKonfirmNode.type = "text";
+            }
+            else {
+                passNode.type = "password";
+                passKonfirmNode.type = "password";
+            }
+        }
+
+        function diProses(e){
+            //validasi Username
+            var usernameError = "";
+
+            if (usernameNode.value === ""){
+                usernameError = "Username harus diisi";
+            }
+            else if (/\W/.test(usernameNode.value)){
+                usernameError = "Hanya bisa diisi dengan karakter Alfanumerik";
+            }
+            else if (usernameNode.value.length < 6){
+                usernameError = "Minimal 6 karakter";
+            }
+            if (usernameError !== ""){
+                pesanUsernameNode.innerHTML = usernameError;
+                pesanUsernameNode.className = "error";
+                usernameNode.style.border = "2px solid red";
+                e.preventDefault();
+            }
+            else {
+                pesanUsernameNode.innerHTML = "Sesuai";
+                pesanUsernameNode.className = "valid";
+                usernameNode.style.border = "2px solid green";
+            }
+
+            //validasi email
+            var emailError = "";
+
+            if (emailNode.value === ""){
+                emailError = "Email harus diisi";
+            }
+            else if (!(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailNode.value))){
+                emailError = "Format email harus sesuai";
+            }
+            if (emailError !== ""){
+                pesanEmailNode.innerHTML = emailError;
+                pesanEmailNode.className = "error";
+                emailNode.style.border = "2px solid red";
+                e.preventDefault();
+            }
+            else {
+                pesanEmailNode.innerHTML = "Sesuai";
+                pesanEmailNode.className = "valid";
+                emailNode.style.border = "2px solid green";
+            }
+
+            //validasi password
+            var passError = "";
+
+            if (passNode.value === ""){
+                passError = "Password harus diisi";
+            }
+            else if (/[^0-9]/.test(passNode.value)){
+                passError = "Hanya bisa diisi dengan karakter numerik";
+            }
+            else if (passNode.value.length !== 6){
+                passError = "Diisi dengan 6 karakter";
+            }
+            if (passError !== ""){
+                pesanPassNode.innerHTML = passError;
+                pesanPassNode.className = "error";
+                passNode.style.border = "2px solid red";
+                e.preventDefault();
+            }
+            else {
+                pesanPassNode.innerHTML = "Sesuai";
+                pesanPassNode.className = "valid";
+                passNode.style.border = "2px solid green";
+            }
+
+            //validasi Konfirm password 
+            var konfirmError = "";
+
+            if (passKonfirmNode.value === ""){
+                konfirmError = "Tulis ulang password";
+            }
+            else if (passKonfirmNode.value.length !== 6){
+                konfirmError = "Diisi dengan 6 karakter";
+            }
+            else if (passKonfirmNode.value !== passNode.value){
+                konfirmError = "Password tidak sesuai";
+            }
+            if (konfirmError !== ""){
+                pesanKonfirmNode.innerHTML = konfirmError;
+                pesanKonfirmNode.className = "error";
+                passKonfirmNode.style.border = "2px solid red";
+                e.preventDefault();
+            }
+            else {
+                pesanKonfirmNode.innerHTML = "Sesuai";
+                pesanKonfirmNode.className = "valid";
+                passKonfirmNode.style.border = "2px solid green";
+            }
+
+            //validasi setuju
+            var setujuError = "";
+
+            if (setujuNode.checked !== true){
+                setujuError = "Syarat dan ketentuan harus disetujui";
+            }
+            if (setujuError !== ""){
+                pesanSetujuNode.innerHTML = setujuError;
+                pesanSetujuNode.className = "error";
+                e.preventDefault();
+            }
+        }
+        pendaftaranNode.addEventListener("submit",diProses);
+        cekPassNode.addEventListener("click",cekPass);
+        usernameNode.addEventListener("focus",deleteError);
+        emailNode.addEventListener("focus",deleteError);
+        passNode.addEventListener("focus",deleteError);
+        passKonfirmNode.addEventListener("focus",deleteError);
+        setujuNode.addEventListener("focus",deleteError);
+
+
+ 
+
+
+
+    </script>
+</html>

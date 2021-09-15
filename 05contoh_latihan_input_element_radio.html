@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>htmlku3</title></head>
+    <style>
+    </style>
+    <body>
+        <p>Belajar:
+            <input type="radio" name="belajar1" id="htmlBljr" value="HTML">HTML
+            <input type="radio" name="belajar1" id="cssBljr" value="CSS">CSS 
+            <input type="radio" name="belajar1" id="jsBljr" value="JavaScript">JavaScript
+            <input type="radio" name="belajar1" id="mysqlBljr" value="MySQL">MySQL
+            <input type="radio" name="belajar1" id="phpBljr" value="PHP">PHP
+        </p>
+        <p><button id="priksa2">Periksa</button></p>
+        <p>Hasil: <span id="hsl2"></span></p>  
+    </body>
+    <script>
+        var belajarNode = document.querySelectorAll("input");
+        var periksaNode = document.getElementById("priksa2");
+        var hasilNode = document.getElementById("hsl2");
+        
+        console.log(belajarNode);
+        function diPeriksa(){
+           
+            var jumlahRadio = belajarNode.length;
+            for (var i = 0; i<jumlahRadio; i++){
+                if (belajarNode[i].checked === true){
+                    hasilNode.innerHTML = belajarNode[i].value;
+                }
+            }
+        }
+        
+        periksaNode.addEventListener("click",diPeriksa);
+
+
+
+
+    </script>
+</html>

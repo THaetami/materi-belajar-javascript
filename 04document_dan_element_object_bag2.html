@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="UTF-8"><title>Document Dan Element Object</title></head>
+    <style>
+        p .hijau, .hijau { color: green; font-family: cursive; background-color: yellow;}
+        #judull { color: yellow; background-color: #cac8c3;}
+        .merah { color: red; }
+        .penting { border: 2px solid black; width: 300px; text-align: center; }
+        .warning { background-color: pink; }
+        .classbaru { background-color: violet; }
+        .classbaru1 { font-family: cursive; }
+        .kuning {border: 3px double red; font-size: 1em; text-align: center; }
+        .hati2 { padding: 3px; margin: 2px 2px 2px 0; width: 75%;}
+    </style>
+    <body>
+        <h5 id="judull">Belajar HTML</h5>
+        <h1 id="judul">Belajar JavaScript</h1>
+        <h1 id="judull">Belajar HTML</h1>
+        <p>sedang belajar <em id="emTag">JavaScript</em><b class="hijau"> dari DuniaIlkom</b></p>
+        <h5>Belajar <u>JavaScript</u></h5>
+        <h3 class="hijau">Belajar JavaScript</h3>
+<!--    laatihan menggunakan querryselector                 -->
+        <ol>
+            <li>Belajar HTML</li>
+            <li>Belajar CSS</li>
+            <li>Belajar PHP</li>
+            <li>Belajar JavaScript</li>
+            <li>Belajar MySQL</li>
+        </ol>
+<!--    laatihan menggunakan querryselectorAll                 -->
+        <p>|=========================================================================</p>
+        <table>
+            <tr><td>Belajar - Property Element.innerHTML</td></tr>
+            <tr><td>Belajar CSS</td></tr>
+            <tr><td>Belajar PHP</td></tr>
+        </table>
+<!--    contoh penggunaaan Property Element.innerHTML       -->
+        <p>|=========================================================================</p>
+        <h3 id="judul1">Belajar JavaScript</h3>
+        <p>|-------------------------------------------------------------------------</p>
+        <div id="penampung"></div>
+<!--    contoh penggunaaan Property Element.outerHTML       -->
+        <p>|=========================================================================</p>
+        <h4 id="judul2">Belajar JavaScript</h4>
+        <p>sedang belajar <em>JavaScript</em><b> dari DuniaIlkom</b></p>
+<!--    MENGEDIT ATRIBUT ELEMENT                            -->
+        <p>|=========================================================================</p>
+        <h4 id="para1" title="Sedang Belajar">Belajar Mengedit Element Atribut Melalui beberapa method</h4>
+<!--    MENGEDIT STYLE ELEMENT                            -->
+        <p>|=========================================================================</p>
+        <h3 id="judul3" style="color:green">Belajar mengedit menggunakan Property HTMLElement.style</h3>
+        <p style="background-color: #cac8c3">Belajar mengedit menggunakan <em>Property </em><b>HTMLElement.style</b></p>
+        <p>|=========================================================================</p>
+        <h4 id="judul4" class="merah">Menggunakan Property Element.className</h4>
+        <p>|-------------------------------------------------------------------------</p>
+        <h4 id="judul5" class="warning merah">Menggunakan Property Element.className</h4>
+        <p>|=========================================================================</p>
+        <h4 id="judul6" class="hijau classbaru">Menggunkan Property Element.classList</h4>
+    </body>
+    <script>
+//=====================================================================================
+//BERBAGAI METHOD UNTUK MENCARI ELEMENT NODE; ========================================
+
+    // document.getElementById(), berfungsi untuk mencari element node HTML berdasarkan nilai atribut id.
+
+/*  // document.getElementsByTagName(), digunakan untuk mencari element node berdasarkan 
+       nama tag, seperti "p", "h1", "em" atau "b".
+***    Karena di dalam sebuah dokumen HTML bisa terdapat lebih dari 1 tag yang sama, method
+       ini akan mengembalikan HTMLCollection. HTMLCollection adalah kumpulan (collection) dari
+       element node yang mirip seperti NodeList. Sebagaimana layaknya collection, HTMLCollection
+       juga bisa diakses menggunakan tanda kurung siku seperti array. */
+
+/*  // document.getElementsByClassName(), berfungsi untuk mencari element node yang memiliki 
+       class tertentu. Nama class ini diinput sebagai atribut class ke dalam tag HTML.
+       Atribut class sebenarnya digunakan untuk memasukkan kode CSS.
+***    Karena nama class bisa dimiliki oleh lebih dari 1 tag HTML, maka hasil dari method 
+       ini juga berupa HTMLCollection. */
+       
+    // document.querySelector(), berfungsi untuk mencari element node menggunakan selector CSS.
+    
+/*  // document.querySelectorAll(),method querySelectorAll() juga menggunakan selector
+       CSS untuk mencari element HTML. Bedanya, method ini bisa digunakan untuk mengakses
+       banyak node sekaligus. */
+       
+
+    //===================================================================================
+    //Method document.getElementById()
+            //contoh penggunaan :
+        var emNode = document.getElementById("emTag"); //akan mencari sebuah tag HTML yg memiliki atribut id="emTag", kemudian menyimpannya ke dalam variabel emNode.
+        emNode.textContent = "Document Object"; //mengganti teks yg ada di variable emNode.
+
+        //---------------------------------------------------------------------------------
+    //Method document.getElementsByTagName()
+            //contoh penggunaan :
+        var h5TagNode = document.getElementsByTagName("h5");
+        var h1TagNode = document.getElementsByTagName("h1");
+
+        console.log(h5TagNode);
+        console.log(h1TagNode);
+
+        h5TagNode[0].textContent = "Belajar menggunakan method getElementByTagName"; //mengganti teks di tag h5 yg memiliki no.Urut 0
+        h1TagNode[1].textContent = "Belajar menggunakan method getElementByTagName";
+
+        //---------------------------------------------------------------------------------
+    //Method document.getElementsByClassName()
+            //contoh penggunaan :
+        var classNode = document.getElementsByClassName("hijau");
+
+        console.log(classNode[0].parentElement);
+
+        classNode[0].textContent = " dari JavaScript Uncover"; 
+
+
+        //---------------------------------------------------------------------------------
+    //Method document.querySelector()
+        var selector1Node = document.querySelector("h5 u"); //cari element HTML <u> yg ada di dalam tag <h5>
+        console.log(selector1Node);
+
+        selector1Node.textContent = "method querySelector";
+            //contoh penggunaan :
+        var olNode = document.querySelector("li:nth-child(4)"); //cari tag <li> yang berada di urutan keempat dari parent element-nya
+        olNode.textContent = "belajar menggunakan querrySelector";
+        olNode.style.backgroundColor = "green";
+
+
+        //---------------------------------------------------------------------------------
+    //Method document.querySelectorAll()
+        var selectorAllNode = document.querySelectorAll("tr"); //cari seluruh tag <tr>
+        console.log(selectorAllNode);
+        console.log(selectorAllNode.length);
+
+        var isiNode;
+        for (isiNode of selectorAllNode){
+            isiNode.textContent = "Belajar menggunakan querrySelectorAll";
+        }
+
+
+
+
+//=====================================================================================
+/** MENGEDIT KONTEN  ELEMENT (Isi Teks yang ada didalam element) MENGGUNAKAN : =======
+    Property Element.innerHTML dan Element.outerHTML */
+        
+    //Property Element.innerHTML
+    var judul1Node = document.getElementById("judul1");
+        judul1Node.innerHTML = "<p><b>Belajar</b> - Property Element.innerHTML</p>";
+        console.log(judul1Node.innerHTML);
+            //------------------------------------------------------------------------
+            //contoh penggunaan lain : (menambah/membuat tabel)
+        var tableBaru = "<table><tr><td>Belajar - Property Element.innerHTML</td></tr><tr><td>Belajar CSS</td></tr><tr><td>Belajar PHP</td></tr></table>";
+        var penampungNode = document.getElementById("penampung");
+        penampungNode.innerHTML = tableBaru;
+        console.log(penampungNode.innerHTML);
+
+    //============================================================================
+    /** Property Element.outerHTML, mirip seperti innerHTML, bedanya property outerHTML juga 
+        mengembalikan tag HTMl dari element itu sendiri.*/
+        var judul2Node = document.getElementById("judul2");
+        var p1Node = document.getElementsByTagName("p");
+
+        judul2Node.outerHTML = "<h3>Belajar - Property Element.outerHTML</h3>";
+        p1Node[6].outerHTML = "sedang belajar <em>Property Element.outerHTML </em><u>dari DuniaIlkom</u>"
+        
+        console.log(judul2Node.outerHTML);
+
+    //untuk melihat perbedaan innerHTML dan outerHTML silahkan dilihat consolenya :)
+
+
+
+
+//====================================================================================
+//MENGUBAH ARTRIBUT ELEMENT ==========================================================
+
+/**** Atribut adalah keterangan tambahan yang melekat ke sebuah tag HTML. beberapa atribut
+      berperan penting bagi tag HTML tersebut dan harus ditulis, seperti atribut href pada 
+      tag <a> dan atribut src pada tag <img>.
+      Terdapat beberapa method dari element object yang berkaitan dengan atribut, yakni: */
+    
+    //------------------------------------------------------------------------------- 
+/*  Method Element.hasAttribute(), digunakan untuk memeriksa apakah sebuah atribut sudah 
+    di set di dalam element HTML atau belum. */
+        var para1Node = document.getElementById("para1");
+
+        console.log(para1Node.hasAttribute("id"));
+        console.log(para1Node.hasAttribute("title"));
+        console.log(para1Node.hasAttribute("class"));
+
+    //---------------------------------------------------------------------------------
+/*  Method Element.getAttribute(), digunakan untuk mengambil nilai dari atribut. 
+    Atribut yang ingin diambil nilainya diinput sebagai argumen dari method ini. */
+        console.log(para1Node.getAttribute("id"));
+        console.log(para1Node.getAttribute("title"));
+        console.log(para1Node.getAttribute("class"));
+
+    //---------------------------------------------------------------------------------
+/*  Method Element.setAttribute(), digunakan untuk mengubah atau menambah sebuah atribut 
+    baru ke dalam element HTML. Atribut ini membutuhkan 2 buah argumen, yakni nama 
+    atribut dan nilai dari atribut. */
+        para1Node.setAttribute("id","paragraf"); //nilai atribut id di para1Node diganti
+        para1Node.setAttribute("title","jangan diganggu"); //nilai atribut title di para1Node diganti
+        para1Node.setAttribute("class","header"); ////para1Node ditambah atribut class
+
+        console.log(para1Node.getAttribute("id")); 
+        console.log(para1Node.getAttribute("title")); 
+        console.log(para1Node.getAttribute("class")); 
+
+    //---------------------------------------------------------------------------------
+/*  Method removeAttribute() digunakan untuk menghapus sebuah atribut. Atribut yang ingin
+    dihapus diinput sebagai argumen. Berikut contoh penggunaannya: */
+        para1Node.removeAttribute("class"); //artibut class beserta nilaina dihapus
+
+        console.log(para1Node.getAttribute("class")); 
+
+    //---------------------------------------------------------------------------------
+/*  Property attributes berisi daftar seluruh atribut yang sudah di set nilainya. 
+    Property ini bersifat read only, sehingga kita tidak bisa mengubah nilai atribut 
+    dari property attributes.*/
+        console.log(para1Node.attributes);
+
+
+        var nodeAttributes = para1Node.attributes;
+        console.log(nodeAttributes.length);
+        console.log(nodeAttributes[0]);
+        console.log(nodeAttributes[1]);
+
+//-------------------------------------------------------------------------------
+// Latihan menambahkan kode inline CSS menggunakan method setAttribute():
+        para1Node.setAttribute("style","color: red; text-shadow: 8px 8px pink");
+        penampungNode.setAttribute("style","border: 3px dotted green");
+
+
+
+
+        
+//=====================================================================================
+//MENGEDIT STYLE ELEMENT ==============================================================
+
+    //Property HTMLElement.style, berfungsi untuk menampilkan dan menginput inline style CSS ke dalam sebuah element HTML.
+    /*** Kelemahan menggunakan proprty ini adalah sebagai berikut :
+            *  memiliki kekuatan paling tinggi dan sangat susah untuk ditimpa dengan 
+               style lain.
+            *  hanya bisa membaca property CSS yang diset dari inline CSS, tapi tidak 
+               bisa membaca property CSS yang diset di dalam tag <style>, seperti
+               internal CSS dan external CSS:  */    
+        //contoh penggunaan :
+        var judul3Node = document.getElementById("judul3");
+        judul3Node.style.fontFamily = "fantasy";
+
+        var p1Node = document.getElementsByTagName("p");
+        p1Node[8].style.backgroundColor = "pink";
+        p1Node[8].style.fontSize = "1.4em";
+        p1Node[8].style.textDecoration = "underline";
+        p1Node[8].style.textAlign = "center";
+        p1Node[8].style.border = "3px solid black";
+        p1Node[8].style.padding = "10px";
+        p1Node[8].style.fontFamily = "fantasy";
+        console.log(p1Node);
+
+        console.log(judul3Node.style.color); //terbaca (lihat console)
+        console.log(p1Node[8].style.fontFamily); //terbaca (lihat console)
+        console.log(p1Node[1].style.fontFamily); //ccs internal yg ada di paragraf ke 1, tidak terbaca (liat konsole)
+        
+
+    //----------------------------------------------------------------------------------
+/*  //Method Window.getComputedStyle(), Untuk mencari informasi mengenai seluruh 
+      nilai property CSS yang saat ini sedang berjalan (tidak hanya dari inline 
+      style CSS saja), 
+    /*** Mehtod getComputedStyle(), membutuhkan dua buah argumen: yang pertama berupa node
+         element yang ingin di cek kode CSSnya, dan yang kedua berupa pseudo-element untuk 
+         kondisi CSS tertentu seperti :after. Argumen kedua ini boleh dikosongkan atau 
+         diisi nilai null jika kita hanya ingin mengecek property normal CSS*/
+        
+        var judullNode = document.getElementById("judull");
+        var hasilStyle = getComputedStyle(judullNode, null);
+
+        console.log(hasilStyle);
+        console.log(hasilStyle.length);
+        console.log(hasilStyle[0]);
+        console.log(hasilStyle[1]);
+        console.log(hasilStyle.color);
+        console.log(hasilStyle.backgroundColor);
+        console.log(hasilStyle.height);
+
+
+    //---------------------------------------------------------------------------------
+/*  Property Element.className
+    Menambah style CSS menggunakan property HTMLElement.style memang praktis namun tidak
+    efisien. Bagaimana jika property yang harus ditambahkan ada 10 atau 20? daripada 
+    menulis satu persatu property CSS dari JavaScript, kita bisa menyiapkan sebuah 
+    class CSS, kemudian tinggal ditambahkan kedalam Element HTML.
+    /*** Untuk proses pembacaan dan penginputan class CSS ke dalam sebuah element HTML, bisa
+    menggunakan property className. */
+    
+        //contoh penggunaannya :
+        var judul4Node = document.getElementById("judul4");
+        console.log(judul4Node.className); //class merah
+
+        judul4Node.className = "hijau"; //diganti dengan class hijau
+        console.log(judul4Node.className); //class hijau
+        //----------------------------------------------------------------------------
+     /*** Yang juga perlu diperhatikan, property className ini akan menimpa class terdahulu, 
+          seperti contoh berikut:   */
+        var judul5Node = document.getElementById("judul5");
+        console.log(judul5Node.className); //class *warning dan *merah
+
+        judul5Node.className = "penting"; //class diganti dengan *penting (class warning dan merah terhapus)
+        console.log(judul5Node.className); //class penting
+
+     /*** Solusi dari masalah ini, agar class seperti diatas (*warning dan *merah) tetap ada, 
+          maka nama class yang ada  harus disimpan dulu ke sebuah variabel, lalu baru 
+          ditambahkan dengan nama class baru: */
+
+     /**** var namaClass = judul5Node.className;
+           judul5Node.className = namaClass * " classbaru classbaru1";
+           console.log(judul5Node.className); 
+           
+        Atau bisa juga dengan menggunakan operator gabungan assignment, sehingga tidak perlu
+        menggunakan variabel perantara, seperti dibawah ini */
+
+        judul5Node.className += " classbaru classbaru1"; //artinya tambahkan hasil className saat ini dengan string " classbaru dan classbaru1". 
+        console.log(judul5Node.className); //class penting, classbaru dan classbaru1
+
+    //-----------------------------------------------------------------------------------
+    //Property Element.classList 
+        var judul6Node = document.getElementById("judul6");
+        console.log(judul6Node.className); //class *hijau dan *classbaru
+
+        judul6Node.classList.add("hati2");
+        judul6Node.classList.remove("classbaru");
+        judul6Node.classList.add("kuning");
+
+        console.log(judul6Node.className);
+    </script>
+</html>

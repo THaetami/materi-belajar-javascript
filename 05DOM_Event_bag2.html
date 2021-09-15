@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>DOM Event Bagian 2</title></head>
+    <style>
+        h4,h5,div {
+            border: 2px solid black;
+            width: 100%;
+            text-align: center;
+            color: red;
+            margin: 2% 2% 2% 0;
+        }
+        table,td {border: 2px solid black;}
+        td {text-align:center; padding: 10px;}
+        #div7{
+            border: 3px solid black;
+            width: 100%;
+            line-height: 150px;
+            text-align: center;
+            font-size: 20px;
+            color: black;
+        }
+        #div8 p, #div9 p {
+            border: 1px solid black;
+            width: 50%;
+            margin: 10px auto;
+            padding: 10px;
+            text-align: center;
+        } 
+        #div10 { border: hidden;
+        width: 500px;
+        height: 150px;
+        line-height: 150px;
+        text-align: center;
+        font-size: 20px;
+        background-color: lavender;
+        }
+        span { background-color: lavender; padding: 5px 20px; cursor: pointer;}
+        #hasil4 { width: 270px; height: 50px; border: 2px solid black}
+        #hasilkomen1 { background: border-box;}
+
+    </style>
+    <body>
+<!--    MENGENAL BERBAGAI EVENT MOUSE                                   -->
+        <div id="div7">cursor mouse ke sini</div> <!--MOUSE EVENT       -->
+        <br>
+<!--    perbedaan EVENT mouseover/mouseout dan mouseenter/mouseleave    -->
+        <div id="div8"><p>Mouse Over dan Out</p></div> 
+        <div id="div9"><p>Mouse Enter dan Leave</p></div>
+<!--    pengenalan EVENT MOUSEMOVE          -->
+        <p id="div10">CURSOR MOUSE KE SINI</p>
+        <p>
+            Koordinat (Screen): X = <span id="sumbuXS"></span>
+            Y = <span id="sumbuYS"></span>
+        </p>
+        <p>
+            Koordinat (Client): X = <span id="sumbuXC"></span>
+            Y = <span id="sumbuYC"></span>
+        </p>
+        <p>|============================================================|</p>
+<!--    TIGA metode cara mencari form element atau lebih tepatnya mencari node object dari tag <form> -->
+        <form id="formKu" name="formKu" method="get" action="proses.php"
+                target="_self" enctype="multipart/form-data"
+                accept-charset="utf-8">
+            <p>Username: <input type="text" name="username" id="username"></p>
+            <p><input type="checkbox" name="js" id="js" value="Belajar JavaScript">Belajar JavaScript</p>
+<!--    PENGENALAN FORM ELEMENT: EVENT (submit dan reset) -->
+            <p><input type="submit" name="submit" id="submit" value="Submit Form">
+            <input type="reset" name="reset" id="reset" value="Reset Form"></p>
+<!--    CONTOH MENGGUNAKAN INPUT ELEMENT PROPERTY               -->
+            <p>Hasil: <span id="hasil"></span></p>
+<!--    MEN-COPY HASIL TEXT BOX KE DALAM TEXT BOX LAIN          -->
+            <p>Hasil Copy: <input type="text" id="hasil2"></p>    
+        </form>
+<!--    FORM ELEMENT: METHOD
+        MENGENAL/MEMBUAT METHOD SUBMIT DAN RESET FORM TANPA TOMBOL BAWAAN DARI HTML -->
+<!--    <p><span id="spanSubmit">Submit Form</span>
+        <span id="spanReset">Reset Form</span></p>              -->
+
+<!--    FORM YANG TIDAK HARUS DIDALAM "FORM"
+        Sebuah tag tidak harus berada didalam <form> agar bisa diproses dengan JavaScript.
+  ***   CARA seperti ini hanya cocok untuk form yang tidak akan dikirim ke server dan hanya
+        diproses menggunakan JavaScript saja. Jika nilai form perlu dikirim ke web server, 
+        kita harus menempatkan isian form ini ke dalam tag <form>.
+        Berikut percobaannya                                    -->
+        <p>|============================================================|</p>
+        <p>Username (diluar &lt;form&gt;): <input type="text" id="username1"></p>
+        <p><button id="copyData">Copy Data</button></p>
+        <p>Hasil: <input type="text" id="hasil3"></p>
+<!--    MEMBUAT DAN MENGENAL INPUT ELEMENT: EVENT (EVENT FOCUS DAN EVENT BLUR)-->
+        <p>|============================================================|</p>
+        <p>INPUT ELEMENT: EVENT FOCUS DAN EVENT BLUR</p>
+        <p>Username (event Focus = aqua) : <input type="text" id="username2" value="Amier"></p>
+        <p>Email (event Blur = merah) : <input type="text" id="email"></p>
+<!--    MEMBUAT DAN MENGENAL INPUT ELEMENT: EVENT (CHANGE)      
+  ***   Event change akan aktif ketika nilai sebuah element berubah, baik jika nilainya 
+        ditambah, dikurangi atau dihapus. Khusus untuk text box, event ini akan aktif
+        pada saat element tersebut kehilangan focusnya.         -->
+        <p>|============================================================|</p>
+        <p>INPUT ELEMENT: EVENT CHANGE</p>
+        <p>Username (event Change) : <input type="text" id="username3" value="Andi"></p>
+<!--    CONTOH CARA MENJALANKAN EVENT MILIK ELEMENT LAIN-->
+        <p>|============================================================|</p>
+        <p>BELAJAR MENJALANKAN EVENT MILIK ELEMENT LAIN</p>
+        <button id="tombol1">Tampilkan pesan</button>
+        <button id="tombol2">Tampilkan pesan juga</button>
+        <p>|------------------------------------------------------------|</p>
+        <p>Username: <input type="text" id="username4"></p>
+        <p>Email: <input type="email" id="email1"></p>
+        <p>Jalankan: <button id="focusU">Fokus ke Username</button>
+        <button id="focusE">Fokus ke Email</button></p>
+<!--    KEYBOARD EVENT (KEYDOWN, KEYPRESS DAN KEYUP)-->
+        <p>|============================================================|</p>
+        <p>PENGENALAN EVENT KEYDOWN KEYPRESS DAN KEYUP</p>
+        <p>Ketik disini: <input type="text" id="ketik"></p>
+        <div id="hasil4">efek keydown = merah, keypress = biru, keyup = kuning</div>
+        <p>|------------------------------------------------------------|</p>
+        <p>Ketik disini: <input type="text" id="ketik1"></p>
+        <p>Hasil Keydown : <span id="hasilKeydown"></span></p>
+        <p>Hasil Keypress : <span id="hasilKeypress"></span></p>
+        <p>Hasil Keyup : <span id="hasilKeyup"></span></p>
+<!--    MENGENAL KEYBOARD EVENT OBJECT
+        Ketiga keyboardEvent diatas akan menghasilkasn sebuah event object khusus 
+        yang benama KeyboardEvent, berikut beberapa property KeyboardEvent object;  -->
+        <p>|============================================================|</p>
+        <p>MENGENAL BEBERAPA PROPERTY KEYBOARDEVENT OBJECT: Ketik, kemudian liat console</p>
+        <p>Ketik disini : <input type="text" id="ketik2"></p>
+<!--    Latihan Squy                                        -->
+        <p>|------------------------------------------------------------|</p>
+        <p>Latihan menggunakan Keyboard Event Object (menghitung banyak huruf 'a' dan 'e' yg diketik di sebuah tag input (textbox)</p>
+        <p>Ketik disini : <input type="text" id="ketik3" size="50"></p>
+        <p>Jumlah Huruf 'a' : <span id="hasilA"></span></p>
+        <p>Jumlah Huruf 'e' : <span id="hasilE"></span></p>
+<!--    INPUT ELEMENT: TYPE PASSWORD  
+        Input element type password adalah sebutan bagi tag <input type="password">. 
+        Element ini digunakan untuk membuat kotak inputan password yang pada saat di 
+        ketik, teks akan disamarkan dengan tanda bulatan hitam atau tanda bintang (tergantung web browser).                                  -->
+        <p>|============================================================|</p>
+        <p>BELAJAR INPUT ELEMENT: TYPE PASSWORD</p>
+        <p>Password: <input type="password" id="pass1"></p>
+        <p><input type="checkbox" id="tom1">Tampilkan password</p>
+        <p>|------------------------------------------------------------|</p>
+        <p>Password: <input type="password" id="pass2"></p>
+        <p><button id="tom2">Tampilkan password</button></p>
+<!--    TEXTAREA ELEMENT                                    
+        Textarea adalah tag <textarea> yang digunakan untuk membuat kotak input teks 
+        dengan ukuran lebih besar dari pada tag <input type="text">.-->
+        <p>|============================================================|</p>
+        <p>BELAJAR TEXAREA ELEMENT</p>
+        <p>Ketik disini : <textarea id="komen1">komentar disini</textarea></p>
+        <p>Komentar : <span id="hasilkomen1"></span></p>
+        <!-- latihan lainnya                                            -->
+        <p>|------------------------------------------------------------|</p>
+        <p>Nama Kota : <input type="text" id="namaKota"></p>
+        <p><button id="tambahKota">Tambah Kota</button></p>
+        <p><textarea id="daftarKota" rows="3" cols="20"></textarea></p>
+<!--    INPUT ELEMENT: TYPE CHECKBOX                                    -->
+        <p>|============================================================|</p>
+        <p>BELAJAR INPUT ELEMENT : TYPE CHECKBOX</p>
+        <p>Belajar:
+        <input type="checkbox" id="bljrHTML" value="HTML">HTML
+        <input type="checkbox" id="bljrCSS" value="CSS">CSS
+        <input type="checkbox" id="bljrJS" value="JavaScript">JavaScript
+        </p>
+        <p><button id="periksa">Periksa</button>
+        <button id="checklistAll">Check List Semua</button>
+        <button id="unchecklistAll">Kosongkan Semua</button></p>
+        <p>Hasil <span id="hsl"></span></p>
+<!--    INPUT ELEMENT: TYPE CHECKBOX                                    -->
+        <p>|============================================================|</p>
+        <p>BELAJAR INPUT ELEMENT : TYPE RADIO</p>
+        <p>Belajar:
+            <input type="radio" name="belajar" id="htmlBljr" value="HTML">HTML 
+            <input type="radio" name="belajar" id="cssBljr" value="CSS">CSS 
+            <input type="radio" name="belajar" id="jsBljr" value="JavaScript">JavaScript 
+            <input type="radio" name="belajar" id="mysqlBljr" value="MySQL">MySQL
+        </p>
+        <p><button id="priksa1">Periksa</button></p>
+        <p>Hasil: <span id="hsl1"></span></p>       
+<!--    SELECT ELEMENT                                                  
+        Jika dibandingkan dengan element form lain, select element mungkin yang paling
+        kompleks, karena kita butuh gabungan tag <select> dan tag <option> untuk 
+        membuat sebuah pilihan dropdown.
+        /**     Di dalam DOM W3C, select element dikelompokkan ke dalam object tersendiri, 
+        yakni HTMLSelectElement dan HTMLOptionElement. HTMLSelectElement adalah 
+        object untuk tag <select>, sedangkan HTMLOptionElement adalah object untuk 
+        tag <option>.
+        /**     Sebagaimana biasa, karena ini adalah sebuah object baru, kita akan lihat apa 
+        saja property yang bisa diakses dari HTMLSelectElement dan HTMLOptionElement.
+        Kita mulai dari HTMLSelectElement terlebih dahulu:  -->
+        <p>|============================================================|</p>
+        <p>BELAJAR SELECT ELEMENT</p>
+        <p>LIAT CONSOLE, Belajar mengenal Property HTMLSelectElement dan HTMLOptionElement:
+            <select name="belajar" id="bljr">
+                <option value="HTML" id="html1Belajar">Belajar HTML</option>
+                <option value="CSS" id="css1Belajar">Belajar CSS</option>
+                <option value="JavaScript" id="js1Belajar">Belajar JavaScript</option>
+            </select>
+        </p>
+        <p><button id="priksa2">Periksa</button></p>
+        <!-- Latihan -->
+        <p>|------------------------------------------------------------|</p>
+        <p>Latihan:
+            <select name="Latihan" id="lthn">
+                <option value="HTML" id="lthnHTML">Latihan HTML</option>
+                <option value="CSS" id="lthnCSS">Latihan CSS</option>
+                <option value="JavaScript" id="lthnJS">Latihan JavaScript</option>
+            </select>
+        </p>
+        <p>Hasil Latihan: <span id="hslLatihan"></span></p>
+        <!-- LATIHAN MEMBUAT DROPDOWN DINAMIS               -->
+        <p>|------------------------------------------------------------|</p>
+        <p>Fakultas: 
+            <select name="fakultas" id="fakultas">
+                <option value="FASILKOM">FASILKOM</option>
+                <option value="Ekonomi">Ekonomi</option>
+                <option value="FMIPA">FMIPA</option>
+            </select>
+            Jurusan:
+            <select name="jurusan" id="jurusan"></select>
+        </p>
+        <br>
+        <p>Pilihan : <span id="pilihan"></span></p>
+ 
+    </body>
+
+    <script>
+//========================================================================================
+// MENGENAL BERBAGAI EVENT MOUSE 
+
+        var div7Node = document.getElementById("div7");
+
+        function mouseoverEvent(e){
+            e.target.style.backgroundColor = "red";
+            e.target.innerHTML = "Terjadi event mouseover";
+        }
+
+        function mouseoutEvent(e){
+            e.target.style.backgroundColor = "blue";
+            e.target.innerHTML = "Terjadi event mouseeventout";
+        }
+
+        function mousedownEvent(e){
+            e.target.style.backgroundColor = "green";
+            e.target.innerHTML = "Terjadi perubahan event mousedown";
+        }
+
+        function mouseupEvent(e){
+            e.target.style.backgroundColor = "yellow";
+            e.target.innerHTML = "Terjadi event mouseup";
+        }
+
+
+        div7Node.addEventListener("mouseover",mouseoverEvent); //Event yang terjadi saat cursor mouse masuk ke dalam area sebuah element atau ke child dari element tersebut.
+        div7Node.addEventListener("mouseout",mouseoutEvent); //Event yang terjadi saat cursor mouse keluar dari area element atau ke child dari element tersebut.
+        div7Node.addEventListener("mousedown",mousedownEvent); //Event yang terjadi saat tombol mouse di tekan.
+        div7Node.addEventListener("mouseup",mouseupEvent); //Event yang terjadi saat tombol mouse di lepaskan.
+
+        /////////////////////////////////////////////////////////////////////////
+        /*-- PERBEDAAN MOUSEOVER/MOUSEOUT DENGAN MOUSEENTER/MOUSELEAVE
+        /*** Bedanya, mouseenter/mouseleave tidak menganggap child element sebagai 
+        element lain (dianggap satu kesatuan dengan parent element). */
+
+        function keYellow(e){
+            e.target.style.backgroundColor = "yellow";
+        }
+
+        function kePurple(e){
+            e.target.style.backgroundColor = "purple";
+        }
+
+        var div8Node = document.getElementById("div8");
+        div8Node.addEventListener("mouseover",keYellow); 
+        div8Node.addEventListener("mouseout",kePurple);
+
+        var div9Node = document.getElementById("div9");
+        div9Node.addEventListener("mouseenter",keYellow); //mouseenter, Event yang terjadi saat cursor mouse masuk ke dalam area element.
+        div9Node.addEventListener("mouseleave",kePurple); //mouseleave, Event yang terjadi saat cursor mouse keluar dari area element.
+
+        //////////////////////////////////////////////////////////////////////////
+        // PENGENALAN EVENT MOUSEMOVE
+
+        var div10Node = document.getElementById("div10");
+        var spanXSNode = document.getElementById("sumbuXS");
+        var spanYSNode = document.getElementById("sumbuYS");
+        var spanXCNode = document.getElementById("sumbuXC");
+        var spanYCNode = document.getElementById("sumbuYC");
+
+        function mousemoveEvent(e){
+            spanXSNode.innerHTML = e.screenX;
+            spanYSNode.innerHTML = e.screenY;
+            spanXCNode.innerHTML = e.clientX;
+            spanYCNode.innerHTML = e.clientY;
+        }
+
+        div10Node.addEventListener("mousemove",mousemoveEvent); //mousemove: Event yang terjadi saat cursor mouse digerakkan dalam element
+        /***Informasi yang umumnya diambil dari event mousemove adalah posisi cursor, 
+        yang bisa diambil dari property screenX, screenY, clientX dan clientY. Karena 
+        event ini selalu dipanggil setiap saat, hasilnya akan selalu berubah-ubah 
+        tergantung posisi cursor. */
+        
+       
+//========================================================================================
+/*** 
+TIGA metode  mencari form element atau lebih tepatnya mencari node object dari tag <form> */
+        var formNode = document.getElementById("formKu"); //MENGGUNAKAN ID
+        var usernameNode = document.forms[0][0]; //sebelum era DOM web browser menyediakan collection, seluruh form yang ada di sebuah halaman disimpan di ke dalam collection document.forms
+        var checkboxNode = document.forms.formKu.js; // MENGGUNAKAN COLLECTION PLUS nilai "NAME"
+        
+
+        console.log(formNode);
+        console.log(usernameNode);
+        console.log(checkboxNode);
+       
+        //================================================================================
+        //MENGENAL FORM ELEMENT : PROPERTY
+        console.log(formNode.elements); //Berisi collection dari anggota / element penyusun form
+        console.log(formNode.length); //Berisi jumlah anggota / element yang menyusun form
+        console.log(formNode.name); //Berisi nilai atribut name dari tag <form>.
+        console.log(formNode.method); //Berisi nilai atribut method dari tag <form>.
+        console.log(formNode.target); //Berisi nilai atribut target dari tag <form>.
+        console.log(formNode.action); //Berisi nilai atribut action dari tag <form>.
+        console.log(formNode.acceptCharset); //Berisi nilai atribut acceptCharset dari tag <form>.
+        console.log(formNode.encoding); //Berisi nilai atribut encoding dari tag <form>.
+
+        /**Selain property elements dan length, property diatas juga bisa digunakan untuk mengubah nilai 
+        atribut, misalnya: */
+        /*      var formNode = document.getElementById("formKu");
+                formNode.action = "login.php"; */ 
+        //skrang jika tombol submit ditekan, akan terkirim ke halaman "login.php" bkn lagi ke proses php.
+        
+
+        //===============================================================================
+        //FORM ELEMENT : METHOD
+        // MENGENAL/MEMBUAT METHOD SUBMIT DAN RESET FORM TANPA TOMBOL BAWAAN DARI HTML
+
+        // var spanSubmitNode = document.getElementById("spanSubmit");
+        // var spanResetNode = document.getElementById("spanReset");
+        
+        // function diSubmit(){ formNode.submit(); } //method submit
+        // function diReset(){ formNode.reset(); } //method reset
+
+        // spanSubmitNode.addEventListener("click",diSubmit);
+        // spanResetNode.addEventListener("click",diReset);
+
+        
+
+        //==============================================================================
+        //PENGENALAN FORM ELEMENT: EVENT (SUBMIT DAN RESET)
+        function diStop(e){ //event 
+            console.log(e.type);
+            e.preventDefault(); //akan menghentikan event bawaan dari sebuah object, efeknya form akan ditahan untuk tidak tersubmit dan tidak ter-reset.
+            console.log(e.defaultPrevented);
+        }
+
+        formNode.addEventListener("submit",diStop);
+        formNode.addEventListener("reset",diStop);
+
+
+//========================================================================================
+//DAFTAR  INPUT ELEMENT (tag input): PROPERTY ===========================================
+        function diProses(e){
+            e.preventDefault();
+            console.log(usernameNode.form); //HTMLInputElement.form: ---- Berisi element node dari form tempat dimana tag <input> berada.
+            console.log(usernameNode.name); //HTMLInputElement.name: ---- Berisi nilai atribut name dari tag <input>.
+            console.log(usernameNode.type); //HTMLInputElement.type: ---- Berisi nilai atribut type dari tag <input>.
+            console.log(usernameNode.autofocus); //HTMLInputElement.autofocus: ---- Berisi nilai boolean apakah atribut autofocus aktif atau tidak.
+            console.log(usernameNode.value); //HTMLInputElement.value: ---- Berisi nilai atribut value dari tag <input>. Property ini juga berisi nilai teks yang saat ini ada di dalam tag <input>,
+            console.log(usernameNode.maxLength); //HTMLInputElement.maxLength: ---- Berisi nilai atribut maxLength dari tag <input>, akan menghasilkan nilai -1 jika atribut maxLength tidak ditulis.
+            console.log(usernameNode.size); //HTMLInputElement.size: ---- Berisi nilai atribut size dari tag <input>. Secara default, panjang dari tag <input> adalah 20.
+            console.log(usernameNode.readOnly); //HTMLInputElement.readOnly: ---- Berisi nilai boolean apakah atribut readOnly aktif atau tidak
+            console.log(usernameNode.placeholder); //HTMLInputElement.placeholder: ---- Berisi nilai atribut placeholder dari tag <input>
+        }
+        formNode.addEventListener("submit",diProses);
+
+        //===============================================================================
+        //CONTOH MENGGUNAKAN INPUT ELEMENT PROPERTY
+        var hasilNode = document.getElementById("hasil");
+
+        function diJalankan(e){
+            e.preventDefault(); //akan menghentikan event bawaan dari sebuah object, efeknya form akan ditahan untuk tidak tersubmit dan tidak ter-reset.
+            hasilNode.innerHTML = usernameNode.value; //mengambil nilai property value dari usernameNode, kemudian diinput ke dalam hasilNode.innerHTML.
+        }
+
+        formNode.addEventListener("submit",diJalankan);
+
+        //==============================================================================
+        //MEN-COPY HASIL TEXT BOX KE DALAM TEXT BOX LAIN 
+        var hasil2Node = document.getElementById("hasil2");
+
+        function diJalankan1(e){
+            e.preventDefault();
+            hasil2Node.value = usernameNode.value; //digunakan untuk mengambil nilai value dari usernameNode ke hasil2NOde
+            hasil2Node.disabled = "true"; // (sekedar tambahan) akan membuat tag <input type="text" id="hasil2"> menjadi disabled (berwrna abu2 dan tidak bisa diisi)
+        }
+        formNode.addEventListener("submit",diJalankan1);
+
+        //==============================================================================
+        //FORM YANG TIDAK HARUS DIDALAM tag "FORM"
+        /*** CARA seperti ini hanya cocok untuk form yang tidak akan dikirim ke server dan hanya
+        diproses menggunakan JavaScript saja. Jika nilai form perlu dikirim ke web server, 
+        kita harus menempatkan isian form ini ke dalam tag <form>. */
+        var copyDataNode = document.getElementById("copyData");
+        var username1Node = document.getElementById("username1");
+        var hasil3Node = document.getElementById("hasil3");
+
+        function diCopy(){
+            hasil3Node.value = username1Node.value;
+            hasil3Node.disabled = "true";
+        }
+
+        copyDataNode.addEventListener("click",diCopy);
+
+        //==============================================================================
+        //MEMBUAT DAN MENGENAL INPUT ELEMENT: EVENT (EVENT FOCUS DAN EVENT BLUR)
+        var username2Node = document.getElementById("username2");
+        var emailNode = document.getElementById("email");
+
+        function diFocus(e){ 
+            e.target.style.border = "2px solid aqua";// ubah style CSS border untuk element tesebut menjadi warna merah
+        }
+        function diBlur(e){
+            e.target.style.border = "2px solid red"; //ubah style CSS border untuk element tesebut menjadi warna orange
+        }
+
+        username2Node.addEventListener("focus",diFocus); //event focus
+        emailNode.addEventListener("focus",diFocus); //event focus
+        username2Node.addEventListener("blur",diBlur); //event blur
+        emailNode.addEventListener("blur",diBlur); //event blur
+       
+
+        //==============================================================================
+        //MEMBUAT DAN MENGENAL INPUT ELEMENT: EVENT (CHANGE)
+        var username3Node = document.getElementById("username3");
+
+        function diChange1(e){
+            e.target.style.border = "2px solid blue"; ////ubah style CSS border untuk element tesebut menjadi warna biru
+        }
+
+        username3Node.addEventListener("change",diChange1); //event change
+
+        //=============================================================================
+        //CONTOH CARA MENJALANKAN EVENT MILIK ELEMENT LAIN
+        var tombol1Node = document.getElementById("tombol1");
+        var tombol2Node = document.getElementById("tombol2");
+
+        function tampilkanPesan(e){
+            alert(e.target.id);
+        }
+        tombol1Node.addEventListener("click",tampilkanPesan);
+
+        function tampilkanPesanJuga(e){
+            tombol1Node.click(); //intinya disini
+        }
+        tombol2Node.addEventListener("click",tampilkanPesanJuga);
+            //========================================================================
+            //contoh lain :
+        var username4Node = document.getElementById("username4");
+        var email1Node = document.getElementById("email1");
+        var focusUNode = document.getElementById("focusU");
+        var focusENode = document.getElementById("focusE");
+
+        function diFocus1(e){
+            e.target.style.border = "2px solid aqua";
+        }
+
+        function diBlur1(e){
+            e.target.style.border = "2px solid red";
+        }
+
+        username4Node.addEventListener("focus",diFocus1);
+        email1Node.addEventListener("focus",diFocus1);
+        username4Node.addEventListener("blur",diBlur1);
+        email1Node.addEventListener("blur",diBlur1);
+
+        focusUNode.addEventListener("click",function(){ username4Node.focus(); });
+        focusENode.addEventListener("click",function(){ email1Node.focus(); });
+
+
+//========================================================================================
+//EVENT KEYBOARD (KEYDOWN, KEYPRESS, DAN KEYUP)
+        var ketikNode = document.getElementById("ketik");
+        var hasil4Node = document.getElementById("hasil4");
+
+        function diKeydown(){
+            hasil4Node.style.backgroundColor = "red";
+        }
+
+        function diKeypress(){
+            hasil4Node.style.backgroundColor = "blue"; // Saat tombol keyboard ditekan, warna tag <div id=hasil4> akan berubah menjadi biru (event keypress),
+        }
+
+        function diKeyup(){
+            hasil4Node.style.backgroundColor = "yellow"; //saat tombol keyboard di lepaskan, warna tag <div=hasil4> akan berubah menjadi kuning (event keyup).
+        }
+
+        ketikNode.addEventListener("keydown",diKeydown);
+        ketikNode.addEventListener("keypress",diKeypress); //Saat tombol keyboard ditekan, warna tag <div> akan berubah menjadi biru (event keypress),
+        ketikNode.addEventListener("keyup",diKeyup); ////saat tombol keyboard di lepaskan, warna tag <div> akan berubah menjadi kuning (event keyup).
+            //========================================================================
+            //contoh lain :
+        var ketik1Node = document.getElementById("ketik1");
+        var hasilKdownNode = document.getElementById("hasilKeydown");
+        var hasilKpressNode = document.getElementById("hasilKeypress");
+        var hasilKupNode = document.getElementById("hasilKeyup");
+
+        function diKeydown1 (){
+            hasilKdownNode.innerHTML = ketik1Node.value; //ubah innerHTML node(hasilKdown), sesuai value dari node ketik
+        }
+        
+        function diKeypress1 (){
+            hasilKpressNode.innerHTML = ketik1Node.value; //ubah innerHTML node(pressKdown), sesuai value dari node ketik
+        }
+
+        function diKeyup1 (){
+            hasilKupNode.innerHTML = ketik1Node.value; //ubah innerHTML node(hasilKdown), sesuai value dari node ketik
+        }
+
+        ketik1Node.addEventListener("keydown",diKeydown1);
+        ketik1Node.addEventListener("keypress",diKeypress1);
+        ketik1Node.addEventListener("keyup",diKeyup1);
+
+        //============================================================================
+        // MENGENAL KEYBOARD EVENT OBJECT 
+        // Ketiga keyboardEvent diatas akan menghasilkasn sebuah event object khusus 
+        // yang benama KeyboardEvent, berikut beberapa property KeyboardEvent object;
+        
+        var ketik2Node = document.getElementById("ketik2");
+
+        function diProses1(e){
+            console.log(e.key); //Berisi string dari tombol yang ditekan, seperti “A”, “c”, “5”, juga tombol seperti “Enter”, “Tab” atau “ArrowUp”.
+            console.log(e.charCode); //Berisi kode Unicode dari tombol yang ditekan, contohnya “A” akan menjadi 65, karena kode Unicode untuk karakter “A” adalah 65. Property ini hanya akan berisi untuk event keypress. charCode sebaiknya tidak dipakai lagi (deprecated), disarankan menggunakan KeyboardEvent.key.
+            console.log(e.keyCode); //Sama seperti charCode, khusus untuk event keydown dan keyup. Di beberapa sistem, huruf ‘a’ kecil akan menghasilkan nilai unicode untuk huruf “A” besar. keyCode juga sebaiknya tidak dipakai lagi (deprecated), disarankan menggunakan KeyboardEvent.key.
+            console.log(e.which); //
+            console.log(e.altKey); //Berisi nilai boolean apakah tombol ALT di tahan saat terjadi event
+            console.log(e.ctrlKey); //Berisi nilai boolean apakah tombol CRTL di tahan saat terjadi event
+            console.log(e.shiftKey); //Berisi nilai boolean apakah tombol SHIFT di tahan saat terjadi event
+        }
+
+        ketik2Node.addEventListener("keydown",diProses1); //sila keydown diganti keypress atau keyup selan liat console
+        //daftar lengkap liat di internet "KeyboardEvent Reference"
+
+          //-----------------------------------------------------------------------
+          //latihan menghitung banyak huruf 'a' dan 'e' yg diketik di sebuah tag input (textbox)
+        
+        var ketik3node = document.getElementById("ketik3");
+        var hasilANode = document.getElementById("hasilA");
+        var hasilENode = document.getElementById("hasilE");
+
+        var jumlahA = 0; // counter untuk menghitung jumlah huruf 'a'
+        var jumlahE = 0; //counter untuk menghitung jumlah huruf 'e'
+        
+        function diProses2 (e){
+            if (e.key == "a"){ 
+                jumlahA++; 
+                hasilANode.innerHTML = jumlahA; 
+            } //jika e.key == "a", naikan nilai vaariabelA sebanyak 1angka, kemudian tampilkan ke hasilANode.innerHTML
+            if (e.key == "e"){
+                jumlahE++;
+                hasilENode.innerHTML = jumlahE;
+            } ////jika e.key == "e", naikan nilai vaariabelE sebanyak 1angka, kemudian tampilkan ke hasilENode.innerHTML
+        }
+        
+        ketik3node.addEventListener("keyup",diProses2); 
+
+
+//INPUT ELEMENT: TYPE PASSWORD ====================================================
+        var pass1Node = document.getElementById("pass1");
+        var tom1Node = document.getElementById("tom1");
+       
+        function lihatPass1(){
+            if (tom1Node.checked){
+                pass1Node.type = "text";
+            }
+            else {
+                pass1Node.type = "password";
+            }
+        }
+
+        tom1Node.addEventListener("click",lihatPass1);
+        var tom1Node = document.getElementById("tom1");
+
+    //---------------------------------------------------------------------------------
+
+        var pass2Node = document.getElementById("pass2");
+        var tom2Node = document.getElementById("tom2");
+        
+        function lihatPass2(){
+            if (tom2Node.innerHTML === "Tampilkan password"){
+                pass2Node.type = "text";
+                tom2Node.innerHTML = "Sembunyikan password";
+            }
+            else {
+                pass2Node.type = "password";
+                tom2Node.innerHTML = "Tampilkan password";
+            }
+        }
+        
+        tom2Node.addEventListener("click",lihatPass2);
+
+
+//================================================================================
+//TEXTAREA ELEMENT ================================================================
+        var komen1Node = document.getElementById("komen1");
+        var hasilkome1Node = document.getElementById("hasilkomen1");
+
+        function hslkmn(){
+            hasilkome1Node.innerHTML = komen1Node.value;
+        }
+
+    //------------------------------------------------------------------------
+        
+        komen1Node.addEventListener("keyup",hslkmn);
+        var namkotaNode = document.getElementById("namaKota");
+        var tambahKotaNode = document.getElementById("tambahKota");
+        var daftarKotaNode = document.getElementById("daftarKota");
+
+        function ditambahKota(){
+            var namaKotaSekarang = namkotaNode.value + "\n";
+            var daftarKotaSekarang = daftarKotaNode.value;
+            daftarKotaNode.value = daftarKotaSekarang + namaKotaSekarang;
+            namkotaNode.value = "";
+            namkotaNode.focus();
+        }
+
+        tambahKotaNode.addEventListener("click",ditambahKota);
+
+
+//==================================================================================
+//INPUT ELEMENT: TYPE CHECKBOX =====================================================
+        var bljrHTMLNode = document.getElementById("bljrHTML");
+        var bljrCSSNode = document.getElementById("bljrCSS");
+        var bljrJSNode = document.getElementById("bljrJS");
+        var periksaNode = document.getElementById("periksa");
+        var hslNode = document.getElementById("hsl");
+
+
+        function diPriksa(){
+            hslNode.innerHTML = "";
+
+            if(bljrHTMLNode.checked){
+                hslNode.innerHTML += bljrHTMLNode.value + " ";
+            }
+            if(bljrCSSNode.checked){
+                hslNode.innerHTML += bljrCSSNode.value + " ";
+            }
+            if(bljrJSNode.checked){
+                hslNode.innerHTML += bljrJSNode.value + " ";
+            } 
+            
+        }
+
+        periksaNode.addEventListener("click",diPriksa);
+
+        //-----------------------------------------------------------------------
+        //latihan
+        var checklistAllNode = document.getElementById("checklistAll");
+        var unchecklistAllNode = document.getElementById("unchecklistAll");
+
+        function diChecklist (){
+            bljrHTMLNode.checked = true;
+            bljrCSSNode.checked = true;
+            bljrJSNode.checked = true;
+        }
+
+        function diKosongkan(){
+            bljrHTMLNode.checked = false;
+            bljrCSSNode.checked = false;
+            bljrJSNode.checked = false;
+        }
+
+        function hsldiKosongkan(){
+            hslNode.innerHTML = " ";
+        }
+
+        checklistAllNode.addEventListener("click",diChecklist);
+        unchecklistAllNode.addEventListener("click",diKosongkan);
+        checklistAllNode.addEventListener("click",diPriksa);
+        unchecklistAllNode.addEventListener("click",hsldiKosongkan);
+
+
+//=================================================================================
+//INPUT ELEMENT: TYPE CHECKBOX ====================================================
+var htmlBljrNode = document.getElementById("htmlBljr");
+        var cssBljrNode = document.getElementById("cssBljr");
+        var jsBljrNode = document.getElementById("jsBljr");
+        var mysqlBljrNode = document.getElementById("mysqlBljr");
+        var priksa1Node = document.getElementById("priksa1");
+        var hsl1Node = document.getElementById("hsl1");
+
+        function diPriksa1(){
+            hsl1Node.innerHTML = " ";
+            if(htmlBljrNode.checked) {
+                hsl1Node.innerHTML = htmlBljrNode.value + " ";
+            }
+            if(cssBljrNode.checked) {
+                hsl1Node.innerHTML = cssBljrNode.value + " ";
+            }
+            if(jsBljrNode.checked) {
+                hsl1Node.innerHTML = jsBljrNode.value + " ";
+            }
+            if(mysqlBljrNode.checked) {
+                hsl1Node.innerHTML = mysqlBljrNode.value + " ";
+            }
+        }
+
+        priksa1Node.addEventListener("click",diPriksa1);
+
+        
+//SELECT ELEMENT ===================================================================
+var priksa2Node = document.getElementById("priksa2");
+        var bljrNode = document.getElementById("bljr");
+
+    //Mengenal HTMLSelectElement Property ------------------------------------------
+        function diPriksa2(){
+            console.log(bljrNode);
+            console.log(bljrNode.name); // Berisi nilai atribut name dari tag <select>.
+            console.log(bljrNode.length); //Berisi jumlah pilihan yang tersedia. Pilihan ini dibuat dari tag <option>
+            console.log(bljrNode.value); //Berisi nilai atribut value dari tag <option> yang saat ini dipilih
+            console.log(bljrNode.selectedIndex); //Berisi nomor index dari tag <option> yang saat ini dipilih. Nomor index dimulai dari 0 untuk tag <option> pertama
+            console.log(bljrNode.options); //Berisi object HTMLCollection, sebuah collection yang berisi seluruh tag <option> penyusun <select>.
+            console.log(bljrNode.selectedOptions); //Berisi object HTMLCollection, sebuah collection dari tag <option> yang saat ini terpilih
+            console.log(bljrNode[0]); //Berisi object dari tag <option> di index ke-0 atau urutan pertama.
+            console.log(bljrNode[1]) //Berisi object dari tag <option> di index ke-1 atau urutan kedua.
+            console.log(bljrNode[2]); //Berisi object dari tag <option> di index ke-2 atau urutan ketiga.
+        }
+
+        priksa2Node.addEventListener("click",diPriksa2)
+
+    //Mengenal HTMLOptionElement Property -------------------------------------------
+        var css1BljrNode = document.getElementById("css1Belajar");
+
+        function diPriksa3(){
+            console.log(css1BljrNode.value); //Berisi nilai atribut value dari tag <option>.
+            console.log(css1BljrNode.index); //Berisi nomor index tag <option> yang dihitung secara beruberurutan dari tag <select>.
+            console.log(css1BljrNode.text); //Berisi teks yang ada di dalam tag <option>. Ini mirip seperti innerHTML untuk element lain.
+            console.log(css1BljrNode.selected); //Berisi nilai boolean apakah tag <option> saat ini dipilih atau tidak
+            console.log(css1BljrNode.defaultSelected); //Berisi nilai boolean apakah tag <option> di set sebagai pilihan default. Pilihan default aktif jika terdapat atribut selected di dalam tag <option>
+            console.log(css1BljrNode.disabled); //Berisi nilai boolean apakah atribut disabled aktif atau tidak
+        }
+
+        css1BljrNode.addEventListener("click",diPriksa3);
+
+    //latihan menggunakan select element ------------------------------------------
+        var lthnNode = document.getElementById("lthn");
+        var lthnHTMLNode = document.getElementById("lthnHTML");
+        var lthnCSSNode = document.getElementById("lthnCSS");
+        var lthnJSNode = document.getElementById("lthnJS");
+        var hslLatihanNode = document.getElementById("hslLatihan");
+
+        function diPriksa4(){
+            hslLatihanNode.innerHTML = lthnNode.value;
+        }
+
+        lthnNode.addEventListener("change",diPriksa4);
+
+
+//LATIHAN MEMBUAT DROPDOWN DINAMIS
+        var fakultasNode = document.getElementById("fakultas");
+        var jurusanNode = document.getElementById("jurusan");
+        var pilihanNode = document.getElementById("pilihan");
+
+// ----                                                     ini save point
+        // function jurusanTampil (){
+        //     console.log(fakultasNode);
+        //     console.log(jurusanNode);
+        //     console.log(pilihanNode);
+        // }
+        // fakultasNode.addEventListener("change",jurusanTampil);
+
+// ----                                                     ini save point
+        // function tampilkanJurusan(){
+        //     if (fakultasNode.value === "FASILKOM"){
+        //         console.log("Fasilkom dipilih");
+        //     }
+        //     if (fakultasNode.value === "Ekonomi"){
+        //         console.log("Ekonomi dipilih");
+        //     }
+        //     if (fakultasNode.value === "FMIPA"){
+        //         console.log("FMIPA dipilih");
+        //     }
+        // }
+        // fakultasNode.addEventListener("change",tampilkanJurusan);
+
+
+        var jurFASILKOM = "";
+        var jurEkonomi = "";
+        var jurFMIPA = "";
+
+        function tampilkanJurusan1(){
+            if (fakultasNode.value === "FASILKOM"){
+                jurFASILKOM = "<option value='ilkom'>Ilmu Komputer</option>";
+                jurFASILKOM += "<option value='TI'>Teknik Informatika</option>";
+                jurFASILKOM += "<option value='SI'>Sistem Informasi</option>";
+                jurusanNode.innerHTML = jurFASILKOM;
+            }
+            if (fakultasNode.value === "Ekonomi"){
+                jurEkonomi = "<option value='Akuntansi'>Akuntansi</option>";
+                jurEkonomi += "<option value='Manajemen'>Manajemen</option>";
+                jurEkonomi += "<option value='Ilmu Ekonomi'>Ilmu Ekonomi</option>";
+                jurusanNode.innerHTML = jurEkonomi;
+            }
+            if (fakultasNode.value === "FMIPA"){
+                jurFMIPA = "<option value='Matematika'>Matematika</option>";
+                jurFMIPA += "<option value='Fisika'>Fisika</option>";
+                jurFMIPA += "<option value='Kimia'>Kimia</option>";
+                jurFMIPA += "<option value='Biologi'>Biologi</option>";
+                jurusanNode.innerHTML = jurFMIPA;
+            }
+            tampilkanPilihan();
+        }
+
+        function tampilkanPilihan(){
+            pilihanNode.innerHTML = "Fakultas " + fakultasNode.value + ", ";
+            pilihanNode.innerHTML += "jurusan " + jurusanNode.value;
+        }
+        window.addEventListener("load",tampilkanJurusan1); // ketika halaman diload, piliahan jurusan FASILKOM akan langsung terisi
+        fakultasNode.addEventListener("change",tampilkanJurusan1);
+        jurusanNode.addEventListener("change",tampilkanPilihan);
+
+
+    </script>
+</html>

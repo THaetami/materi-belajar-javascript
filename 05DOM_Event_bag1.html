@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="UTF-8"><title>DOM Event</title></head>
+    <style>
+        #para3, #para4, #para5 { background-color: lavender;}
+        div { background-color: lavender; margin: 10px;}
+        #para1, #para2 { text-align: center; padding: 2px; border: 2px solid black;}
+        h4, h5 { margin: 5px 5px 5px 0; border: 3px solid black; padding: 3px; text-align: center; color: red; }
+        table,td {border: 2px solid black;}
+        td {text-align:center; padding: 10px;}
+        .merah { color: red; }
+        .hitam { color: rgb(24, 24, 21); } 
+        .biru { color: blue; }
+    </style>
+    <body>
+<!--### BELAJAR EVENT HANDLER DARI ATRIBUT HTML : ---------------------------------------
+        Cara paling mudah dan paling singkat untuk menginput event adalah dengan 
+        menulisnya langsung sebagai atribut dari sebuah element HTML.
+        Nama event ditulis dengan tambahan awalan “on”. Sebagai contoh, event click ditulis 
+        sebagai "onclick", event mouseover ditulis sebagai "onmouseover". 
+            Nilai dari atribut ini berupa kode JavaScript yang akan dijalankan.   -->
+        <h4 onclick="alert('Saya di Click')";>Klik Teks ini, Belajar Event Handler dari Atribut HTML</h4>
+        <h4 ondblclick="alert('Saya di Double Click')";>DoubleKlik Teks ini, Belajar Event Handler dari Atribut HTML</h4>
+        <h4 oncontextmenu="alert('Saya di Click kanan')";>Klik Kanan Teks ini, Belajar Event Handler dari Atribut HTML</h4>
+        <h4 onmouseover="alert('Saya di mouseover')";>Sentuh Teks ini, Belajar Event Handler dari Atribut HTML </h4>
+        
+        <div id="para1" onclick="console.log('Saya di Click')";
+        ondblclick="console.log('Saya di Double Click')";
+        oncontextmenu="console.log('Saya di Click kanan')";
+        onmouseover="console.log('saya dimoseover')";>Klik/Doubleklik/Klik Kanan Teks ini, Belajar Event Handler dari Atribut HTML <br>liat console</div>
+    <!--    Salah satu kelemahan ketika menginput event sebagai atribut adalah keterbatasan 
+          ruang. Jika kode program JavaScript sudah terlalu panjang, sangat susah untuk di 
+          ketik dan diedit.
+            Solusinya, kita bisa memindahkan kode JavaScript ke dalam sebuah function, 
+          kemudian memanggil function tersebut dari dalam atribut. ]
+             //Seperti contoh berikut:-->
+        <h4 onclick="tampil1();">Klik Teks ini, Belajar Event Handler dari Atribut HTML</h4>
+        <div id="kontainer"></div>
+
+<!--### BELAJAR EVENT HANDLER DARI PROPERTY ELEMENT : -----------------------------------
+        Cara kedua untuk “memasang” event adalah dengan menginputnya ke dalam property khusus
+        dari Element Node (secara teknis property ini melekat ke GlobalEventHandlers3 ).-->
+        <p>|============================================================================</p>
+        <h5 id="judul1">Menggunakan Event Handler dari Property Element <br/> (Klik/DblKLik/KLik kanan)</h5>
+        <div id="kontainer1"></div>
+    <!-- Kelemahan Event Handler dari Property Element---------------------------->
+        <h5 id="judul2">Melihat kelemahan Event Handler dari Property Element (Klik)</h5>
+        <div id="kontainer2"></div>
+        <div id="kontainer3"></div>
+
+<!--    BELAJAR EVENT HANDLER DARI METHOD ELEMENT
+        Cara ketiga untuk menginput event adalah dengan menggunakan method khusus yang 
+        bernama addEventListener(). Ini merupakan metode yang paling disarankan dan 
+        menjadi standar DOM W3C. -->
+        <p>|============================================================================</p>
+        <h4 id="judul3">Menggunakan Event Handler dari Method Element</h4>
+        <div id="kontainer4"></div>
+        <div id="kontainer5"></div>
+<!--    MENGENAL EVENT OBJECT                                                     -->
+        <p>|============================================================================</p>
+        <h4 id="judul4">Mengenal Event Object <br/> Klik & tekan tombol shfit ctrl dan alt <br/> Kemudian lihat console</h4>
+        <p id="para2"></p>
+    <!--    latihan menggunkan event object target                                -->    
+        <p>|-----------------------------------------------------------------------------</p>
+        <h4 id="judul5">belajar HTML</h4>
+        <h4 id="judul6">belajar CSS</h4>
+        <h4 id="judul7">belajar JavaScript</h4> 
+        <div id="kontainer6"></div>
+    <!--    latihan menggunkan event object target                                -->   
+        <p>|-----------------------------------------------------------------------------</p>
+        <p id="para3">ganti background warna menggunakan event object target, klik teks ini</p>
+        <p id="para4">ganti background warna menggunakan event object target, klik teks ini</p>
+        <p id="para5">ganti warna tulisan menggunakan event object target, klik teks ini</p>
+    <!--    latihan menggunkan event object target                                -->   
+        <p>|-----------------------------------------------------------------------------</p>
+        <p>latihan memberi warna background menggunkan event object target </p>
+        <table>
+            <tr>
+                <td>red</td><td>blue</td><td>green</td>
+            </tr>
+            <tr>
+                <td>yellow</td><td>brown</td><td>pink</td>
+            </tr>
+            <tr>
+                <td>aqua</td><td>magenta</td><td>orange</td>
+            </tr>
+        </table>
+<!--### BELAJAR EVENT PROPAGATION
+        Event propagation adalah istilah yang merujuk kepada cara event “ditangkap” oleh web
+        browser.-->       
+        <p>|===============================================================================</p>
+        <p class="merah">belajar <em class="biru">event propagantion (<b class="hitam"> mode bubling </b>)</em></p>
+        <p class="merah">belajar <em class="biru">event propagantion (<b class="hitam"> mode capturing </b>)</em></p>
+        <p class="merah">belajar<em class="biru"> (event stopPropagantion) <b class="hitam"> liat konsol</b></em></p>
+<!--### BELAJAR EVENT DEFAULT .-->    
+        <a href="belajar_js.html">Belajar Event Default </a>
+    </body>
+
+
+
+
+
+
+
+
+    <script>
+//BELAJAR EVENT HANDLER DARI ATRIBUT HTML ===============================================
+        function tampil1(){
+            document.getElementById("kontainer").innerHTML="judul di klik";
+        }
+
+//BELAJAR EVENT HANDLER DARI PROPERTY ELEMENT : =========================================
+        var judul1Node = document.getElementById("judul1"); 
+
+        function diClick(){
+            document.getElementById("kontainer1").innerHTML="judul diklik";
+        }
+
+        function diDblClick(){
+            document.getElementById("kontainer1").innerHTML="judul di Double Klik";
+        }
+
+        function diClickKanan(){
+            document.getElementById("kontainer1").innerHTML="judul diklik kanan";
+        }
+
+        judul1Node.onclick = diClick;
+        judul1Node.ondblclick = diDblClick;
+        judul1Node.oncontextmenu = diClickKanan;
+
+  /*** kelemahan dari metode ini. Kita tidak bisa menggabungkan dua event yang sama, 
+       event baru akan menimpa event sebelumnya, seperti contoh berikut: */
+
+        var judul2Node = document.getElementById("judul2");
+        
+        function diClick2(){
+            document.getElementById("kontainer2").innerHTML="Judul di kontainer2 diKlik";
+        }
+        function diClick3(){
+            document.getElementById("kontainer3").innerHTML="Judul di kontainer3 diKlik";
+        }
+        judul2Node.onclick = diClick2;
+        judul2Node.onclick = diClick3;
+
+//BELAJAR EVENT HANDLER DARI METHOD ELEMENT : =========================================
+        var judul3Node = document.getElementById("judul3");
+
+        function tampil2(){
+            document.getElementById("kontainer4").innerHTML="Klik dikontainer4 (Event handler dari method)";
+        }
+        
+        judul3Node.addEventListener("click",tampil2);
+
+        //-----------------------------------------------------------------------------
+
+        function tampilClick (){
+            document.getElementById("kontainer5").innerHTML="Klik di kontainer5 (Event handler dari method)";
+        }
+        function tampilDblClick(){
+            document.getElementById("kontainer5").innerHTML="DoubleKlik di kontainer5 (Event handler dari method)";
+        }
+        function tampilKlikK(){
+            document.getElementById("kontainer5").innerHTML="Klik kanan di kontainer5 (Event handler dari method)";
+        }
+
+        judul3Node.addEventListener("click",tampilClick);
+        judul3Node.addEventListener("dblclick",tampilDblClick);
+        judul3Node.addEventListener("contextmenu",tampilKlikK);
+
+        //method removeEventListener ---------------------------------------------------
+        judul3Node.removeEventListener("dblclick",tampilDblClick); //menghapus function tampilDblClick
+
+//MENGENAL EVENT OBJECT ================================================================
+        var judul4Node = document.getElementById("judul4");
+
+        judul4Node.addEventListener("click",function (e){ //event object
+            console.log(e); //lihat console berisi property event object
+
+    /***  Hasil yang ada di dalam tab Console merupakan isi dari event object. 
+        Terlihat ada property target yang berisi element node <h1#judul>, property 
+        buttons dengan nilai 0, clientX bernilai 227, clientY bernilai 77, layerX 
+        bernilai 227, dan layerY yang bernilai 77.
+    ***   Selanjutnya, karena nilai-nilai event object ini berbentuk property, tentunya 
+        bisa kita akses menggunakan dot notation, mari kita coba: */
+
+            console.log(e.target); //Berisi node object tempat event terjadi
+            console.log(e.type); //Tipe dari event yang saat ini dijalankan.
+            console.log(e.bubbles);  //Berisi nilai boolean apakah event bersifat bubbles
+            console.log(e.cancelable); //Berisi nilai boolean apakah event bisa di cancel.
+            console.log(e.defaultPrevented); //Berisi nilai boolean apakah event default sudah dihentikan
+            console.log(e.detail); //Jumlah klik dalam waktu singkat, untuk event dblclick akan berisi 2.
+            console.log(e.currentTarget); //Node tempat event ditulis.
+            console.log(e.relatedTarget); //Node yang berhubungan dengan event saat ini, hanya berisi nilai untuk event tertentu seperti mouseover, mouseout, mouseenter dan mouseleave.
+            console.log(e.screenX); //Posisi cursor mouse pada sumbu x dengan patokan lebar layar.
+            console.log(e.screenY); //Posisi cursor mouse pada sumbu y dengan patokan tinggi layar.
+            console.log(e.clientX); //Posisi cursor mouse pada sumbu x dengan patokan lebar element.
+            console.log(e.clientY); //Posisi cursor mouse pada sumbu y dengan patokan tinggi element.
+            console.log(e.button); //Tombol mouse yang di klik, 0 = tombol kiri, 1 = tombol tengah, 2 = tombol kanan.
+            console.log(e.ctrlKey); //Berisi nilai boolean apakah tombol keyboard CTRL di tahan saat event click terjadi.
+            console.log(e.shiftKey); //Berisi nilai boolean apakah tombol keyboard SHIFT di tahan saat event click terjadi.
+            console.log(e.altKey); //Berisi nilai boolean apakah tombol keyboard ALT di tahan saat event click terjadi.
+        });
+
+        //--------------------------------------------------------------------------------
+        //latihan menggunakan object event ctrlKey, shiftKey dan altKey ----------------
+        var para2Node = document.getElementById("para2");
+
+        function ditampil(e){
+            if (e.ctrlKey === true){
+                para2Node.innerHTML = "menggunakan event object. \n tombol CTRL terdeteksi";
+            }
+            else if (e.altKey === true){
+                para2Node.innerHTML = "menggunakan event object. \n altKey terdeteksi";
+            }
+            else if (e.shiftKey === true){
+                para2Node.innerHTML = "menggunakan event object. \n tombol SHIFT terdeteksi";
+            }
+            else {
+                para2Node.innerHTML = "menggunakan event object. \n Judul diklik";
+            }
+        }
+
+        judul4Node.addEventListener("click", ditampil);
+
+        //--------------------------------------------------------------------------------
+        //latihan menggunakan event object target ---------------------------------------
+        var judul5Node = document.getElementById("judul5");
+        var judul6Node = document.getElementById("judul6");
+        var judul7Node = document.getElementById("judul7");
+        var kontainer6Node = document.getElementById("kontainer6");
+
+        function ditampil3(e){
+            kontainer6Node.innerHTML = e.target.innerHTML +" menggunakan event object target ";
+        }
+
+        judul5Node.addEventListener("click", ditampil3);
+        judul6Node.addEventListener("click",ditampil3);
+        judul7Node.addEventListener("click",ditampil3);
+
+        //-------------------------------------------------------------------------------
+        //latihan mengganti warna background menggunakan event object target ---------------------------------------
+        var para3Node = document.getElementById("para3");
+        var para4Node = document.getElementById("para4");
+        var para5Node = document.getElementById("para5");
+
+        function wrngnt(e){
+            var idTarget = e.target.getAttribute("id");
+            if (idTarget === "para3"){
+                e.target.style.backgroundColor = "yellow"; //inline style
+            }
+            else if (idTarget === "para4"){
+                e.target.style.backgroundColor = "aqua"; //inline style
+            }
+            else if (idTarget === "para5"){
+                e.target.className = "biru"; //internal style
+            }
+        }
+
+        para3Node.addEventListener("click",wrngnt);
+        para4Node.addEventListener("click",wrngnt);
+        para5Node.addEventListener("click",wrngnt);
+
+        //-------------------------------------------------------------------------------
+        //latihan memberi warna background menggunakan event object target ---------------------------------------
+        var tabelNode = document.querySelector("table");
+
+        function ubahWrnTable(e){
+            e.target.style.backgroundColor = e.target.innerHTML;
+        }
+
+        tabelNode.addEventListener("click",ubahWrnTable);
+
+//MENGENAL EVENT PROPAGATION ================================================================
+    //Belajar menggunakan event Propagation: Bubbling
+        var emNode = document.getElementsByTagName("em");
+        var pNode = document.getElementsByTagName("p");
+        var bNode = document.getElementsByTagName("b");
+
+        console.log(emNode);
+        console.log(pNode);
+        console.log(bNode);
+
+        function ampilkanEM1() {
+            console.log("tag em1 di-klik");
+        }
+        function ampilkanP1() {
+            console.log("tag p1 di-klik");
+        }
+        function ampilkanB1() {
+            console.log("tag b1 di-klik");
+        }
+        emNode[0].addEventListener("click",ampilkanEM1);
+        pNode[12].addEventListener("click",ampilkanP1);
+        bNode[0].addEventListener("click",ampilkanB1);
+
+    //====================================================================================
+    //Belajar menggunakan event Propagation: Capturing
+
+        function ampilkanEM2() {
+            console.log("tag em2 di-klik");
+        }
+        function ampilkanP2() {
+            console.log("tag p2 di-klik");
+        }
+        function ampilkanB2() {
+            console.log("tag b2 di-klik");
+        }
+        emNode[1].addEventListener("click",ampilkanEM2, true);
+        pNode[13].addEventListener("click",ampilkanP2, true);
+        bNode[1].addEventListener("click",ampilkanB2, true);
+
+    //====================================================================================
+    //Belajar menggunakan event stopPropagation
+        function ampilkanEM3 (e) {
+            console.log("tag em3 di-klik");
+            e.stopPropagation();
+        }
+        function ampilkanP3 (e) {
+            console.log("tag p3 di-klik");
+            e.stopPropagation();
+        }
+        function ampilkanB3 (e) {
+            console.log("tag b3 di-klik");
+            e.stopPropagation();
+        }
+        emNode[2].addEventListener("click",ampilkanEM3);
+        pNode[14].addEventListener("click",ampilkanP3);
+        bNode[2].addEventListener("click",ampilkanB3);
+
+
+//MENGENAL EVENT DEFAULT ================================================================
+        var aNode = document.querySelector("a");
+        
+        function alertt(e) {
+            alert("Belajar Prevent Default");
+            e.preventDefault(); //ini eventna, menghentikan link
+        }
+        
+        aNode.addEventListener("click",alertt);
+
+
+    </script>
+</html>

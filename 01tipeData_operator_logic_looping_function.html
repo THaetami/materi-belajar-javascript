@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="UTF-8"><title>Tipe Data | Operator | Logic | function</title></head>
+    <style>
+    </style>
+    <body>
+        <h4>Tipe Data | Operator | Logic | function</h4>
+        
+    </body>
+    <script>
+var bar = false; //operator logika (nilai boolean) 
+var foo = bar || alert("hello\ndari\nexternal\nJavaScript");
+
+//strick mode
+(function(){
+ "use strict";
+    var hargaBarang = 12000;
+    var ongkosKirim = 5000;
+    var totalBiaya = hargaBarang + ongkosKirim;
+    
+    var pajak = 10/100 * totalBiaya;
+    
+    totalBiaya = totalBiaya + pajak;
+    console.log(totalBiaya);
+
+}());
+
+//konstanta
+const SALAM_PAGI = "Selamat pagi";
+const PI = 3.13;
+
+console.log(PI);
+console.log(SALAM_PAGI);
+
+
+//penulisan scientific Notation
+var angklung = 3e3;
+var jang = 0.4e-3;
+var lung = -9.353e6;
+
+console.log(angklung);
+console.log(jang);
+console.log(lung);
+
+
+//bilangan desimal
+var foo;
+foo = 999;
+console.log(foo);
+
+//bilangan biner, didahului angka 0 dan huruf b
+foo = 0b1111100111;
+console.log(foo);
+
+
+//bilangan oktal, didahului angka 0 atau angka 0 dan huruf o kecil
+foo = 01747;
+console.log(foo);
+
+foo = 0o1747;
+console.log(foo);
+
+//bilangan heksadesimal, didahului angka 0 dan huruf x kecil
+foo = 0x3e7;
+console.log(foo);
+
+
+//NaN (Not a Number) dan Infinity (tak hingga) 
+var foo;
+
+foo = 9*"a";
+console.log(foo);
+
+foo = 9/"a";
+console.log(foo);
+
+foo = -5/0;
+console.log(foo);
+
+foo = 5/0;
+console.log(foo);
+
+
+
+///ESCAPE CHARAKTER =============================================
+/*escape charakter dan unicode (memasukan karakter khusus
+ke dalam string) menggunakan tanda backslash "\" unicode ada
+di ascii-code.com */
+var bar = "\0 Tatang \v Haetami \u0752";
+console.log(bar);
+
+var foo = "\u2665 Tatang Haetami \u2764";
+console.log(foo);
+
+// template string
+var foo = "indonesia";
+var bar = `Selamat pagi ${foo}`;
+console.log(bar);
+
+
+
+
+/// ### TIPE DATA BOOLEAN #### data yang hanya mempunyai 2 nilai yakni True dan False
+
+//null adalah keadaan dimana data itu 'kosong'. umumnya nilai null diinput dgn sengaja oleh programmer.
+var foo = null;
+console.log(foo);
+
+//undefined adalah data yang tidak terdefinisi, atau nilai yang dihasilkan JS itu sendiri, sebagian besar karena kesalahan program ...
+//kita juga bisa menginput sendiri seperti nilai null
+var tang;
+console.log(tang);
+
+var foo = undefined;
+console.log(foo);
+
+//operator typeof digunakan untuk melihat tipe data sebuah variable, apakah tipe datanya number, string, blooen, undefined atau sebuah object
+var kang;
+console.log(typeof kang);
+
+foo = 199;
+console.log(typeof foo);
+
+foo = 0.00002;
+console.log(typeof foo);
+
+foo = "Belajar JavaScript";
+console.log(typeof foo);
+
+foo = "hello indonesia";
+console.log(typeof foo);
+
+foo = false;
+console.log(typeof foo);
+
+foo = null;
+console.log(typeof foo);
+
+
+
+
+
+/// ### TIPE DATA ARRAY ==========================================
+
+//contoh variable array -> nama siswa (joko dll) di sebut element array ... untuk mengakses element array diperlukan index (no.urut) yg dimulai dgn no. 0
+//yang ditulis didalam kurung siku [***] ..
+var siswa = ["andri", "joko", "sukma", "rina", "sari"];
+console.log(siswa[0]);
+console.log(siswa[1]);
+console.log(siswa[2]);
+console.log(siswa[3]);
+console.log(siswa[4]);
+//anggota array tidak harus 1tipe data saja. bisa bercampur dengan data lain
+var contoh = [1, 2, 3, 4, 5];
+console.log(contoh);
+
+var bar = ["a", "b", "c"];
+console.log(bar);
+
+var baz = ["aku", 999, true, 0.00085, null];
+console.log(baz);
+
+console.log(typeof baz);
+
+//mengubah element array, contoh dibawah ini mengubah andi yg berindex [0] menjadi alex.. 
+var foo = ["andi", "santi", "joki"];
+foo[0] = "alex";
+console.log(foo);
+//menambah rika (element array) dengan menambah index mengunakan index [3] 
+foo[3] = "rika";
+console.log(foo);
+
+///Array 2dimensi, element array yang memiliki array
+var koordinat = [[2,5], [9,5], [3,5]];
+
+console.log(koordinat[0][0]); 
+console.log(koordinat[0][1]); //untuk mengakses array 2dimensi kita menulis 2buah index [0][1]. index pertama '[0]' adalh posisi element array pertama'[2,5],-
+                              // index kedua [1] untuk mencari posisi array didalam array '[2,5]' yakni hasilna 5
+console.log(koordinat[1][0]);
+console.log(koordinat[1][1]);
+
+console.log(koordinat[2][0]);
+console.log(koordinat[2][1]);
+
+var foo = [
+    ["sedang", "belajar", "javascript"],
+    ["selamat", "pagi", "dunia"],
+    ["a", "b", "c", "d", "e"]
+];
+
+console.log(foo [0][2]);
+
+foo [1][1] = "subuh";// mengganti kata 'pagi' yg ada di element array (index1)
+console.log(foo[1]);
+foo [0][3] = "dirumah";
+console.log(foo [0]);
+foo [2][1] = "i";
+console.log(foo [2]);
+foo [2][5] = "f";// menambah anggota element array (index2) dengan huruf f
+foo [2][6] = "g";
+console.log(foo [2]);
+
+
+
+
+
+/// ### OPERATOR ARITMATIKA ====================================
+var foo;
+
+foo = +100; //plus
+console.log(foo);
+
+foo = -22; //minus
+console.log(foo);
+
+foo = 30 + 5; //penjumlahan
+console.log(foo);
+
+foo = 3.33 + 9.02; 
+console.log(foo);
+
+foo = 9 * 7; // perkalian
+console.log(typeof foo);
+
+foo = 6 + 8 / 2 + 6;
+console.log(foo);
+
+foo = 30 % 7; // modulus, sisa bagi hasil 
+console.log(foo);
+
+
+var foo;
+foo = 4 + 6 / 5 - 3 * 2 + 3; //urutan operator juga memengaruhi.. operator perkalian dan pembagian lebih kuat dari operator penjumlahan dan pengurangan.
+console.log(foo);
+
+foo = (4+6)/(5-3)*2+3;
+console.log(foo);
+
+
+
+
+
+/// ### OPERATOR INCREMENT & DECREMENT ==========================
+///operator Incremenet dan Decrement, sering digunakan untuk struktur kondisi perulangan.
+
+//Pre-Increment ->naikan nilai variable foo sebanyak 1angka, kemudian tampilkan angka yang sudah dinaikan ini. 
+//Post-Increment ->tampilkan nilai saat ini. baru kemudian naikkan (tambah) nilai variable sebanyak 1angka.
+//Pre-Decrement ->kurangkan nilai variable foo sebanyak 1angka, kemudian tampilkan angka yang sudah dikurangi ini.
+//Post-Decrement ->tampilkan nilai saat ini. baru kemudian kurangkan nilai variable sebanyak 1angka.
+var foo; 
+foo = 7;
+console.log(++foo); //pre-increment
+console.log(foo);
+
+foo = 7;
+console.log(foo++); //post-increment
+console.log(foo);
+
+foo = 7;
+console.log(--foo); //pre-decrement
+console.log(foo);
+
+foo = 7;
+console.log(foo--); //post-decrement
+console.log(foo);
+
+
+
+
+/// ### OPERATOR PERBANDINGAN ====================================
+//Operator Perbandingan -> hasil perbandingan bertype data boolean
+var foo ;
+
+foo = 9 < 12;
+console.log(foo);
+
+foo = 5 < 5;
+console.log(foo);
+
+foo = 5 <= 5;
+console.log(foo);
+
+foo = 8 != 12;
+console.log(foo);
+
+foo = 15 == 12;
+console.log(foo);
+
+foo = 15 === 15;
+console.log(foo);
+
+foo = 0.3 === 3e-1;
+console.log(foo);
+
+//operator perbandingan bisa digunakan untuk tipe data string. berikut contohnya..
+//*jika yang dibandingkan berupa data string. JavaScript menggunakan nomor urut karakter ASCII (ascii-code.com) untuk menentukan huruf mana yang lebih besar.
+var foo;
+
+foo = "a" < "b";
+console.log(foo);
+
+foo = 'a' < 'A';
+console.log(foo);
+
+foo = "revaka" < "reva";
+console.log(foo);
+
+foo = false < true;
+console.log(foo);
+
+foo = 'joni' == 12;
+console.log(foo);
+
+//perbedaan antara samadengan (==) dan identikdengan (===)..
+//untuk operator 'sama dengan' (==), jika terdapat operasi yang melibatkan dua tipe data berbaeda. javascript akan menkonversi tipe data tersebut ke tipe data
+//--lain kemudian baru dibandingkan...
+//sedangkan operator identikdengan (===) akan mengecek apakah tipe data yang dibandingkan tsb juga berbeda tipe data. jika iya, hasilnya langsung false.
+//--operator ini akan menghasilkan true jika kedua data tsb bernilai sama dan memiliki tipe data yang sama.
+//secara umum, menggunakan ooperator 'identikdengan' akan lebih aman dibanding operator 'samadengan'..
+var foo;
+
+foo = 9 == '9';
+console.log(foo);
+
+foo = 9 === '9';
+console.log(foo);
+
+foo = true == 1;
+console.log(foo);
+
+foo = true === 1;
+console.log(foo);
+
+foo = false == 0;
+console.log(foo);
+
+foo = false === 0;
+console.log(foo);
+
+
+
+
+
+
+/// ### OPERATOR LOGIKA ========================================
+/*operator logika, membandingkan 2 kondisi logika, yakni logika benar (true) dan false (salah).
+harus bernilai boolean, jika tidak, javascript akan mengkonversi berdasarkan falsy */
+//--berdasarkan falsy dan truthy value.
+var foo;
+
+foo = true && false; //Operator && (dibaca and), Hasil akan True, jika kedua variable sama2 bernilai True 
+console.log(foo);
+
+foo = true || false; //Operator || (dibaca or), Hasil akan True, jika salah satu atau kedua variabel bernilai True
+console.log(foo);
+
+foo = !false;
+console.log(foo); //Operator ! (dibaca not), Hasil akan True, jika variable bernilai false
+
+foo = true || true && false; //operator && memiliki kekuatan yang lebih tinggi maka akan diproses terlebih dahulu.
+console.log(foo);
+
+foo = false && true || true;
+console.log(foo);
+
+//////////////////////////////
+var foo = 4;
+
+if (typeof foo === "number"){
+    alert("foo bertipe number");
+    if (foo >= 10){
+        alert("nilai foo lebih besar dari 10");
+    }
+    else {
+        alert("nilai foo lebih kecil dari 10");
+    }
+}
+else if (typeof foo === "string"){
+    alert("foo bertipe string");
+}
+else {
+    alert("foo bukan bertipe number maupun string");
+}
+
+var hari = 10;
+if (typeof hari === "string"){
+    alert("saatnya kerja...");
+}
+else{
+    alert("saatnya bermain")
+}
+
+///operasi logika non boolean
+var foo = "DuniaIlkom" || "JavaScript";
+console.log(foo);
+
+var foo = "DuniaIlkom" && "JavaScript";
+console.log(foo);
+
+var jontol = false && false;
+console.log(jontol);
+
+var kontol = false || true;
+console.log(kontol);
+
+var foo = "JavaScript"  && false;
+console.log(foo);
+
+var gnteng = false && "JavaScript";
+console.log(gnteng);
+
+var foo = false || false && true;
+console.log(foo);
+
+var foo = true || false && true || "JavaScript";
+console.log(foo);
+
+
+
+
+/// ### OPERATOR STRING ========================================= 
+var foo, bar, baz;
+
+foo = "sedang " + "belajar " + "JavaScript";
+console.log(foo);
+
+foo ="Belajar " + "ECMAScript " + 7;
+console.log(foo);
+
+foo = `selalmat `;
+bar = "Malam ";
+baz = `Indonesia `;
+hasil = foo + bar + baz;
+console.log(hasil);
+
+
+// Operator String
+//untuk menyambungkan string digunakan operator plus (+)
+var foo, bar, baz;
+var siswa = ["Andri", "Joko", "Sukma", "Rina", "Sari"];
+
+foo = siswa[1] + " mendapat penghargaan sebagai siswa teladan";
+console.log(foo);
+
+bar = siswa[3] + ' dan' + siswa[4] + ' adalah teman akrab';
+console.log(bar);
+
+
+baz = "Dalam ujian kemaren, " + siswa[0] + ' mendapat nilai ' + 4*20;
+console.log(baz);
+
+//dengan template string ($), kita bisa menulis semuanya di dalam string 
+var foo, bar, baz;
+var siswa = ["Andri", "Joko", "Sukma", "Rina", "Sari"];
+
+foo = `${siswa[1]} mendapatkan penghargaan sebagai siswa teladan`; // ${siswa[1]} disebut template string
+console.log(foo);
+
+bar = `${siswa[3]} dan ${siswa[4]} adalah teman akrab`;
+console.log(bar);
+
+baz = `Dalam ujian kemarin ${siswa[0]} mendapat nilai ${4*20}`;
+console.log(baz);
+
+
+
+
+
+/// ### OPERATOR BITWISE ========================================
+//Operator bitwise adalah operator khusus untuk menangani operasi logika bilangan biner.
+
+var a = 0b10101010;
+var b = 0b11011110;
+
+console.log(a);
+console.log(b);
+
+var foo;
+
+foo = a & b;
+console.log(foo);
+
+foo = a | b;
+console.log(foo);
+
+foo = a ^ b;
+console.log(foo);
+
+foo = ~a;
+console.log(foo);
+
+foo = a >> 2;
+console.log(foo);
+
+foo = a << 3;
+console.log(foo);
+
+
+
+
+
+/// ### OPERATOR ASSIGMENT ======================================
+var a = 100;
+var b = "Belajar";
+
+a = a + 10; 
+a = a + a + 5;
+console.log(a);
+
+a += 10; //plus equals
+a += 10 + 5;
+console.log(a);
+
+a -= 10; //min equals
+console.log(a);
+
+a /= 3; //devide equals
+console.log(a);
+
+a *= 5; //multiply equals
+console.log(a);
+
+a %= 9; //modulus equals
+console.log(a);
+/////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+///OPERATOR SPREAD ==============================================
+/*Operator Spread, digunakan untuk berbagai keperluan yang
+berhubungan dengan array, salah satunya untuk menggabungkan
+array.
+* menggunakan titik 3 kali (...), kemudian diikuti dengan nama
+variabel. */
+
+
+var nilai1 = ["a", "b", "c", "d",];
+console.log(nilai1);
+
+var nilai2 = [1, 2, 3, 4,];
+console.log(nilai2);
+
+var nilai3 = [... nilai1, "e", "f", ...nilai2];
+console.log(nilai3);
+
+var nilai4 = [... nilai2, 5, 6];
+console.log(nilai4);
+
+var nilai5 = [... nilai3, ...nilai4];
+console.log(nilai5);
+
+
+
+
+/// ================ STRUKTUR LOGIKA IF ==================== ///
+/*
+
+if (condition) {
+    statment
+}
+*condition adalah kondisi penentu. condition ini biasanya berupa operasi perbandingan, yang akan menhasilkan nilai
+true atau false.
+*/
+var hari = "selasa";
+
+if (hari === "selasa"){
+    console.log("saatnya kerja...");
+    console.log("besok hari selasa");
+}
+
+//contoh praktek penggunaan logika IF untuk pengecekan validasi
+var username = "alex";
+
+if (typeof username === "string"){
+    console.log("Username Valid!!");
+}
+
+var username = 11.3;
+
+if (typeof username === "string"){
+    console.log("Username Valid");// tak akan tampil di consol
+}
+
+
+
+
+
+
+/// =============== STRUKTUR LOGIKA IF ELSE ================= ///
+/*
+
+if (condition){
+    statment1
+}
+else {
+    statment2
+}
+
+*/
+
+var hari = "selasa";
+
+if (hari === "senin"){
+    console.log("saatnya kerja...");
+}
+else {
+    console.log("Saatnya Tidur");
+}
+
+var username = 11;
+
+if (typeof username === "number"){
+    console.log("Validasi Berhasil");
+}
+else {
+    console.log("Validasi Gagal");
+}
+
+//contoh operator conditional///
+var poe = "jum\'at";
+var besok = poe === "jum\'at" ? true : false;
+
+if (besok){
+    console.log("Besok sholat jum\'at");
+}
+/////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+/// ============= STRUKTUR LOGIKA IF ELSE IF =============== ///
+/*
+
+if (condition){
+    statment1
+}
+else if (condition{
+    statment2
+}
+else{
+    statment3
+}
+
+*/
+var username = "ahad";
+
+if (typeof username === "string"){ //if
+    console.log("username string");
+}
+else if (typeof username === "number"){ //else if
+    console.log("username angka");
+}
+else{ //else
+    console.log("username bukan string dan angka");
+}
+
+
+
+
+
+
+/// ================= STRUKTUR NESTED IF ELSE ================ ///
+/*format dasarnya:
+
+if (condition){
+    statement1
+    if(condition1..1){
+        
+    }
+}
+else if (condition2){
+    statement2
+    if (condition2.1){
+        statement2.1
+    }
+}
+
+*/
+var foo = 2;
+console.log("nilai foo = "+ foo);
+
+if (typeof foo === "number"){
+    console.log("foo bertipe number");
+    if (foo > 10){
+        console.log("nilai foo lebih besar dari 10");
+    }
+    else {
+        console.log("nilai foo lebih kecil dari 10");
+    }
+}
+else if (typeof foo === "string"){
+    console.log("foo bertipe string");
+}
+else {
+    console.log("foo bukan bertipe number maupun string");
+}
+
+//contoh:
+var foo = "gajah";
+console.log("nilai foo = " + foo);
+
+if ((typeof foo === "number") && (foo >= 10)){
+    console.log("foo bertipe number");
+    console.log("nilai foo besar dari 10");
+}
+else if ((typeof foo === "number") && (foo < 10)){
+    console.log("foo bertipe number");
+    console.log("nilai foo kecil dari 10");
+}
+else if (typeof foo === "string"){
+    console.log("bertipe string");
+}
+else {
+    console.log("foo bukan bertipe number maupun string");
+}
+//perubahan mendasar, saya menggabungkan kondisi if((typeof foo === "number") && (foo >= 10)).
+//ini artinya kedua if ini harus bisa dipenuhi agar block if bisa dieksekusi, jika tidak akan lanjut ke else if berikutnya.
+
+
+var situs = "twitter";
+
+if (situs === "google"){
+    console.log('<a href="href="//www.google.com">Situs Google<a>');
+}
+else if (situs === "facebook"){
+    console.log('<a href="http://www.facebook.com">Situs Facebook<a>');
+}
+else if (situs === "twitter"){
+    console.log('<a href="http=//www.twitter.com">Situs Twitter<a>');
+}
+else if (situs === "duniailkom"){
+    console.log('<a href="http=//duniailkom.com">Situs Duniailkom<a>')
+}
+else {
+    console.log("Situs tidak terdaftar");
+}
+
+
+
+
+/// ================ STRUKTUR LOGIKA SWITCH ================ ///
+var nilai = 1;
+
+switch (nilai){
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5: console.log('Selama ini ngapain ae??'); break; // break, berfungsi untuk keluar keluar dari switch begitu kondisi yang cocok ditemukan.
+    case 6:
+    case 7:
+    case 8: console.log('Belajar lebih giat'); break; //brak, berfungsi untuk keluar keluar dari switch begitu kondisi yang cocok ditemukan.
+    case 9:
+    case 10: console.log('Pertahankan'); break; // break, berfungsi untuk keluar keluar dari switch begitu kondisi yang cocok ditemukan.
+    default: console.log("Masukan angka 1-10");
+}
+
+
+
+
+///OPERATOR CONDITIONAL (mempersingkat penulisan logika IF ELSE)
+
+/*
+strukturnya:
+result = (condition) ? statement_true : statement_false
+*/
+// result adalah variabel panampung hasil condition..
+//contoh
+var user = "admin";
+
+var hak_akses = user === "admin"? true : false; // var hak_akses sebagai result atau penampung hasil conditonal
+
+if (hak_akses){
+    console.log("Selamat datang admin..");
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//contoh lain
+var jumlah_barang = 200;
+var total = jumlah_barang > 500? jumlah_barang * 100 : jumlah_barang * 150;
+console.log(total); // var total sebagai result, 'jumlah_barang > 500' sebagai condition, 'jumlah_barang * 100 dan jumlah_barang * 150 sebagai statement..
+
+
+
+
+
+/// ================= PERULANGAN FOR =========================///
+/*
+Struktur Logika dan Perulangan
+for (start; condition; increment) {
+    statement;
+}
+start diisi dengan kondisi awal dari perulangan. bisasaya kita mendefenisikan sebuah variabel counter yang berfungsi mengontrol perulangan. sebagai contoh
+saya bisa menulis var i = 1 
+*/
+
+for (var contoh = 3; contoh <= 30; contoh = contoh + 3){
+    console.log("Percontohan "+ contoh);
+}
+////////////////////////////////////////////////////////
+for (var contoh = 30; contoh >= 3; contoh = contoh - 3){
+    console.log("Percontohan "+ contoh);
+}
+/////////////////////////////////////////////////////////   
+for (var i = 1; i < 10; i++){
+    if (i === 5){ //dihentikan di nilai ini
+        break; // digunakan untuk menghentikan perulangan
+    }
+    console.log("Hello Indonesia" + i);
+}
+////////////////////////////////////////////////////////
+for (var i = 10; i >= 1; --i){
+    if (i === 7){ // perulangan dilewati di nilai ini
+        continue; // digunakan untuk melewati perulangan
+    }
+    console.log("Percobaan" + i);
+}
+/////////////////////////////////////////////////////////
+for (var i = 2; i <= 20; i = i + 2){
+    if (i === 16){
+        break;
+    }
+    console.log("kelilipan" + i);
+}
+/////////////////////////////////////////////////////////
+for (var a = 75; a <= 90; a += 7){
+    console.log("Pertelihan" + a);
+}
+/////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+/// ========== NESTED LOOP (PERULANGAN BERSARANG) ===========///
+/*
+struktur Logika dan Perulangan:
+
+for (start1; condition1; increment1){
+    statement1
+        for(start2: condition2; increment2){
+            statment2
+    }
+}
+
+*/
+
+var i, j;
+for (i = 1; i <= 4; i++){
+    for (j = 1; j <= 2; j++){
+        console.log("variable i bernilai "+ i +", variabel j bernilai "+ j);
+    }
+}
+/////////////////////////////////////////////////////////////////////////////
+var k, l;
+for (k = 1; k <= 5; k = k + 2){
+    for (l = 5; l >= 1; l = l - 2){
+        console.log("variabel k bernilai "+ k +", variabel l bernilai "+ l);
+    }
+}
+
+
+
+
+/// ================== PERULANGAN WHILE ==================== ///
+/*
+
+struktur dasar perulangan while
+start;
+while (conditional){
+    statement;
+    increment; //(pola kenaikan aatau penurunan)
+}
+
+*/
+
+var i = 1; // start
+while (i <= 10){ // condition
+    console.log("Hello Indonesia"); // statement
+    i++; // increment (pola kenaikan atau penurunan)
+}
+
+var b = 8;
+while (b <= 40){
+    console.log("hello hyung "+ b);
+    b = b + 3;
+}
+
+var i = 100;
+while (i > 0){
+    console.log( i + " *5 = " + i*5);
+    i = i - 5;
+}
+
+
+var i = 1;
+do {
+    console.log(i + " kuadrat = " + i * 1);
+    i = i + 1;
+} while (i <= 10);
+
+//perintah break dan continue juga tetap berfungsi dalam while
+
+var i = 1;
+while (i <= 10){
+    if (i === 5){
+        break;
+    }
+    console.log("Hello JavaScript " + i);
+    i = i + 1;
+}
+
+//menampilkan element array dengan perulangan
+var siswa = ["Andri", "Joko", "Sukma", "Rina", "Sari"];
+
+for (var i = 4; i >= 0; i--){
+    console.log(siswa[i]);
+}
+
+var siswa = ["Andri", "Joko", "Sukma", "Rina", "Sari", "mahmud", "mahfud", "madrai"];
+var jumlah_siswa = siswa.length;
+
+console.log("Jumlah siswa = " + jumlah_siswa);
+
+for (var i = 0; i < jumlah_siswa; i++){
+    console.log(siswa[i]);
+}
+
+
+
+
+
+/// ================== PERULANGAN FOR OF =====================///
+//perulangan for of, digunakan untuk menampilkan element array
+
+var siswa = ["Andri", "Joko", "Rina", "Sukma", "Sari"];
+
+for (var i of siswa){
+    console.log(i);
+}
+
+
+
+
+
+/// ====================== FUNCTION ======================== ///
+
+/* Format dasar pembuatan function dalam JavaScript
+
+function function_name (argument1, argument2,...) {
+    statement;
+    statement;
+    return value;
+}
+
+*/
+
+//pendeklarasian function
+function hallo(){
+    console.log("Selamat Pagi");
+    console.log("Good Morning");
+    console.log("Ohayou Gozaimasu");
+    console.log("Buenos Dias");
+}
+
+hallo(); //pemanggilan function
+/////////////////////////////////////
+
+//mengembalikan Nilai Function
+function isuk(){
+    return "Selamat Pagi";
+}
+var salam = isuk();
+console.log(salam);
+////////////////////////////////////
+
+function subuh(){
+    return "Good Morning";
+}
+console.log(subuh());
+
+/////////////////////////////////////
+
+function sapaan(){
+    var salamPagi = ["Selamat Pagi", "Good Morning", "Ohayou Gozaimasu", "Buenos Dias"];
+    return salamPagi;
+}
+var salam = sapaan();
+for (var value = 0; value <= 3; value++){
+    console.log(salam[value]);
+}
+
+for (var i of salam) {
+    console.log(i);
+}
+
+
+
+/// ================ ARGUMENT FUNCTION ======================-///
+/*digunakan untuk mengirim satu atau beberapa nilai kedalam
+function untuk diproses. */
+function pagi(hari, tanggal, jam){ //hari tanggal dan jam merupakan argument
+    return "Pada hari ini, " + hari + " tanggl " + tanggal + " pukul " + jam;
+}
+console.log(pagi ("jum\'at", "23 Februari 2021", "08.00"));
+console.log(pagi ("sabtu", "24 Februari 2021", "08.00"));
+console.log(pagi ("minggu", "25 Februari 2021", "08.00"));
+console.log(pagi ("senin", "26 Februari 2021", "08.00"));
+
+
+function rata2(a, b, c, d){ //a,b,c,d disebut parameter
+    var hasil = (a + b + c + d)/4;
+    return hasil;
+}
+var nilai1 = rata2(8, 5, 2, 6); //8,5,2,6, disebut argumen
+console.log(nilai1);
+var nilai2 = rata2(90, 78, 95, 76);
+console.log(nilai2);
+var nilai3 = rata2(nilai1, 55, 60, nilai2);
+console.log(nilai3);
+
+//Default Argument, adalah mempersiapkan nilai awal untuk argument. dengan tujuan, jika argument ini tidak diinput, nilai awal akan digunakan..
+//jika nilai awal tidak diinput alias tidak diisi, maka JavaScript akan memberikan nilai undefined..
+
+function rataa2 (a = 10, b = 10, c = 10, d = 10){
+    var hasil = (a + b + c + d)/4;
+    return hasil;
+}
+var nilai1 = rataa2(); 
+console.log(nilai1);
+var nilai2 = rataa2(20); // 20 akan menjadi variabel a, sedangkan variabel b, c, d akan bernilai 10 sesuai nilai awal (default) function rata2
+console.log(nilai2);
+var nilai3 = rataa2(20, 5, 30); //variabel a=20, b=5, c=30, sedang d bernilai default.
+console.log(nilai3);
+
+
+
+
+///================== ARGUMENTS OBJECK =======================///
+//pemanggilan object
+function nomor(){
+    console.log(arguments[0]); //4
+    console.log(arguments[1]); //8
+    console.log(arguments[2]); //3
+    console.log(arguments[3]); //7
+}
+
+nomor(4, 8, 3, 7);
+
+////////////////////////////////////////////
+//mencari tau berapa banyak element yang ada dalam arguments
+function numur(){
+    var totalArg = arguments.length;
+    return totalArg;
+}
+var a = numur(1, 9);
+console.log(a);
+
+var b = numur(4, 8, 3, 7);
+console.log(b);
+
+var c = numur(3, 9, 1, 4, 6, 9, 0);
+console.log(c);
+/////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////
+//membuat fungsi rata-rata
+function rata2(){
+    var totalArg = arguments.length; //mencari jumlah argument
+    var hasil = 0;
+    /////////////////////////////////   
+    for (var i = 0; i < totalArg; i++){ //fungsi perulangan ini adalah untuk menjumlahkan setiap argument yang ada.
+        hasil = hasil + arguments[i];
+    }
+    //////////////////////////////////
+    return hasil/totalArg; //  
+}
+var a = rata2(1, 9);
+console.log(a);
+
+var b = rata2(4, 8, 3, 7);
+console.log(b);
+
+var c = rata2(14, 34, 17, 55, 98, 22, 26);
+console.log(c);
+
+
+
+
+
+/// ============= SPREAD OPERATOR UNTUK ARGUMENT  ============///
+/* menggunakan titik tiga (...)
+fungsi lain spread oprator selain untuk menggabungkan array
+yaitu menggantikan peran arguments object... */
+
+//contoh
+function namer(...foo){
+    console.log(foo[0]);
+    console.log(foo[1]);
+    console.log(foo[2]);
+    console.log(foo[3]);
+}
+namer(4, 8, 3, 7);
+
+/* selain itu kita juga bisa membuat argument biasa yang disambung
+ dengan spread operator, seperti contoh berikut; */
+function nimir(a, b, ...sida){
+    console.log(a); //6
+    console.log(b); //3
+    console.log(sida); // [2, 8]
+}
+nimir(6, 3, 2, 8);
+
+
+//////////////////////////////////////////////////////////////////
+function roto2(...kabehArg){
+    var tutulArg = kabehArg.length;
+    var maksud = 0;
+    for (var i of kabehArg){
+        maksud = maksud + i;
+    }
+    return maksud/tutulArg;
+}
+var t = roto2(1, 9);
+console.log(t);
+
+var y = roto2(4, 8, 3, 7);
+console.log(y);
+
+var u = roto2(14, 34, 17, 55, 98, 22, 26);
+console.log(u);
+
+
+var a = "Belajar JavaScript";
+function foo(){
+    console.log(a);
+}
+
+
+
+/// ================ VARIABEL SCOPE ======================== ///
+
+/* variabel scope adalah istilah tentang sejauh mana sebuah
+variabel masih dapat diakses terdiri dari local scope dan global scope
+
+* global scope bisa diakses dimana saja, termasuk didalam function
+* local scope hanya bisa diakses dari dalam function itu saja alias
+  tidak bisa diakses diluar function
+
+
+
+/*prinsip pemisahan antara global variabel dan local variabel
+ini juga berlaku untuk argument,.. *///contoh
+function hoo(cv, cb){
+cv = 50; 
+cb = 34; 
+return (a + b);
+}
+
+var cv = 6; 
+var cb = 45; 
+var cc = hoo(cv, cb); 
+
+console.log(cv); //mengakses global scope
+console.log(cb); //mengakses global scope
+console.log(cc); //mengakses local scope (variabel didlm function)
+/////////////////////////////////////////////////////////////////
+
+
+//var a didalam function termasuk local scope 
+function joo(){
+var a = 12; //var dlm function
+var b = 24; //var dlm function
+return (a + b);
+}
+
+var a = 6;
+var b = 23;
+var c = joo(a, b);
+
+console.log(a);
+console.log(b);
+console.log(c);
+
+////////////////////////////////////////////////////////////////
+/*jika sebuah variabel di defenisikan tanpa var ketika ditulis
+dari dalam function, variabel a  dan b akan berefek menjadi
+global scope, */
+//contoh :
+function hoo(){ 
+a = 50;
+b = 34;
+return (a + b);
+}
+
+var a = 6;
+var b = 45;
+var c = hoo(a, b);
+
+console.log(a); //hasil 50 (definisi di dlm function)
+console.log(b); //hasil 34 (definisi di dlm function)
+console.log(c);
+////////////////////////////////////////////////////////////////
+
+
+
+
+/// === PERBEDAAN CARA MEMBUAAT VARIABEL VAR DAN LET ======///
+
+/* Jika kita membuat variabel dengan var, variabel tersebut
+dibatasi di ruang function. Dengan kata lain, yang bisa
+membatasi scope variabel yang di defenisikan dengan keyword var
+hanyalah sebuah function. */
+
+/* sedangkan variabel yang dibuat menggunakan keywod let memiliki
+scope yang lebih kecil, yakni dibatasi oleh tanda kurung kurawal
+yang biasanya digunakan untuk block kode program. Selain itu juga
+dibatasi oleh function seperti layaknya variabel yang dibuat
+dengan var. */
+
+//contoh perbedaannya;
+for (var g = 15; g > 5; g--){
+    console.log("Bebalac " + g);
+}
+console.log(g); //var bisa diakses meskipun diluar kurung kurawal
+
+for (let mn = 10; mn > 0; mn--){
+    console.log("Calac " + mn);
+} /*
+console.log(mn); //hasil defined, karna consol.log diluar kurung
+kurawal */
+
+/////////////////////////////////////////////////////////////////
+/* Sekilas terlihat membuat variabel dengan let lebih merepotkan,
+karena tidak bisa diakses nilainya dari luar scope.
+Tapi ini sebenarnya sebuah keuntungan. Dengan membatasi ruang
+lingkup sebuah variabel, kita terhindar dari masalah bentrok
+antar variabel. Terutama jika kode program sudah cukup banyak
+dan melibatkan ratusan variabel. */
+
+// contoh kasusnya;
+
+var kasus = 10000;
+
+for (var kasus = 1; kasus < 3; kasus++){
+    console.log("contoh kasus bentrok "+ kasus);
+}
+console.log("niatannya mau munculin var kasus 10000 malah = " + kasus);
+console.log("niatannya mau munculin var kasus 10000 malah = " + kasus);
+//var kasus diperulangan yg kecantol
+
+/////////////////////////////////////////////////////////////////
+
+
+
+
+
+/// ================ JAVASCRIPT HOISTING ==================== ///
+/* bisa dibilang bug yang susah dicari (diketahui)... biasanya
+bernilai undefined */
+//contoh kasus;
+var lu = "ini var lu diluar function";
+function kaa(){
+    var lu;
+    console.log("tampilankan var lu didalam function = "+ lu); //undefined
+    lu = "ini var lu";
+}
+kaa(); /* hasil undefined, biasanya hal ini akan sulit diketahui
+        * penyebabnya karena JavaScript tidak akan mengeluarkan
+        * error apapun*/
+console.log("tampilankan var lu diluar function = "+ lu);
+
+
+/* untuk mencegah kasus diatas terjadi, var didalam function
+diganti dengan let dan akan mengeluarkan error..
+** Error disini sangat bagus bagi programmer, karena bisa
+mendapat informasi bahwa ada sesuatu yang salah. Jika menggunakan
+var memang tidak tampil error, tapi bisa sangat berbahaya karena
+kita tidak tau ada yang salah di kode program*/
+
+/*contoh;
+//////////////////////////////////////////////////////////////////
+var lo = "ini variabel diluar function";
+function kat(){
+    console.log("tampilkan variabel lo didalam function ="+ lo);
+    let lo = "ini var lo didalam function";
+}
+kat();
+console.log("tampilankan var lo diluar function = "+ lo);
+*/
+/////////////////////////////////////////////////////////////////
+
+/* efek yang sama (JavaScript Hoisting) juga berlaku diluar
+function. jika kita mengakses sebuah variabel yg belum
+teridentifikasi sama sekali */
+
+//contoh :
+console.log(x); //hasil undefined
+var x = "hadir bro =";
+
+/* akan menghasilkan error jika penulisannya seperti
+ contoh dibawah ini;
+ 
+ console.log(x);
+ let x = "Hadir bro =";
+ 
+ */
+
+/*Cara paling efektif untuk menghindari efek JavaScript hoisting
+ini adalah, selalu mendefenisikan variabel di awal kode program. */
+
+
+
+
+
+/// ============ FUNCTION: FIRST-CLASS CITIZEN ============== ///
+
+/* Hal yang cukup unik dan jarang ditemui dalam bahasa
+pemrograman lain adalah di dalam JavaScript, function dianggap
+sebagai tipe data. Artinya, function bisa disimpan ke dalam
+variabel, serta bisa digunakan sebagai argumen sebagaimana
+layaknya tipe data biasa. */
+
+// ## mengisi sebuah variabel dengan function ===================
+var hitang = function rutu2(a, b){
+    return (a + b)/2;
+};
+console.log(hitang(4, 8));
+/** Hasilnya, variabel hitang, seolah-olah menjadi
+function rutu2().
+memanggil function hitang(4,8), sama  dengan rutu2(4,8) **/
+/** penulisan fungsi “tanpa nama” biasa dikenal sebagai
+Anonymous Functions. */
+
+/////////////////////////////////////////////////////////////////
+
+
+
+// ## memanggil function ke dalam argumen =========================
+function ratu2(a, b){
+    return (a + b)/2;
+}
+
+function tambah(c, d){
+    return c + d;
+}
+
+var hasil = tambah(6, ratu2(4, 8));
+console.log(hasil);
+
+// ## mengirim function sebagai argument ========================
+function rati2(a, b){
+    return (a + b)/2;
+}
+
+function tamba(c, d){
+    return c + d(10, 6);
+}
+
+var hasil = tamba(2, rati2); //letak function yang dikirim jd argument
+console.log(hasil); //10
+
+
+//////////////////////////////////////////////////////////////////
+
+function doo(apa){
+    alert(apa);
+}
+
+function salammmm(ban){
+    ban("Selamat Makan");
+}
+
+salammmm(doo);
+
+
+//////////////////////////////////////////////////////////////////
+
+
+
+/// ================ ARROW NOTATION ==========================///
+/**
+Merupakan alternatif penulisan function expression, menggunakan
+tanda panah (arrow) => untuk membuat function.
+**/
+//contoh;
+var pagu = function () { return "Selamat siang";};
+var paguJuga = () => { return "Selamat Siang"; }; // pake arrow notation
+
+console.log( pagu() );
+console.log( paguJuga() );
+
+
+//Bagaimana jika menggunakan argument?
+var page = function(saha) { return "Selamat datang " + saha };
+var pageJuga = (saha) => { return "Selamat datang "+ saha};
+
+console.log( page("Indonesia") );
+console.log( pageJuga("Indonesia") );
+
+////////////////////////////////////////////////////////////////
+var totol = function(a, b, c) { return a+b+c; };
+var totolJuga = (a, b, c) => { return a+b+c; };
+
+console.log( totol(4, 5, 6) );
+console.log(totolJuga(7, 8, 9 ));
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

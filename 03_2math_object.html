@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="UTF-8"><title>Math Object</title></head>
+    <style>
+    </style>
+    <body>
+        <h4>Belajar Materi Math Object</h4>
+        
+    </body>
+    <script>
+
+// ============================== MATH OBJECT =============================================== ///
+
+/***
+   Terdapat 8 property dari Math object, yang semuanya merupakan konstanta matematis :
+
+    1. Math.E: Berisi angka logaritma natural e, dengan nilai 2.718281828459045.
+    2. Math.LN10: Berisi angka logaritma natural 10, dengan nilai 2.302585092994046.
+    3. Math.LN2: Berisi angka logaritma natural 2, dengan nilai 0.6931471805599453.
+    4. Math.LOG10E: Berisi angka logaritma natural e basis 10, dengan nilai 0.4342944819032518.
+    5. Math.LOG2E: Berisi angka logaritma natural e basis 2, dengan nilai 1.4426950408889634.
+    6. Math.PI: Berisi angka pi (π) dengan nilai 3.141592653589793.
+    7. Math.SQRT1_2: Berisi angka 1 dibagi dengan akar kuadrat 2, dengan nilai 0.707106781186.
+    8. Math.SQRT2: Berisi angka akar kuadrat dari 2, dengan nilai 1.4142135623730951.
+
+***/
+
+//berikut hasil pemanggialannya :
+console.log("Math.E = " + Math.E);
+console.log("Math.LN10 = " + Math.LN10);
+console.log("Math.LN2 = " + Math.LN2);
+console.log("Math.LOG10E = " + Math.LOG10E);
+console.log("Math.LOG2E = " + Math.LOG2E);
+console.log("Math.PI = " + Math.PI);
+console.log("Math.SQRT1_2 = " + Math.SQRT1_2);
+console.log("Math.SQRT2 = " + Math.SQRT2);
+
+// ---------------------------------------------------------------------------------------- //
+// latihan:
+var jari2 = 7;
+var luasLingkaran = Math.PI * jari2 * jari2;
+console.log( luasLingkaran.toFixed(2) ); 
+
+
+
+
+// ============================== MATH OBJECT METHOD ===================================== ///
+
+/***
+   Math Object memiliki banyak method, total terdapat 35 method, tp yang akan saya bahas hanya:
+
+   1. Math.ceil(), Math.floor(), dan Math.round()
+   2. Math.random()
+   3. Math.max() dan Math.min()
+   4. Math.abs()
+   5. Math.pow()
+   6. Math.sqrt()
+   7. Math.log(), Math.log10(), Math.log2()
+   8. Math.sin(), Math.cos() dan Math.tan()
+
+***/
+//===============================================================================================
+// == Method Math.ceil(x), Math.floor(x), dan Math.round(x) -------------------------------------
+/* 
+  Ketiga method ini digunakan untuk membulatkan angka ke integer terdekat (angka bulat). Masing-masing
+  menerima 1 argumen berupa angka yang ingin dibulatkan.
+
+  Method Math.ceil() = untuk pembulatan ke atas
+  Method Math.floor() = untuk pembulatan ke bawah
+  Method Math.round() = untuk pembulatan ke bawah jika kurang dari 0,5 dan pembulatan ke atas jika lebih
+                        dari 0,5 (termasuk angka 0.5)
+
+*/
+
+//contoh penggunaanya:
+var foo = 12.5;
+
+console.log( Math.floor(foo) );
+console.log( Math.ceil(foo) );
+console.log( Math.round(foo) );
+
+/***
+    Bagaimana jika kita ingin membulatkan andka buka ke benruk integer, tapi (misalnya) ke posisi 3 angka
+    desimal? ini diakali dengna mengalikan nilai tersebut dengan 1000, jalan method, lalu bagi kembali 
+    dengan 1000
+***/ 
+
+var foo = 12.1354;
+
+console.log( Math.floor(foo * 1000) / 1000 );
+console.log( Math.ceil(foo * 1000) / 1000 );
+console.log( Math.round(foo * 1000) / 1000 );
+
+
+//===============================================================================================
+// == Method Math.random() ----------------------------------------------------------------------
+/* 
+  Digunakan untuk membuat angka acak (random). Angka acak yang dihasilkan berada dalam rentang 0-1,
+  tapi tidak termasuk angka 1 itu sendiri. Maksudnya angka acak yang dihasilkan adalah
+  0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0,8, 0.9:
+
+*/
+
+//contoh penggunaanya:
+
+var qoo = Math.random();
+console.log( qoo ); //akan menghasilkan angka seperti ini 0.7656339439523763
+
+var qntl = Math.floor(Math.random() * (10 + 1)); //mencari angka bulat acak dari 0 - 10
+console.log( qntl );
+
+var jqntl = Math.floor(Math.random() * (60)) + 21; //mencari angka bulat acak dari angka 20 sampai 80
+console.log( jqntl );
+
+/*** 
+    Contoh diatas (var qntl) untuk membuat membuat angka bulat acak 0 sampai 10 menggunakan method Math.floor(), 
+    kenapa tidak menggunakan method Math.round() ??
+
+    menggunakan method Math.round() memiliki 1 kelemahan, dimana sebaran angka yang dihasilkan kurang merata.
+    sehingga peluang kemunculan angka 0 dan 10 ini keluar hanya setengah kali dari angka-angka lain..
+
+    menggunakan method Math.floor() juga memiliki kelemahan dimana angka 10 tidak akan pernah muncul, tapi
+    dengan solusi menambahkan nilai maksiumum + 1 kelemahan itu dapat ditutupi. 
+
+***/ 
+
+//latihan: menggenerate angka acak sebanyak 10 buah, yang nilainya disimpan ke dalam sebuah array. angka
+//acak ini saya batasi dari 5-20;
+var too = [];
+
+for (var i = 0; i < 10; i++) {
+    too[i] = 5 + Math.floor( Math.random() * 16 );
+}
+
+console.log( too );
+
+
+
+//===============================================================================================
+// == Method Math.max() dan Math.min() ----------------------------------------------------------
+/* 
+  Digunakan untuk menari nilai paling besar dan nilai paling kecil dari angka-angka yang diinput ke dalam 
+  argumennya:
+*/
+//contoh penggunaanya:
+var eoo = Math.max(45,90,12,55,19,75);
+console.log( eoo );
+
+var wek = Math.min(45,90,12,55,19,75);
+console.log( wek );
+
+/****
+    Dalam kebanyakan kasus, kita ingin mencari nilai maksimum dan minimum dari data yang
+    tersimpan di dalam array. Sayangnya, kedua method tidak bisa diinput langsung dengan tipe
+    data array. Kita harus menggunaan perulangan untuk mencari nilai maksimum dan minimum
+    dari sebuah array.
+
+    Namun spread operator dari ECMAScript 6 muncul sebagai solusi. Kita bisa menggunakan
+    spread operator untuk memasukkan seluruh element array ke dalam method Math.max() dan
+    Math.min(). Berikut contoh penggunaannya:
+****/ 
+var doon = [45,90,12,55,19,75];
+
+console.log( Math.max(...doon) );
+console.log( Math.min(...doon) );
+
+
+
+//===============================================================================================
+// == Method Math.abs() -------------------------------------------------------------------------
+/* 
+  digunakan untuk menghasilkan nilai absolut dari argumentnya. Jika angka itu positif, tidak 
+  dilakukan perubahan apapun. Namun jika angka itu negatif, hasilnya adalah angka positif.
+*/
+//contoh penggunaanya:
+var kon = 5;
+console.log( Math.abs(kon) );
+
+var kin = -5;
+console.log( Math.abs(kin) );
+
+
+
+//===============================================================================================
+// == Method Math.pow() -------------------------------------------------------------------------
+/* 
+    digunakan untuk pemangkatan suatu angka. Method ini membutuhkan
+    2 argumen. Argumen pertama adalah angka yang ingin dicari pangkatnya (base number) dan
+    argumen kedua adalah nilai pangkatnya.
+
+
+*/
+//contoh penggunaanya:
+console.log( Math.pow(5,2) ); // 25
+console.log( Math.pow(2,8) ); // 256
+
+
+
+//===============================================================================================
+// == Method Math.sqrt() ------------------------------------------------------------------------
+/* 
+    digunakan untuk akar kuadrat (square) dari suatu angka.
+
+    Jika akar kuadrat tersebut tidak valid, seperti akar kuadrat dari angka negatif, method ini akan
+    menghasilkan nilai NaN.
+*/
+//contoh penggunaanya:
+console.log( Math.sqrt(25) ); // 25
+console.log( Math.sqrt(81) ); // 256
+
+console.log( Math.sqrt(-1) ); // NaN 
+
+
+
+//===============================================================================================
+// == Method Math.log(), Math.log10() dan Math.log2() -------------------------------------------
+/* 
+  Math object memiliki beberapa method untuk menghitung logaritma. Tiga diantaranya adalah:
+  Math.log(), Math.log10() dan Math.log2().
+  
+  Method Math.log() digunakan untuk mencari nilai logaritma natural (e), bukan logaritma
+  yang kita gunakan sehari-hari (basis 10). Untuk logaritma dengan basis desimal (basis 10), kita
+  harus menggunakan Math.log10(). Sedangkan untuk Math.log2() merupakan method untuk
+  menghitung nilai logaritma dari bilangan biner.
+*/
+//contoh penggunaanya:
+console.log( Math.log(1) ); // 0
+console.log( Math.log(10) ); // 2.302585092994046
+
+console.log( Math.log10(1000) ); // 3
+console.log( Math.log10(0.001) ); // -3
+
+console.log( Math.log2(256) ); // 8
+console.log( Math.log2(4294967296) ); // 32
+
+
+
+//===============================================================================================
+// == Method Math.sin(), Math.cos() dan Math.tan() ----------------------------------------------
+/* 
+  gunanya untuk mencari nilai sinus, cosinus dan tangen. Akan tetapi argumen yang diinput adalah dalam 
+  bentuk radian, bukan derajat. Dimana 360 derajat sama dengan 2 π radian atau dengan kata lain
+  1 derajat = (2 π radian)/360.
+
+*/
+//contoh penggunaanya:
+var derajat = 60;
+var rad = derajat * ((2 * Math.PI) / 360);
+
+console.log( Math.sin(rad) ); // 0.8660254037844386
+console.log( Math.cos(rad) ); // 0.5000000000000001
+console.log( Math.tan(rad) ); // 1.7320508075688767
+
+//cara lain menggunkannnya:
+console.log ( Math.sin(60 * Math.PI / 180) ); //sin dari 60 derajat
+console.log ( Math.cos(60 * Math.PI / 180) ); //cos dari 60 derajat
+console.log ( Math.tan(60 * Math.PI / 180) ); //tan dari 60 derajat
+
+
+
+
+    </script>   
+        
+</html>

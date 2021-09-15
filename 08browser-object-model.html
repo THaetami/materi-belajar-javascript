@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> Belajar JavaScript </title>
+</head>
+<body>
+  <h1>Browser Object Property</h1>
+  <h4>Mengenal Beberapa Location Object Method</h4>
+  <button id="tombolAssign">Assign</button>
+  <button id="tombolReload">Reload</button>
+  <button id="tombolReplace">Replace</button>
+  <p>|===============================================================================</p>
+  <h4>Membuat Link Dropwon</h4>
+  <p>Pilih website: 
+    <select id="daftarWebsite">
+      <option value="google">Google</option>
+      <option value="facebook">Facebook</option>
+      <option value="twitter">Twitter</option>
+      <option value="instagram">Instagram</option>
+    </select>
+    <!-- <button id="tombol">Go</button> -->
+  </p>
+<!--  Link dropdown yang baru saja kita rancang cukup sering dipakai. Oleh karena itu 
+      saya juga menyiapkan penulisan singkat menggunakan inline JavaScript:       -->  
+  <p>|---------------------------------------------------|</p>
+  <h4>Membuat Link Dropwon dengan penulisan kode singkat</h4>
+  <p>Pilih Web:
+    <select onchange="location = this.value;">
+        <option value="">-- Daftar Link --</option>
+        <option value="http://www.google.com">Google</option>
+        <option value="http://www.facebook.com">FaceBook</option>
+        <option value="http://www.twitter.com">Twitter</option>
+        <option value="http://www.instagram.com">Instagram</option>
+    </select>
+  </p>
+<!--  PROPERTY DAN METHOD HISTORY OBJECT   -->
+  <p>|============================================================================</p>
+  <h4>Property dan Method Dari History Object</h4>
+  <p>Jumlah alamat di history: <span id="hasil"></span></p>
+  <button id="back">Back</button>
+  <button id="forward">Forward</button>
+  <button id="back2">Back 2 kali</button>
+<!--  NAVIGATOR OBJECT: PROPERTY           -->
+  <p>|===========================================================================</p>
+  <h4>(Browser Sniffing) <br>Mendeteksi web browser yg digunakan</h4>
+  <button id="tombol">Cek Browser</button> 
+  <p>Web Browser Anda: <span id="hasilCek"></span></p>
+<!--  SCREEN OBJECT       
+  Screen Object berisi informasi mengenai layar (screen) yang digunakan oleh 
+  pengunjung. Melalui screen object, kita bisa mengecek ukuran layar, 
+  kedalaman warna, serta orientasi layar.     -->
+
+</body>
+
+<script>
+//======================================================================================
+//DAFTAR LOCATION OBJECT PROPERTY ======================================================
+    
+    console.log("-------------------------------");
+    console.log(location.hash); //Berisi bagian hash dari sebuah alamat, seperti #belajar atau #judul_1.
+    console.log(location.host); //Berisi bagian host dari sebuah URL, dan termasuk nomor port (jika ada). Contohnya: www.duniailkom.com, atau localhost:8080.
+    console.log(location.hostname); //Berisi bagian namehost dari sebuah alamat, tidak termasuk nomor port, seperti www.duniailkom.com atau localhost.
+    console.log(location.href); //Berisi alamat lengkap dari sebuah URL, termasuk nama protocol, host hostname, path, serta hash. 
+    console.log(location.origin); //Berisi alamat URL seperti property location.host.
+    console.log(location.pathname); //Berisi alamat path, yakni bagian URL setelah nama domain, seperti /02.location_object_property.html. 
+    console.log(location.port); //Berisi nomor port, seperti 8080. Jika didalam URL tidak ditulis nomor port, hasil property juga akan kosong. Ini berarti alamat URL menggunakan port default, yakni 80 untuk http, dan 443 untuk https.
+    console.log(location.protocol); //Berisi nama protocol, seperti http:, https:, atau file:, nama protocol termasuk karakter titik dua “ : “.
+    console.log(location.search); //Berisi bagian alamat untuk query string, yakni bagian yang diawali tanda tanya, seperti ?username=andi.
+
+
+
+//======================================================================================
+//MENGENAL BEBERAPA LOCATION OBJECT METHOD ======================================================    
+
+    var tombolAssignNode = document.getElementById("tombolAssign");
+    var tombolReloadNode = document.getElementById("tombolReload");
+    var tombolReplaceNode = document.getElementById("tombolReplace");
+
+    tombolAssignNode.addEventListener("click", function(){
+    location.assign("https://www.google.com"); 
+    }); /** location.assign() 
+            membuka alamat baru, dimana alamat URL akan diinput sebagai argumen. 
+        **/
+
+    tombolReloadNode.addEventListener("click",function(){
+    location.reload();
+    }); /** location.reload() 
+            Menampilkan ulang alamat (reload). 
+        **/
+
+    tombolReplaceNode.addEventListener("click",function(){
+    location.replace("https://www.google.com");
+    }); /** location.replace() 
+            Menggantikan alamat saat ini, dimana alamat URL akan diinput sebagai argumen. 
+        **/
+
+
+
+//=====================================================================================
+//MEMBUAT LINK DROPDOWN ===============================================================    
+    var tombolNode = document.getElementById("tombol");
+    var daftarWebsiteNode = document.getElementById("daftarWebsite");
+
+    function pilihWebsite(){
+      var namaWebsite = daftarWebsiteNode.value;
+      switch (namaWebsite){
+        case ("google") :
+          window.location = "https://www.google.com"; break;
+        case ("facebook") : 
+          window.location = "https://www.facebook.com"; break;
+        case ("twitter") : 
+          window.location = "https://www.twitter.com"; break;
+        case ("instagram") : 
+          window.location = "https://www.instagram.com"; break;
+      }
+    }
+    // tombolNode.addEventListener("click",pilihWebsite);
+    daftarWebsiteNode.addEventListener("change",pilihWebsite);
+
+
+
+//==================================================================================
+//PROPERTY DAN METHOD HISTORY OBJECT ==============================================
+var hasilNode = document.getElementById("hasil");
+  var backNode = document.getElementById("back");
+  var forwardNode = document.getElementById("forward");
+  var back2Node = document.getElementById("back2");
+
+  hasilNode.innerHTML = history.length; /* history.length Berisi jumlah alamat URL
+                                           yang tersimpan di daftar history. */
+  backNode.addEventListener("click",function(){
+    history.back(); //mundur ke alamat URL sebelumnya
+  });
+  forwardNode.addEventListener("click",function(){
+    history.forward(); //maju ke alamat URL selanjutnya
+  });
+  back2Node.addEventListener("click",function(){
+    history.go(-2); 
+  }); /** pergi ke alamat tertentu dari dafrar history (tergantung nilai argumen). 
+          Jika di input angka negatif, digunakan untuk mundur ke alamat sebelumnya, 
+          jika diinput angka positif, digunakan untuk maju ke alamat berikutnya.  
+      **/
+
+
+
+//======================================================================================
+//DAFTAR NAVIGATOR OBJECT PROPERTY ======================================================
+
+    console.log("-------------------------------");
+    console.log(navigator.appCodeName); //berisi nilai code name web browser
+    console.log(navigator.appName); //berisi nilai name web browser
+    console.log(navigator.appVersion); //berisi nilai versi web browser
+    console.log(navigator.cookieEnabled); //berisi nilai boolean akan fitur cookie aktif di web
+    console.log(navigator.geolocation); //berisi sebuah geolocation object yang bisa digunakan untuk mengetahui posisi pengguna (tidak selalu bisa diakses)
+    console.log(navigator.language); //berisi kode bahasa yang digunakan web browser
+    console.log(navigator.onLine); //berisi nilai boolean apakah web browser sedang online
+    console.log(navigator.platform); //berisi kode sistem operasi yang digunakan 
+    console.log(navigator.product); //berisi nilai web browser engine
+    console.log(navigator.userAgent); //berisi nilai user-agent header yang dikirim web browser server.
+
+  /** 
+   Daftar lengkap mengenai property dan method dari Navigator Object bisa diakses
+   ke Navigator Object (Mozilla Developer Network)5, atau The Navigator Object
+   (w3schools)6. 
+  **/
+
+
+
+//=================================================================================
+//(Browser Sniffing) Mendeteksi web browser yang digunakan =======================
+  var tombolNode = document.getElementById("tombol");
+  var hasilCekNode = document.getElementById("hasilCek");
+
+  function periksaWebBrowser(){
+    if ((navigator.userAgent.indexOf("Opera") != -1) || (navigator.userAgent.indexOf("OPR") != -1)) {
+        hasilCekNode.innerHTML = "Opera";
+    }
+    else if (navigator.userAgent.indexOf("Edge") != -1) {
+        hasilCekNode.innerHTML = "Microsoft Edge";
+      }
+    else if (navigator.userAgent.indexOf("Chrome") != -1) {
+        hasilCekNode.innerHTML = "Google Chrome";
+      }
+    else if (navigator.userAgent.indexOf("Safari") != -1) {
+        hasilCekNode.innerHTML = "Apple Safari";
+      }
+    else if (navigator.userAgent.indexOf("Firefox") != -1) {
+       hasilCekNode.innerHTML = "Mozzila Firefox";
+      }
+    else if ((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentNode === true)) {
+      hasilCekNode.innerHTML = "Microsoft Internet Explorer";
+    }
+    else {
+      hasilCekNode.innerHTML = "Tidak diketahui";
+    }
+  }
+
+  tombolNode.addEventListener("click",periksaWebBrowser);
+
+  /*** 
+        Trik browser sniffing seperti diatas dulunya umum dipakai, karena banyak fitur yang 
+      hanya bisa berjalan di web browser tertentu saja. Tapi saat ini penggunaannya 
+      sudah tidak disarankan lagi. 
+        Jika anda ingin menggunakan fitur terbaru yang hanya di dukung oleh sedikit 
+      web browser, bisa menggunakan konsep Feature Detection sebagai pengganti 
+      browser sniffing.
+        Feature Detection adalah sebuah metode untuk memeriksa apakah sebuah fitur 
+      tersedia atau tidak di dalam web browser. Caranya dengan mencoba memanggil 
+      object dari fitur tersebut. Jika hasilnya null atau false, bisa dipastikan 
+      web browser tersebut tidak mendukungnya.
+  ***/ 
+      //contoh penggunaan Feature Detection :
+      if (window.XMLHttpRequest){
+        console.log("XMLHttpRequest object tersedia");
+        new XMLHttpRequest();
+      }  /** 
+            Dalam kode program diatas saya memeriksa apakah object XMLHttpRequest 
+            tersedia di dalam web browser. Hanya jika object tersebut bisa dipakai, 
+            kita baru masuk ke dalam kode program.
+            Dengan cara seperti ini, kode JavaScript tidak menghasilkan error untuk 
+            web browser yang belum mendukung XMLHttpRequest.
+         **/
+
+
+
+
+//======================================================================================
+//DAFTAR SCREEN OBJECT PROPERTY ========================================================
+  
+  console.log("-------------------------------");
+  console.log(screen.availHeight); //Berisi nilai tinggi layar yang bisa dipakai dalam satuan pixel (dikurangi dengan bagian yang tidak bisa digunakan seperti Windows Taskbar).
+  console.log(screen.availWidth); //Berisi nilai lebar layar yang bisa dipakai dalam satuan pixel (dikurangi dengan bagian yang tidak bisa digunakan seperti Windows Taskbar).
+  console.log(screen.colorDepth); //Berisi kedalaman warna (color depth) dalam satuan bit per pixel.
+  console.log(screen.pixelDepth); //Berisi kedalaman bit (bit depth) dalam satuan bit per pixel. Nilai property ini biasanya sama dengan colorDepth.
+  console.log(screen.height); //Berisi nilai total tinggi layar dalam satuan pixel.
+  console.log(screen.width); //Berisi nilai lebar layar dalam satuan pixel. 
+  console.log(screen.orientation); //Berisi collection dari orientation (orientasi layar). Property ini relatif baru dan tidak selalu bisa diakses.
+  console.log(screen.orientation.type); // berisi keterangan apakah layar diset ke landscape atau portrait. Nilai dari screen.orientation.type bisa salah satu dari: portrait-primary, portrait-secondary, landscape-primary dan landscape-secondary.
+
+
+
+</script>
+
+</html>

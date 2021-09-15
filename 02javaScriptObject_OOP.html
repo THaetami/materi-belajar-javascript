@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="UTF-8"><title>JavaScript Object & OOP</title></head>
+    <style>
+    </style>
+    <body>
+        <h4>JavaScript Object & OOP</h4>
+        
+    </body>
+    <script>
+        
+///######################     OBJECT DI DALAM JAVASCRIPT  ###########################///
+/**
+* object bisa disebut sebagai container, yakni wadah yang
+  digunakan untuk menampung berbagai data.. */
+
+
+/// ### FORMAT DASAR OBJECT =====================================
+/**
+var namaObject = {
+    property1 : "isi property1",
+    property2 : "isi property2",
+    property3 : "isi property3",
+    
+    method1 : function (){
+        "isi method 1";
+    },
+    
+    method2 : function (){
+        "isi method 2";
+    }
+}
+**/
+
+//contoh:
+var mahasiswa = {
+    nama : "Andi", //teknik dot notation
+    "jurusan" : "Teknik Informatika", //teknik bracket notation
+    ipk : 3.67, //teknik dot notation
+    "semester" : 4,
+    "nama sekolah" : "universitas padjadjaran" // teknik bracket notation
+};
+
+console.log( mahasiswa.nama ); // akses dot notation
+console.log( mahasiswa["jurusan"]); // bracket notation []
+console.log( mahasiswa.ipk ); //dot notation
+console.log( mahasiswa["semester"]); // dot notation
+console.log( mahasiswa["nama sekolah"]); // bracket notation
+
+/** pengaksesan property menggunakan dot notation (.) dan bracket
+  notation (  [ ]  ) alias kurung siku
+ ** nama property atau isi propery  yang memiliki spasi atau
+    lebih dari 2 kata maka menggunakan teknik bracket
+  */
+
+
+
+/// ### MENAMBAH OBJECT PROPERTY ================================
+
+//object property juga bisa dibuat seperti contoh berikut;
+
+var mahasiswi = {};
+
+mahasiswi.nama = "Anisa";
+mahasiswi.jurusan = "Teknik Listrik";
+mahasiswi.ipk = 3.90;
+mahasiswi.semester = 5;
+
+console.log( mahasiswi.nama ); 
+console.log( mahasiswi.jurusan); 
+console.log( mahasiswa.ipk ); 
+console.log( mahasiswa.semester );
+
+/* Tentu saja kita bisa membuat sebagian property pada saat
+pendefinisian, dan sebagian lagi setelahnya, contoh dibawah ini: */
+ 
+var mahasiswu = { nama : "Andy", //pendefinisan
+                  jurusan : "Teknik Informatika" };
+mahasiswu.ipk = 4.70; //setelah pendefinisian
+mahasiswu.semester = 7; //setelah pendefinisian
+
+console.log( mahasiswu.nama);
+console.log( mahasiswu.jurusan);
+console.log( mahasiswu.ipk);
+console.log( mahasiswu.semester);
+
+
+
+/// ### MENGUBAH NILAI OBJECT PROPERTY =========================
+
+/** untuk mengubah nilai property dari sebuah object, bisa dengan
+ cara menimpa property tersebut... **/
+
+//contoh:
+var mahasiswo = {
+    nama : "Amir",
+    jurusan : "Teknik Industri",
+    ipk : 2.50,
+    semester : 8 };
+
+console.log(mahasiswo.nama); //hasil Andi
+
+mahasiswo.nama = "Joko"; // nama diganti menjadi joko
+console.log(mahasiswo.nama); //hasil joko
+
+console.log(mahasiswo.ipk);
+mahasiswo.ipk = 4.00;
+console.log(mahasiswo.ipk);
+
+
+
+/// ### OBJECT METHOD ============================================
+
+/** Selain property, di dalam object bisa terdapat method, yakni
+sebutan untuk function. Penulisannya sangat mirip seperti function 
+biasa yang kita bahas pada bab sebelumnya, yakni menggunakan
+function expressions. */
+
+
+var mobil = { merk: "Toyota Avanza",
+              tipe: "MPV",
+              harga: 2000000000,
+              warna: "merah",
+              hidupkan: function () {return "Mesin dihidupkan";} //ini disebut object method
+            };
+
+
+console.log( mobil.hidupkan() );
+/**** Perhatikan cara pembuatan method hidupkan(), saya menggunakan 
+cara penulisan function expressions, dimana anonymous function 
+diinput ke dalam variabel hidupkan.
+/** Untuk menjalankan method, caranya adalah dengan menulis nama 
+object, tanda titik, lalu nama method yang diikuti tanda kurung 
+(yang nantinya sebagai tempat untuk argument). */
+
+/////////////////////////////////////////////////////////////////////
+
+/** Selanjutnya, bagaimana cara menuliskan argument untuk method 
+ini? Caranya sama seperti pendefenisan function biasa: */
+
+//contoh :
+var motor = { merk: "Yamaha Nmx",
+              tipe: "roda dua",
+              harga: 300000000,
+              warna: "biru geuneuk",
+              hirupkan: function (tempat) { return "Pergi ke "+ tempat; } 
+            };
+
+console.log( motor.hirupkan("rangkas") ); // dot notation
+console.log( motor["hirupkan"]("angkaas") ); //brakcet notation
+
+/////////////////////////////////////////////////////////////////////
+
+/** Selain di defenisikan di dalam object, method juga bisa diinput 
+setelah pendefinisian object, seperti contoh berikut: */
+
+var sepeda = { merk: "BMX",
+               tipe: "Gunung",
+               harga: 1000000,
+               warna: "kuning"};
+//method diinput setelah pendefinisian object ^^
+
+sepeda.nyalakan = function() { return "pedal digoeskan"; };
+sepeda.mangkat = function (mangkat) { return "pergi ke "+ mangkat; };
+
+console.log( sepeda.nyalakan() );
+console.log( sepeda.mangkat("bali") );
+
+
+
+
+/// ### MENGUBAH OBJECT METHOD ============================================
+//---------------------------------------------------------------------
+
+
+
+/// ### NESTED OBJECT============================================
+
+/** Nested object adalah sebutan untuk object di dalam object. 
+Sebagai mana kita melihat array 2 dimensi (array di dalam array), 
+nested object juga seperti itu. Caranya adalah dengan mengisi
+nilai property dengan sebuah object lain. Struktur seperti ini 
+diperlukan untuk membuat data yang kompleks. Berikut contoh pembuatan 
+nested object JavaScript: **/
+
+var mahasiwa = { nama: "Andi",
+                 jurusan: "Teknik Informatika",
+                 ipk: {
+                        semester1: 3.1,
+                        semester2: 3.5,
+                        semester3: 2.7,
+                     },
+                semester: 4};
+
+console.log(mahasiwa.ipk.semester1);
+console.log(mahasiwa.ipk.semester3);
+
+
+
+/// ### OBJECT REFERENCE ============================================
+//-------------------------------------------------------------------
+/** Object reference adalah materi yang membahas bagaimana prilaku sebuah object ketika
+dipindahkan ke variabel lain. Ini pula yang nantinya membedakan hasil operasi 
+perbandingan, ketika yang dibandingkan itu berupa object.
+Sebelum kita membahas object reference, silahkan lihat sejenak kode program berikut: */
+
+var siswa = "Juned";
+var siswaBaru = siswa; //ini disebut “assignment by value”, dimana yang dikirim ke variabel siswaBaru adalah nilai (value) dari variabel siswa.
+                       
+console.log(siswa);
+console.log(siswaBaru);
+
+siswaBaru = "Amin";
+
+console.log(siswa);
+console.log(siswaBaru);
+
+siswa = "Agus";
+
+console.log(siswa);
+console.log(siswaBaru);
+
+/**     Di dalam JavaScript, seluruh tipe data primitive (number, string, dan boolean) 
+        menggunakan prinsip “assignment by value”. **/
+        //Khusus untuk object, hasilnya akan berbeda:
+
+var siswi = {nama: "Santi",
+             jurusan: "IPA"};
+
+var siswiBaru = siswi; //“assignment by reference”.
+
+console.log(siswi.nama); //santi
+console.log(siswiBaru.nama); //santi
+
+siswi.nama = "Isti";
+console.log(siswi.nama); //isti
+console.log(siswiBaru.nama); //isti
+
+siswiBaru.jurusan = "BahasaIndonesia";
+console.log(siswi.jurusan);
+console.log(siswiBaru.jurusan);
+
+
+
+/// ### PERULANGAN FOR IN ============================================
+
+/** perulangan yang digunakan untuk menanpilkan seluruh isi object 
+(property dan method).. 
+/** Cara penggunaannya mirip seperti perulangan for of, bedanya yang 
+menjadi variabel counter adalah nama dari property tersebut, bukan 
+nilainya.
+Berikut contoh penggunaan perulangan for in JavaScript: */
+
+var mobit = { merk: "Toyota Avanza",
+              tipe: "MPV",
+              harga: 200000000,
+              warna: "merah" };
+              
+var prop;
+for (prop in mobit) {
+console.log('Isi property '+ prop +' = '+ mobit[prop]);
+}
+
+
+
+
+///########## OBJECT ORIENTED PROGRAMMING JAVASCRIPT ###############///
+
+
+/// ### PENGERTIAN CLASS DAN OBJECT ==================================
+
+/** Dalam teori OOP, Class adalah cetak biru dari sebuah object, atau 
+dalam bahasa sederhananya, class merupakan kelompok umum dari 
+sesuatu. Object adalah “sesuatu” tersebut. Class dan object merupakan 
+materi paling dasar dari pemrograman berbasis object. 
+/** Jika mobil adalah class, maka mobilAndi merupakan object dari 
+class mobil. Jika binatang adalah class, maka sapi merupakan object 
+dari class binatang. Jika Gelas adalah class, maka gelasKaca adalah 
+object dari class gelas. **/
+
+
+
+/// ### MEMBUAT CLASS DAN OBJECT =====================================
+/*** Untuk membuat class di dalam JavaScript, dalam ECMAScript 6 bisa 
+menggunakan keyword class:
+/*** Salah satu kebiasaan programmer JavaScript adalah, nama class 
+ditulis dengan awalan huruf besar, bukan dengan huruf kecil 
+sebagaimana layaknya variabel. 
+/*** Jika class ini terdiri dari 2 kosa kata atau lebih, tetap 
+menggunakan gaya penulisan camel case:
+/*** Dalam konsep OOP, class hanya berperan sebagai cetak biru 
+(blue print) dari object. Di dalam object lah pemrosesan dilakukan. 
+Untuk membuat object dari suatu class, digunakan keyword new, 
+kemudian diikuti dengan nama class tersebut */
+
+//contoh pemembuatan object dari class Mobil seperti dibawah ini dikenal dengan sebutan instantiation
+
+class Mobil {   
+}
+
+var mobilAndi = new Mobil();    
+var mobilJoko = new Mobil();
+
+console.log(mobilAndi instanceof Mobil); //hasilna akan true karna MobilAndi memiliki class Mobil
+console.log(mobilJoko instanceof Mobil); 
+console.log(mobilJoko instanceof String); //hasilna false karan MobilJoko tdk memimiliki class String
+//operator instanceof yang bisa digunakan untuk mengecek apakah 
+//suatu object merupakan instance dari sebuah class.
+
+
+
+/// ### CLASS SEBAGAI "OBJECT INDUK" ================================
+/***
+Pertanyaan yang mendasar ketika belajar OOP adalah, untuk apa kita
+membuat class?? Kenapa tidak langsung membuat object saja?
+
+class berperan sebai wadah yang menyediakan semua hal yang dibutuhkan
+oleh object, perhatikan kode program dibawah ini:
+***/
+
+var mobilANdo = { merk: "Daihatsu Xenia",
+                  tipe: "MPV",
+                  harga: 1600000000,
+                  hidupkan: function () { return "Mesin dihidupkan"; },
+                  pergi: function (tempat) { return "Pergi ke "+ tempat; }
+                };
+
+var mobilANdo = { merk: "Cadillac Xenia",
+                  tipe: "SUV",
+                  harga: 1600000000,
+                  hidupkan: function () { return "Mesin dihidupkan"; },
+                  pergi: function (tempat) { return "Pergi ke "+ tempat; }
+                };  
+/*** 
+    Dapat dilihat bahwa kedua object diatas sebenarnya masuk ke 
+    golongan "mobil" . Jika sasya membuat object baru dengan nama 
+    mobilALex, tentunya object baru ini memiliki property dan 
+    method yang sama.
+
+    Bagaimana jika saya butuh membuat 100object mobil?. Akan lebih
+    efisien jika terdapat sebuah "object induk" bernama Mobil.
+
+    Untuk membuat object mobilTono, mobilRudi, atau mobilAnton, saya 
+    cukup memasukkannya sebagai anggota dari “object induk” Mobil. 
+    Dengan demikian saya bisa langsung mengakses mobilRudi.merk, 
+    atau mobilAnton.hidupkan().
+
+    “Object induk” inilah yang disebut sebagai class. Ketika 
+    object dibuat dari suatu class, object tersebut otomatis 
+    berisi seluruh property dan method yang melekat kepada 
+    asal class-nya, yakni Mobil. Selain itu, saya juga bisa 
+    membuat kode program yang nantinya hanya bisa menerima
+    input berupa object dari class Mobil.
+***/
+
+
+
+/// ### CLASS PROPERTY ===============================================
+/** Untuk bisa menambahkan property ke dalam Class, kita harus 
+menggunakan method khusus bernama constructor(). Method constructor 
+ini otomatis akan berjalan saat proses pembuatan object (saat proses 
+instantiation).
+
+penulisannya sebagai berikut:
+////////////////////////////////////////////////////////////////////
+
+class Mobil {
+    constructor(){
+        //isi constructor disini
+    }
+}
+
+/** Di dalam JavaScript, semua property untuk Class harus ditulis 
+di dalam method constructor(). 
+/** Bagaimana cara menulis property untuk class ini? 
+Kita tidak bisa langsung membuat property seperti biasa, tapi 
+harus menggunakan object khusus bernama this: 
+/*** This adalah object khusus sebagai pengganti object yang nantinya 
+di buat dari class Mobil. Penjelasan tentang this memang sedikit 
+rumit, untuk sementara mari kita anggap bahwa dalam membuat property 
+class, harus menggunakan perintah this.namaProperty. */
+
+//contoh membuat class
+class Motor {
+    constructor() {
+        this.merk = "Daihatsu Xenia";
+        this.tipe = "MPV";
+        this.harga = 12000000000;
+    }
+}
+
+//membuat object dengan class Motor diatas
+var motorAndi = new Motor(); //proses instantiation
+console.log(motorAndi.merk);
+
+var motorAnggung = new Motor(); //proses instantiation
+console.log(motorAnggung.harga);
+
+var motorAMir = new Motor(); //proses instantiation
+console.log(motorAMir.tipe);
+
+/***
+    Didalam class Motor saya membuat 3 property: this.merk, this.tipe,
+    dan this.harga Ketika class Motor dijadikan object, property ini
+    sudah melekat ke setiap object.
+
+    Disini anda bisa melihat bahwa class Motor berperan sebagai “cetakan” 
+    untuk object motorAndi, motorAnggung, dan motorAMir. Setiap object ini 
+    memiliki property yang sama, yang berasal dari class Mobil.
+***/
+
+
+
+/// ### ARGUMENT CONSTRUCTOR ===============================================
+/***
+    Dalam penjelasan diatas, kita sudah membahas proses pembuatan object
+    dari class. Akan tetapi object yang dihasilkan indentik satu sama lain.
+    motorAndi, motorAnggung, dan motorAMir memiliki nama merk yang sama. 
+    alias memiliki property yang sama.
+
+    Agar memiliki merk atau property yang berbeda, maka dalam pembuatan
+    class ditambahkan argument constructor...
+***/
+
+//contoh pembuatan class dengan argument constructor
+class Sepeda {
+    constructor(merk, tipe, harga) { //ini constructor dengan argumen
+        this.merk = merk;            
+        this.tipe = tipe;
+        this.harga = harga;
+    }
+}
+
+var sepedaTatang = new Sepeda("bmx","gunung",14000000);
+console.log(sepedaTatang.merk);
+console.log(sepedaTatang.harga);
+console.log(sepedaTatang.tipe);
+
+var sepedaJoko = new Sepeda("Poligon","lipat",13000000);
+console.log(sepedaJoko.merk);
+console.log(sepedaJoko.harga);
+console.log(sepedaJoko.tipe);
+
+
+
+/// ### CLASS METHOD ===============================================
+/***
+    Untuk menambahkan method ke dalam class, kita tidak perlu menulisnya
+    di dlam constructor(), tapi cukup di dalam class:
+***/
+
+//contoh penggunaan:
+class Laptop {
+    constructor(merk, tipe, harga) {
+        this.merk = merk;
+        this.tipe = tipe;
+        this.harga = harga;
+    }
+
+    //ini method alias function didalam object
+    hidupkan() {
+        return "Laptop "+this.merk+" dihidupkan";
+    }
+}
+
+var laptopAndi = new Laptop("Asus","XXs21",150000000);
+console.log( laptopAndi.merk );
+console.log( laptopAndi.hidupkan() );
+
+var laptopJajang = new Laptop("Xiomi","AA45",12000000);
+console.log( laptopJajang.merk );
+console.log( laptopJajang.hidupkan() );
+
+
+//======================================================================
+
+//contoh pembuatan Class dengan method yg menggunakan argumen
+class Handphone {
+    constructor(merk, tipe, harga) {
+        this.merk = merk;
+        this.tipe = tipe;
+        this.harga = harga;
+    }
+
+    //ini method alias function didalam object
+    hidupkan() {
+        return "Handphone "+this.merk+" dihidupkan";
+    }
+
+    //method dengan argumen
+    bermain(game) {
+        return "Bermain game "+game+" dengan menggunakan HP "+this.merk;
+    }
+}
+
+var hpTami = new Handphone("Nokia","JJKL",7000000);
+console.log( hpTami.merk );
+console.log( hpTami.hidupkan() );
+console.log( hpTami.bermain("PUBG") ); // mengakses method dengan argumen
+
+var hpIjal = new Handphone("Infinix","HOT PRO 4",1500000);
+console.log( hpIjal.merk );
+console.log( hpIjal.hidupkan() );
+console.log( hpIjal.bermain("Mobile Legend") ); // mengakses method dengan argumen
+
+
+
+/// ### MEMBUAT OBJECT DENGAN CONSTRUCTOR FUNCTIONS ===============================
+/***
+    Untuk membuat class tanpa keyword class, JavaScript menyediakan constructor 
+    functions. Constructor function adalah function khusus yang digunakan untuk 
+    membuat "kelompuk object", yang tidak lain adalah sebutan untuk class di dalam
+    OOP biasa.
+
+    Constructor function  sebenarnya tidak berbeda dengan function biasa. Sebagai 
+    contoh, untuk membuat class, penulisannya adalah sebagai berikut:
+ */
+
+function Charger (merk, tipe, harga) {
+    this.merk = merk;
+    this.tipe = tipe;
+    this.harga = harga;
+
+    this.hidupkan = function() {
+                        return "charger dicolokkan";
+                    };
+
+    //function menggunakan argumen
+    this.lama = function(waktu) {
+                        return "setelah "+ waktu + " jam "+ this.hidupkan() + " Charger "+this.merk+ " baru full";
+                    };
+}
+
+var chargerAnwar = new Charger("Full Bass Xenia","kodok",230000);
+var chargerEdwin = new Charger("Gimmick Streao","colok",150000);
+
+console.log( chargerAnwar.merk );
+console.log( chargerEdwin.merk );
+
+console.log( chargerAnwar.hidupkan() );
+console.log( chargerEdwin.hidupkan() );
+
+console.log( chargerAnwar.lama(3) ); //mengakses function dengan argumen
+console.log( chargerEdwin.lama(10) ); //mengakses function dengan argumen
+
+
+
+/// ### MEMBUAT CLASS METHOD DENGAN OBJECT PROTOTYPE =====================
+/***
+    Selain membuat "kelompok object" menggunakan constructor function, kita
+    juga bisa membuatnyaa menggunakan object khusus yang bernama prototype.
+    Dengan mengguankan prototype, property dan method bisa ditambahkan 
+    kapan saja.
+***/
+
+//berikut contoh penggunaanya:
+function Television (merk, tipe, harga) {
+    this.merk = merk;
+    this.tipe = tipe;
+    this.harga = harga;
+}
+
+Television.prototype.lcdType = "Plasma";
+
+Television.prototype.hidupkan = function() {
+                                    return "Televisi dihidupkan";
+                                };
+
+//method dengan argumen
+Television.prototype.jual = function(tempat) {
+                                return this.merk + " dijual di " + tempat;
+                            };
+
+
+var tvAnton = new Television("Samsung","YIBS",2300000);
+
+console.log( tvAnton.merk );
+
+console.log( tvAnton.hidupkan() );
+
+console.log( tvAnton.jual("Rangkasbitung") );
+
+
+
+/// ### OBJECT BAWAAN JAVASCRIPT ===============================================
+/***
+  Dalam materi ini dan materi sebelumnya, kit atelah membahas cara pembuatan 
+  object sebagai tipe data data object sebagai bagian dari class. Keduanya merupakan
+  object yang kita buat sendiri.
+
+  Selain itu, juga terdapat object bawaan JavaSricpt (JavaScript Native Object), yg
+  bisa kita gunakan dalam merancang kode program. Object bawaan ini memiliki banyak
+  method dan property.
+  
+  Berikut object bawaan JavaScript yang akan kita bahas nantinya;
+    • Number
+    • Math
+    • String
+    • Array
+    • Boolean
+    • RegExp
+    • Function
+    • Date
+***/
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

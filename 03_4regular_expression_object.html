@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+    <head><meta charset="UTF-8"><title>Regular Expression Object</title></head>
+    <style>
+    </style>
+    <body>
+        <h4>Belajar Regular Expression Object</h4>
+        
+    </body>
+    <script>
+
+//### Regular Expression Object
+/*  Regular Expression atau sering disingkat sebagai RegExp atau RE, adalah suatu 
+mekanisme pencocokan pola (pattern matching), yang dibuat menggunakan karakter-karakter 
+khusus. Fungsinya sangat beragam, mulai dari memeriksa apakah sebuah inputan sudah 
+sesuai atau belum (test), untuk membuat fitur pencarian (search), atau penggantian 
+string (replace). */
+
+    /* Membuat RegExp Object menggunakan 2 cara penulisan, yakni menggunakan object
+       constructor dan cara langsung (literal). */
+
+    /*  cara langsung (literal), kita tinggal membuat pola karakter diantara tanda
+          forward slash: / dan /                         */
+      
+    var foo = /ab+c/; //cara literal
+    console.log(foo);
+    console.log(typeof foo);
+
+    /*  Menggunakan object constructor, perintahnya adalah new RegExp(). */
+    var bar = new RegExp("ab+c"); //menggunakan object constructor
+    console.log(bar);
+    console.log(typeof bar);
+
+
+//### RegExp Object Method ========================================================
+
+    // Method RegExp.prototype.test()
+        /*** Method test() digunakan untuk memeriksa apakah sebuah string lolos dari 
+             pola regular expression yang diinput. Jika lolos, hasilnya true. Jika 
+             tidak, hasilnya false. */
+    var foo = "Belajar JavaScript dari buku JavaScript Uncover";
+    var pola = /JavaScript/;
+                     
+    console.log ( pola.test(foo) ); // true
+    console.log ( /buku/.test(foo) ); // true
+    console.log ( /Buku/.test(foo) ); // false
+
+    // Method RegExp.prototype.exec()
+        /*** Method exec() berfungsi untuk mencari karakter atau kata yang cocok dengan 
+             pola regular expression, kemudian meyimpan hasilnya ke dalam array. */
+    var goo = "1 jam sama dengan 60 menit, juga sama dengan 3600 detik";
+
+    var kola = /\d+/; //kola \d+ artinya cari angka dgn jumlah 1digit atau lebih./
+    console.log( kola.exec(goo) ); //digunakan untuk mencari karakter angka string goo.
+    
+        //------------------------------------------------------------------------------
+    var hoo = "1 jam sama dengan 60 menit, juga sama dengan 3600 detik";
+    var kota = /\d+/g; //tambah flag g, untuk mencari angka dengan semua digit
+
+    console.log( kota.exec(hoo) ); //hasil 1
+    console.log( kota.exec(hoo) ); //hasil 60
+    console.log( kota.exec(hoo) ); //hasil 3600
+    console.log( kota.exec(hoo) ); //hasil null
+    /* setiap kali method exec() dipanggil, pencarian pola akan lanjut ke posisi berikutny
+       jika tidak ada lagi akan mengembalikan nilai null */
+
+       //----------------------------------------------------------------------------
+        /** kita juga bisa mengakses property index yg berisi posisi index dimana pola itu ditemukan */
+    var joo = "1 jam sama dengan 60 menit, juga sama dengan 3600 detik";
+    var polo = /\d+/g;
+
+    var hasil1 = polo.exec(joo);
+    console.log( hasil1.index ); //posisi index polo ditemukan
+    console.log( hasil1[0] );
+
+    var hasil2 = polo.exec(joo);
+    console.log( hasil2.index ); //posisi index polo ditemukan
+    console.log( hasil2[0] );
+
+    var hasil3 = polo.exec(joo);
+    console.log( hasil3.index ); //posisi index polo ditemukan
+    console.log( hasil3[0] );
+
+      //----------------------------------------------------------------------------
+        /** Jika anda hanya ingin mencari seluruh pola yang cocok (tanpa peduli posisinya), 
+            akan lebih sederhana menggunakan method match() dari String object: */
+    var koo = "1 jam sama dengan 60 menit, juga sama dengan 3600 detik";
+
+    console.log( koo.match(/\d+/g) );
+
+
+//### Pola Reguler Expression ======================================================
+    
+    //-------------------------------------------------------------------------------
+    //Pola RegExp Sebagai String ---------------------------------------------------
+    /*** jika isi regular expression berbentuk string biasa yang terdiri dari sebuah 
+         kata atau beberapa karakter. Jika ditulis seperti ini, pola tersebut akan 
+         cocok selama di dalam string terdapat kata tersebut (di posisi mana saja). */
+    
+    var moo = "Belajar JavaScript";
+
+    console.log ( /JavaScript/.test(moo) ); // true
+    console.log ( /Javascript/.test(moo) ); // false
+    console.log ( /Belajar/.test(moo) ); // true
+    console.log ( /belajar/.test(moo) ); // false
+    console.log ( /Java/.test(moo) ); // true
+    console.log ( /ajar/.test(moo) ); // true
+
+
+
+
+    //------------------------------------------------------------------------------
+    //Regular Expression Flag ------------------------------------------------------
+    /*** dalam contoh diatas, perintah console.log(.test() ) dijalankan secara case sensitif,
+         dimana huruf besar dan kecil dianggap berbeda.. 
+        ** Bagaimana jika kita ingin proses pencocokan pola di lakukan secara case 
+        insensitif? Dimana huruf besar dan huruf kecil dianggap sama? Caranya adalah 
+        dengan menambahkan sebuah flag (penanda) karakter i persis setelah tanda forward 
+        slash penutup regular expression:   */
+
+    var loo = "Belajar JavaScript";
+
+    console.log( /JavaScript/i.test(loo) );
+    console.log( /Javascript/i.test(loo) );
+    console.log( /Belajar/i.test(loo) );
+    console.log( /belajar/i.test(loo) );
+    console.log( /JAVASCRIPT/i.test(loo) );
+    console.log( /javaSCRIPT/i.test(loo) );
+
+        /**
+        daftar beberapa flag lain dalam regular expression;
+        * g = global match, digunakan untuk mencari seluruh string yang cocok dengan pola. 
+            Flag ini hanya bisa digunakan untuk method yang mendukung banyak pencarian 
+            sekaligus, seperti match() dan exec(). Jika flag ini tidak ditambahkan, 
+            regexp akan langsung berhenti di pola pertama.
+        m = multiline, flag ini baru berfungsi jika kita membuat string asal yang terdiri 
+            dari beberapa kalimat / paragraf. Jika ditambahkan, pola regular expression 
+            akan cocok untuk setiap kalimat, bukan keseluruhan string. Efeknya digunakan 
+            untuk pola ˆ dan $ yang berfungsi sebagai tanda awal dan akhir string.
+        u = unicode, jika ditambahkan, pola reguler expression akan dianggap sebagai code 
+            unicode. Contoh penggunaan flag ini akan kita bahas kembali nantinya.
+        **/
+
+
+
+
+    //--------------------------------------------------------------------------------
+    //Menandakan Awal dan Akhir Pola -------------------------------------------------
+    /*
+    ˆ = Sebagai karakter penanda awal pola. Jika regular expression ditambahkan karakter 
+        ini, pola tersebut harus berada di awal string. Kalau tidak, hasilnya akan false.
+    $ = Sebagai karakter penanda akhir pola. Jika regular expression ditambahkan 
+        karakter ini, pola tersebut harus berada di akhir string. Kalau tidak, hasilnya akan false.
+    */
+        //contoh penggunaannya :
+    var noo = "Belajar JavaScript";
+
+    console.log ( /JavaScript/.test(noo) ); // true
+    console.log ( /^JavaScript/.test(noo) ); // pola JavaScript berada diawal string noo
+    console.log ( /JavaScript$/.test(noo) ); // pola JavaScript berada diakhir string noo
+    console.log ( /^Belajar/.test(noo) ); // pola Belajar berada diawal string noo
+    console.log ( /^Belajar JavaScript$/.test(noo) ); // pola Belajar berada diawal string noo, dan pola JavaScript berada diakhir string noo
+    console.log ( /Script$/.test(noo) ); // pola Script berada diakhir string noo
+
+
+
+
+    //-------------------------------------------------------------------------------
+    //Wildcard ----------------------------------------------------------------------
+    /** karakter wildcard ditulis dengan tanda titik (.)
+    . = Jika di dalam pola regular expression terdapat tanda titik, artinya karakter itu 
+        bisa digantikan dengan karakter apa saja.
+    **/
+        //contoh penggunaannya :
+    var coo = /.b../;
+        /**  Pola /.b../ akan menghasilkan true jika terdapat 1 karakter (apa saja), 
+             kemudian diikuti oleh huruf b, yang kemudian harus diikuti MINIMAL 2 karakter 
+             apa saja.*/
+    console.log( coo.test("abaa") ); //true
+    console.log( coo.test("aba") ); //false
+    console.log( coo.test("abbaa") ); //true
+    console.log( coo.test("baab") ); //false
+    console.log( coo.test("1b11") ); //true
+    console.log( coo.test(" b  ") ); //true (spasi juga termasuk karakter)
+
+        //-----------------------------------------------------------------------
+        //contoh lain :
+    var coo = /^.b..$/;
+        /**  Pola ini /^.b..$/ hanya akan cocok jika keempat karakter tersebut ada di awal 
+             dan diakhir string.
+        **   Maksudnya string tersebut harus terdiri dari 4 karakter, tidak boleh kurang 
+             maupun lebih:*/
+    console.log( coo.test("abaa") ); //true
+    console.log( coo.test("aba") ); //false
+    console.log( coo.test("abbaa") ); //false
+    console.log( coo.test("baab") ); //false
+    console.log( coo.test("1b11") ); //true
+    console.log( coo.test(" b  ") ); //true
+
+
+
+
+    //----------------------------------------------------------------------------
+    //Pola Character Set ---------------------------------------------------------
+    /** Pola selanjutnya adalah character set, dimana kita bisa membuat syarat bahwa 
+        hanya karakter tertentu saja yang boleh ditulis. Ini dibuat menggunakan tanda 
+        kurung siku: [ dan ]. Hanya karakter yang ada di dalam tanda kurung ini saja 
+        yang akan memenuhi syarat. */
+
+    //contoh penggunaan :
+    var rola= /[abcde]../;
+        /** Pola /[abcde]../ artinya, digit pertama hanya bisa diisi oleh salah satu 
+            dari huruf a, b, c, d atau e. Kemudian salah satu huruf tersebut diikuti 
+            setidaknya oleh 2 karakter lain (bebas mau karakter apa saja). */
+    console.log ( rola.test("abaa") ); // true
+    console.log ( rola.test("fba") ); // false
+    console.log ( rola.test("1dd") ); // false
+    console.log ( rola.test("add") ); // true
+    console.log ( rola.test(" dd") ); // false
+    console.log ( rola.test("belajar") ); // true
+
+        //-----------------------------------------------------------------------
+        //latihan lain :
+    var bola = /^[a-e][1-9][R-Z]./;
+        /** Pola /^[a-e][1-9][R-Z]./ , artinya kararter pertama hanya bisa diisi huruf 
+            a sampai e, kararter kedua berupa angka 1-9. karakter ketiga harus huruf R-Z,
+            dan diikuti huruf bebas apa saja. */
+    console.log ( bola.test("a9R") ); // false
+    console.log ( bola.test("a9Ra") ); // true
+    console.log ( bola.test("fa9Ra") ); // false
+    console.log ( bola.test("e9ZA") ); // true
+    console.log ( bola.test("e9ZAAAAA") ); // true
+
+
+
+    //----------------------------------------------------------------------------
+    //Pola Negasi Character Set --------------------------------------------------
+        /** digunakan untuk menambahkan instruksi: selain ke dalam character set.
+            Misalnya saya ingin digit pertama hanya boleh diisi selain huruf a - e.
+            untuk membuat pola seperti ini, kita menggunakan karakter ˆ didalam charakter set. */
+                
+                   /*** intinya; tanda ^ ada didalam character set ***/
+    
+    //contoh penggunaanya :
+    var voli = /[^a-e]../;
+        /** Pola /[^a-e]../ , Pola tersebut akan cocok dengan string yang didalamnya 
+            terdapat karakter SELAIN HURUF a-e, kemudian diikuti setidaknya 2 karakter 
+            lain (wildcard). Karakter ini tidak harus berada di awal string. */
+    console.log ( voli.test("abaa") ); // false
+    console.log ( voli.test("fba") ); // true
+    console.log ( voli.test("1dd") ); // true
+    console.log ( voli.test("ddd") ); // false
+    console.log ( voli.test(" dd") ); // true
+    console.log ( voli.test("belajar") ); // true
+
+
+
+
+    //----------------------------------------------------------------------------
+    //Membatasi Jumlah Karakter --------------------------------------------------
+    /**     Regular expression juga mengizinkan kita membatasi jumlah karakter tertentu, 
+        misalnya huruf a harus ditulis 2 kali, atau digit angka harus tertulis sebayak 
+        8 - 12 kali (untuk nomor HP).
+            Karakter yang digunakan untuk membuat pola ini adalah tanda kurung kurawal 
+        { dan }. Jika di dalam tanda kurung ini hanya ada 1 angka, berarti digit 
+        tersebut harus sesuai dengan banyak angka. Pola /a{4}/ artinya huruf a harus 
+        ditulis sebanyak minimal 4 kali. */
+
+    //contoh penggunaannya ;
+    var kala = /A{2}1{3}/;
+        /*** Pola /A{2}1{3}/ akan cocok dengan string yang memiliki huruf A minimal 
+             sebanyak 2kali dan angka 1 minimal sebanyak 3kali */
+    console.log ( kala.test("AA111") ); // true
+    console.log ( kala.test("zzAAA111zz") ); // true
+    console.log ( kala.test("A11") ); // false
+    console.log ( kala.test("AA11") ); // false
+    console.log ( kala.test("A1111") ); // false
+    console.log ( kala.test("zzAAA1111zz") ); // true
+
+    //---------------------------------------------------------------------------
+        /** Selain membatasi jumlah karakter, kita juga bisa membatasi jangkauan jumlah 
+            karakter. Caranya dengan membuat 2 angka di dalam kurung kurawal. Angka 
+            pertama menentukan jumlah minimum, sedangkan angka kedua untuk menentukan 
+            nilai maksimum.  */
+
+    //contoh lain :
+    var jala = /^A{2,4}1{2}$/;
+        /**  Pola /A{2}1{2,3}/ , akan cocok dengan string yang memiliki huruf A sebanyak 
+             minmal 2 sampai 4kali dan angka 1 harus minimal sebanyak 2 kali. */
+    console.log ( jala.test("AAAAA11s") ); // false
+    console.log ( jala.test("AA11") ); // true
+    console.log ( jala.test("A11") ); // false
+    console.log ( jala.test("AAAA11") ); // true
+    console.log ( jala.test("AAA11") ); // false
+
+    //jika digit kedua tidak ditulis itu artinya digit maksimal tidak dibatasi
+    //contoh
+    var julu = /^A{1,}1{3,}$/;
+    
+    console.log ( julu.test("AAAAA1111") ); // true
+    console.log ( julu.test("zzAAA111zz") ); // false
+    console.log ( julu.test("A11") ); // false
+    console.log ( julu.test("AA11") ); // false
+    console.log ( julu.test("A1111") ); // true
+
+
+
+    //latihan :
+    var pola = /[A-Z]{2}[0-9]{1,4}[A-Z]{1,3}[a-e]{2}/;
+    
+    console.log ( pola.test("BM1234ARAbd") ); // true
+    console.log ( pola.test("BMCV1234ARAa") ); // false
+    console.log ( pola.test("BDER9980XYZae") ); // true
+    console.log ( pola.test("BA99XYZ") ); // false
+    console.log ( pola.test("Belajar BA99XYZcddf") ); // true
+
+    //latihan :
+    var roli = /^[A-Z0-9]{2,}z{2}_$/;
+
+
+    //-----------------------------------------------------------------------------
+
+/** Selain menulis manual jumlah karakter, regular expression juga menyediakan beberapa 
+    karakter khusus untuk membatasi pola: 
+    * (tanda bintang), sama fungsinya dengan {0,}. Artinya cocok dengan 0 atau lebih 
+      karakter (tidak dibatasi).
+    + (tanda tambah), sama fungsinya dengan {1,}. Artinya cocok dengan 1 karakter 
+      atau lebih (tidak dibatasi).
+    ? (tanda tanya), sama fungsinya dengan {0,1}. Artinya cocok dengan 0 atau 1 
+      karakter (tidak boleh lebih)
+**/
+    var format = /ab*c/;
+        /** akan cocok dengan string yang diawali huruf a, kemudian diikuti
+            tanpa atau beberapa huruf b, dan diakhiri dengan 1 huruf c */
+    console.log( format.test("abc") );
+    console.log ( format.test("abbbbbc") ); // true
+    console.log ( format.test("ac") ); // true
+    console.log ( format.test("aaaab") ); // false
+
+        //----------------------------------------------------------------------
+    
+    var hola = /ab+c/; 
+        /** mensyaratkan huruf b harus ada minimal sekali: */
+    console.log ( hola.test("abc") ); // true
+    console.log ( hola.test("abbbbbc") ); // true
+    console.log ( hola.test("ac") ); // false
+    console.log ( hola.test("aaaab") ); // false
+
+        //-----------------------------------------------------------------------
+
+    var goola = /ab?c/;
+        /** Pola ini artinya huruf b boleh ada maupun tidak, jika ada
+            hanya boleh sekali (tidak bisa lebih). */
+    console.log ( goola.test("abc") ); // true
+    console.log ( goola.test("abbbbbc") ); // false
+    console.log ( goola.test("ac") ); // true
+    console.log ( goola.test("aaaab") ); // false
+
+
+//================================================================================
+//###   Pola Karakter Khusus =====================================================
+/*** Untuk pola yang sering digunakan seperti digit angka 0-9, atau huruf abjad A-Z 
+     dan a-z, regular expression memiliki karakter khusus sebagai pengganti pola-pola 
+     ini. Berikut diantaranya: 
+
+     \d: Cocok dengan seluruh digit angka, atau sama dengan [0-9].
+
+     \D: Cocok dengan seluruh digit selain angka, atau sama dengan [ˆ0-9].
+
+     \w: Cocok dengan seluruh huruf alfabet dan angka (alfanumerik) serta karakter 
+         underscore: _. Ini sama dengan pola [A-Za-z0-9_].
+
+     \W: Cocok dengan seluruh huruf selain alfabet dan angka (alfanumerik) serta 
+         karakter underscore: _. Ini sama dengan pola [ˆA-Za-z0-9_].
+
+     \s: Cocok dengan karakter whitespace, seperti spasi, tab, form feed, atau line 
+         feed, termasuk karakter lain yang dianggap whitespace.
+
+     \S: Cocok dengan satu karakter selain whitespace.
+     
+     \t: Cocok dengan satu karakter tab (horizontal tab).
+     
+     \r: Cocok dengan satu karakter enter (carriage return).
+     
+     \n: Cocok dengan satu karakter penanda pindah baris (linefeed).
+     
+     \v: Cocok dengan satu karakter tab vertical (vertical tab).
+     
+     \f: Cocok dengan satu karakter form-feed.
+     
+     \ : Sebagai karakter ‘escape’, digunakan untuk mencegah sebuah karakter dianggap 
+         sebagai karakter khusus. Misalnya bagaimana cara membuat karakter titik di 
+         dalam pola? Kita tidak bisa menulisnya langsung karena tanda titik punya 
+         makna khusus di dalam regular expression. Oleh karena itu harus ditulis 
+         sebagai \.. ***/
+
+         //contoh penggunaan karakter \
+            var contohh = /www\.....\.com/;
+                /** Pola ini akan menghasilkan true untuk string yang diawali dengan 
+                    karakter www, sebuah titik, diikuti oleh 4 karakter apa saja, 
+                    sebuah titik, dan akhiran com. */
+            console.log ( contohh.test("www.google.com") ); // false
+            console.log ( contohh.test("www.abcd.com") ); // true
+            console.log ( contohh.test("www.xyz1.com") ); // true
+            console.log ( contohh.test("www.1234.com") ); // true
+
+
+
+    // FORMAT POLA EMAIL
+    var dola = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    console.log( dola.test("tatanghaetami.97@gmail.com") ); //true
+    console.log( dola.test("(hetami@gmail.com") ); //false
+
+
+
+    //------------------------------------------------------------------------------
+    //Pola Logika OR 
+    var cola = /aku|dia|kami/;
+        /** Pola /aku|dia|kami/ akan menghasilkan nilai true jika di dalam string 
+            terdapat setidaknya 1 kata dari 3 kemungkinan tersebut. */
+    console.log ( cola.test("aku di sini") ); // true
+    console.log ( cola.test("dia di sana") ); // true
+    console.log ( cola.test("kami belajar JavaScript") ); // true
+    console.log ( cola.test("belajar JavaScript dengan dia") ); // true
+
+</script>   
+</html>

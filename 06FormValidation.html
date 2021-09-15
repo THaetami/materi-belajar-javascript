@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Form Validation</title></head>
+    <style>
+       .error{ text-align:center; width: 150px; padding: 2px; color: red;}
+    </style>
+    <body>
+<!--    FORM VALIDATION HTML5   
+        contoh penggunaan               -->
+        <p>form validation menggunakan HTML5</p>
+        <form id="formKu" name="formKu" method="get" action="peroses.php">
+            <p>Username: <input type="text" name="username" id="username" required pattern="[A-Z]{3}[0-9]{3}"></p>
+            <!--required pattern adalah atribut dari HTML5--> 
+            <p><input type="submit" name="submit1" id="submit1" value="Kirim Data"></p>
+        </form>
+<!--    FORM VALIDATION MENGGUNAKAN JavaScript                                     
+        Prinsip dari form validation adalah, ambil atribut value dari sebuah element, 
+        kemudian bandingkan dengan syarat. Jika tidak memenuhi, tampilkan pesan error 
+        dan jalankan preventDefault() untuk form element. Perintah preventDefault() 
+        diperlukan agar form tidak sampai dikirim ke server. -->
+        <!-- contoh penggunaan   -->
+        <p>|======================================================================</p>
+        <form id="form" name="form" method="get" action="data.php">
+            <p>Username: <input type="text" name="namauser" id="namauser"> <span id="pesan"></span></p>
+            <p><input type="submit" name="submit" id="submit" value="Proses Data"></p>
+        </form>
+        <p>|=====================================================================</p>
+        <p>CASE STUDY: VALIDASI BERBAGAI ELEMENT FORM</p>
+        <form id="formulir" name="formulir" method="get" action="form.php">
+            <p>Username: <input type="text" name="nickname" id="nickname"> <output id="pesanNick"></output></p>
+            <p>Password: <input type="password" name="password" id="password"> <output id="pesanPass"></output></p>
+            <p>Konfirmasi Password: <input type="password" name="passKonfirm" id="passKonfirm"> <output id="pesanKonfirm"></output></p>
+            <p><input type="checkbox" name="tampilkan" id="tampil">Tampilkan Password</p>
+            <p><input type="checkbox" name="setuju" id="setuju">Saya menyetujui syarat dan ketentuan <output id="pesanSetuju"></output></p>
+            <p><input type="submit" name="kirim" id="kirim" value="Kirim Data"></p>
+        </form>
+
+    </body>
+
+    <script>
+        var formNode = document.getElementById("form");
+        var namauserNode = document.getElementById("namauser");
+        var pesanNode = document.getElementById("pesan");
+
+        function diProses1(e){
+            if (namauserNode.value === ""){ 
+                /* fitur validasi trim " .trim() " , 
+                Tujuannya untuk membuang seluruh karakter whitespace yang ada di dalam text box username. */
+                pesanNode.innerHTML = "Pin harus diisi";
+                pesanNode.className = "error"; //menambahkan kode CSS (style) secara internal style
+                e.preventDefault();
+            }
+            else if (/[^0-9]/.test(namauserNode.value)){
+                /* fitur validasi Regular Expression /D/.test , artinya jika value 
+                   namauserNode tanpa spasi (trim), sesuai method test RegEx " /\D/ " 
+                   maka jalankan perintah dibawah ini */
+                pesanNode.innerHTML = "Hanya bisa diisi dengan karakter numerik";
+                pesanNode.className = "error";
+                e.preventDefault();
+            }
+            else if (namauserNode.value.length !== 6){
+                /* fitur validasi panjang karakter */
+                pesanNode.innerHTML = "diisi dengan 6 karakter";
+                pesanNode.className = "error";
+                e.preventDefault();
+            }
+        }
+        function hapusError(e){
+            e.target.style.border = ""; //menghapus warna border merah dari namauserNode
+            e.target.parentElement.lastChild.innerHTML = ""; //menghapus pesan error,
+              /** Perhatikan bahwa saya menggunakan penulisan 
+                  struktur DOM e.target.parentElement.lastChild untuk mencari tag 
+                  <span id="pesan">. Kenapa tidak langsung menggunakan 
+                  pesanNode saja? Karena saya ingin function hapusError() 
+                  juga berlalu untuk object lain, tidak hanya usernameNode saja.
+                  Tentunya struktur seperti ini hanya berlaku selama saya membuat 
+                  struktur yang sama untuk element form lain, yakni tag <span> yang 
+                  menampung pesan error harus ditulis tepat setelah tag <input> dan 
+                  berada di dalam parent element tag <p>, */
+        }    
+        formNode.addEventListener("submit",diProses1);
+        namauserNode.addEventListener("focus",hapusError); //menambahkan Efek event focus
+
+///###  REFACTORING KODE PROGRAM
+    /**    Alasan untuk melalukan refactoring bisa bermacam-macam. Boleh untuk 
+           menyederhanakan penulisan, agar kode program kita menjadi lebih fleksibel, 
+           serta mengurangi kode program yang redundant (ditulis 
+           berulang kali) seperti baris pesanNode.className = "error" dan 
+           e.preventDefault() yg selalu ditulis untuk setiap kondisi validasi. 
+    **/
+        // contoh refactoring kode program diatas ;
+        // function diProses2 (e){
+        //     var usernameError = "";
+
+        //     if (namauserNode.value === ""){
+        //         usernameError = "Username harus diisi";
+        //     }
+        //     else if (/\W/.test(namauserNode.value)){
+        //         usernameError = "Hanya diisi dengan karakter alfanumerik";
+        //     }
+        //     else if (namauserNode.value.length < 6){
+        //         usernameError = "Minimal diisi dengan 6 karakter";
+        //     }
+
+        //     if (usernameError !== ""){
+        //         pesanNode.innerHTML = usernameError;
+        //         pesanNode.className = "error";
+        //         namauserNode.style.border = "2px solid red"; //menambahkan CSS dengan inline style
+        //         e.preventDefault();
+        //     }
+        // }
+        // function hapusError(e){
+        //     e.target.style.border = ""; //menghapus warna border merah dari namauserNode
+        //     e.target.parentElement.lastChild.innerHTML = ""; // menghapus pesan error,
+        //       /** Perhatikan bahwa saya menggunakan penulisan 
+        //           struktur DOM e.target.parentElement.lastChild untuk mencari tag 
+        //           <span id="pesan">. Kenapa tidak langsung menggunakan 
+        //           pesanNode saja? Karena saya ingin function hapusError() 
+        //           juga berlalu untuk object lain, tidak hanya usernameNode saja.
+        //           Tentunya struktur seperti ini hanya berlaku selama saya membuat 
+        //           struktur yang sama untuk element form lain, yakni tag <span> yang 
+        //           menampung pesan error harus ditulis tepat setelah tag <input> dan 
+        //           berada di dalam parent element tag <p>, */
+        // }
+        // formNode.addEventListener("submit",diProses2);
+        // namauserNode.addEventListener("focus",hapusError); //menambahkan Efek event focus
+
+
+
+
+
+
+
+//===================================================================================    
+//CASE STUDY: VALIDASI BERBAGAI ELEMENT FOTM ========================================
+        
+        var formulirNode = document.getElementById("formulir");
+        var nicknameNode = document.getElementById("nickname");
+        var passwordNode = document.getElementById("password");
+        var passKonfirmNode = document.getElementById("passKonfirm");
+        var tampilNode = document.getElementById("tampil");
+        var setujuNode = document.getElementById("setuju");
+        var pesanNickNode = document.getElementById("pesanNick");
+        var pesanPassNode = document.getElementById("pesanPass");
+        var pesanKonfirmNode = document.getElementById("pesanKonfirm");
+        var pesanSetujuNode = document.getElementById("pesanSetuju");
+
+        //tampilkan Pass
+        function tampil(e){
+            if (tampilNode.checked){
+                passwordNode.type = "text";
+                passKonfirmNode.type = "text";
+            }
+            else {
+                passwordNode.type = "password";
+                passKonfirmNode.type = "password"; 
+            }
+        }
+        // delet error
+        function deleteError(e){
+            e.target.parentElement.lastChild.innerHTML = "";
+            e.target.style.border = "";
+        }
+        
+        function validasi(e){
+            // Validasi Username
+            var nickError = "";
+
+            if (nicknameNode.value === ""){
+                nickError = "Username harus diisi";
+            }
+            else if (/\W/.test(nicknameNode.value)){
+                nickError = "Hanya diisi dengan karakter alfanumerik";
+            }
+            else if (nicknameNode.value.length < 6 ){
+                nickError = "minimal 6 karakter";
+            }
+            if (nickError !== ""){
+                pesanNickNode.innerHTML = nickError;
+                nicknameNode.style.border = "2px solid red";
+                pesanNickNode.className = "error";
+                e.preventDefault();
+            }
+
+            //validasi pass
+            var passError = "";
+
+            if (passwordNode.value === ""){
+                passError = "Username harus diisi";
+            }
+            else if (passwordNode.value.length < 6 ){
+                passError = "minimal 6 karakter";
+            }
+            if (passError !== ""){
+                pesanPassNode.innerHTML = passError;
+                passwordNode.style.border = "2px solid red";
+                pesanPassNode.className = "error";
+                e.preventDefault();
+            }
+    
+            //validasi konfirmPass
+            var konfirmError = "";
+
+            if (passKonfirmNode.value === ""){
+                konfirmError = "Username harus diisi";
+            }
+            else if (passKonfirmNode.value.length < 6 ){
+                konfirmError = "minimal 6 karakter";
+            }
+            else if (passKonfirmNode.value !== passwordNode.value){
+                konfirmError = "password tidak sesuai";
+            }
+            if (konfirmError !== ""){
+                pesanKonfirmNode.innerHTML = konfirmError;
+                passKonfirmNode.style.border = "2px solid red";
+                pesanKonfirmNode.className = "error";
+                e.preventDefault();
+            }
+            //validasi checkbox
+            var setujuError = "";
+            if (setujuNode.checked !== true){
+                setujuError = "Syarat dan ketentuan harus di setujui";
+            }
+            if (setujuError !== ""){
+                pesanSetujuNode.innerHTML = setujuError;
+                pesanSetujuNode.className = "error";
+                e.preventDefault();
+            }
+        }
+
+        formulirNode.addEventListener("submit",validasi);
+        nicknameNode.addEventListener("focus",deleteError);
+        passwordNode.addEventListener("focus",deleteError);
+        passKonfirmNode.addEventListener("focus",deleteError);
+        tampilNode.addEventListener("click",tampil);
+        setujuNode.addEventListener("focus",deleteError);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</html>
